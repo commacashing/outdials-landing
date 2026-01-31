@@ -732,6 +732,318 @@ body {
     }
 }
 
+/* Hero parallax effect */
+.hero-title {
+    will-change: transform;
+}
+
+/* Number counter animation */
+@keyframes countUp {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.stat-value {
+    animation: countUp 0.6s var(--spring) forwards;
+}
+
+.stat-item:nth-child(1) .stat-value {
+    animation-delay: 0.2s;
+}
+
+.stat-item:nth-child(3) .stat-value {
+    animation-delay: 0.4s;
+}
+
+.stat-item:nth-child(5) .stat-value {
+    animation-delay: 0.6s;
+}
+
+/* Card Battle - Manual vs OutDials */
+.problem-before {
+    opacity: 0;
+    animation: slideInLeft 0.8s var(--spring) forwards;
+}
+
+.problem-after {
+    opacity: 0;
+    animation: slideInRight 0.8s var(--spring) 0.2s forwards;
+}
+
+.problem-arrow {
+    opacity: 0;
+    animation: pulseFade 0.8s var(--spring) 0.4s forwards;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-60px) scale(0.95);
+    }
+    to {
+        opacity: 0.7;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(60px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes pulseFade {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Card Flip Animation - How It Works */
+.how-step {
+    opacity: 0;
+    transform: rotateY(-90deg) scale(0.8);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+
+.how-step.flip-in {
+    animation: cardFlip 0.6s var(--spring) forwards;
+}
+
+.how-step:nth-child(1).flip-in {
+    animation-delay: 0s;
+}
+
+.how-step:nth-child(2).flip-in {
+    animation-delay: 0.15s;
+}
+
+.how-step:nth-child(3).flip-in {
+    animation-delay: 0.3s;
+}
+
+.how-step:nth-child(4).flip-in {
+    animation-delay: 0.45s;
+}
+
+@keyframes cardFlip {
+    0% {
+        opacity: 0;
+        transform: rotateY(-90deg) scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: rotateY(-45deg) scale(1.05);
+    }
+    100% {
+        opacity: 1;
+        transform: rotateY(0deg) scale(1);
+    }
+}
+
+/* Feature Cards - Stacked Deck Deal */
+.features-grid {
+    position: relative;
+    perspective: 1500px;
+}
+
+.feature-card {
+    opacity: 0;
+    position: relative;
+    will-change: transform, opacity;
+}
+
+.feature-card.deal-card {
+    animation: dealFromDeck 0.7s var(--spring) forwards;
+}
+
+.feature-card:nth-child(1).deal-card {
+    animation-delay: 0s;
+}
+
+.feature-card:nth-child(2).deal-card {
+    animation-delay: 0.1s;
+}
+
+.feature-card:nth-child(3).deal-card {
+    animation-delay: 0.2s;
+}
+
+.feature-card:nth-child(4).deal-card {
+    animation-delay: 0.3s;
+}
+
+.feature-card:nth-child(5).deal-card {
+    animation-delay: 0.4s;
+}
+
+.feature-card:nth-child(6).deal-card {
+    animation-delay: 0.5s;
+}
+
+@keyframes dealFromDeck {
+    0% {
+        opacity: 0;
+        transform: translateY(-200px) translateX(-50%) rotateZ(-10deg) scale(0.7);
+        z-index: 0;
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(30px) rotateZ(5deg) scale(1.05);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) translateX(0) rotateZ(0deg) scale(1);
+        z-index: 1;
+    }
+}
+
+/* Feature card hover - 3D tilt */
+.feature-card {
+    transform-style: preserve-3d;
+    transition: all 0.3s var(--spring);
+}
+
+.feature-card:hover {
+    transform: translateY(-8px) rotateX(5deg) rotateY(2deg) scale(1.02);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+/* Problem card hover - enhanced */
+.problem-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Pricing card entrance */
+.pricing-card {
+    opacity: 0;
+    transform: scale(0.9) translateY(30px);
+}
+
+.pricing-card.price-reveal {
+    animation: priceReveal 0.8s var(--spring) forwards;
+}
+
+@keyframes priceReveal {
+    0% {
+        opacity: 0;
+        transform: scale(0.9) translateY(30px);
+    }
+    60% {
+        transform: scale(1.05) translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Pricing amount glow pulse */
+.pricing-amount {
+    position: relative;
+    animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+    50% {
+        text-shadow: 0 0 40px rgba(255, 255, 255, 0.5), 0 0 60px rgba(255, 255, 255, 0.2);
+    }
+}
+
+.royalty-amount {
+    animation: greenGlow 2s ease-in-out infinite;
+}
+
+@keyframes greenGlow {
+    0%, 100% {
+        text-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+    }
+    50% {
+        text-shadow: 0 0 40px rgba(34, 197, 94, 0.6), 0 0 60px rgba(34, 197, 94, 0.3);
+    }
+}
+
+/* Contact card entrance */
+.contact-card {
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.contact-card.contact-reveal {
+    animation: contactReveal 0.8s var(--spring) forwards;
+}
+
+@keyframes contactReveal {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Button ripple effect */
+.btn-primary {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-primary:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* Icon pulse on hover */
+.feature-icon svg,
+.problem-icon svg {
+    transition: all 0.3s var(--spring);
+}
+
+.feature-card:hover .feature-icon svg,
+.problem-card:hover .problem-icon svg {
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+}
+
 /* Scroll-triggered fade-in (applied via JS) */
 .fade-in {
     opacity: 0;
@@ -742,6 +1054,38 @@ body {
 .fade-in.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Blur to focus effect */
+.blur-in {
+    filter: blur(8px);
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.8s var(--spring);
+}
+
+.blur-in.focused {
+    filter: blur(0);
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Nav morph on scroll */
+.nav {
+    transition: all 0.3s var(--spring);
+}
+
+.nav.scrolled {
+    padding: 12px 0;
+}
+
+.nav.scrolled .nav-logo {
+    font-size: 20px;
+}
+
+.nav.scrolled .broken-o {
+    width: 24px;
+    height: 28px;
 }
 
 /* ===== RESPONSIVE ===== */
