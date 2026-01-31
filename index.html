@@ -3,11 +3,314 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OutDials - The 5-Second Headstart</title>
+    <title>OutDials - Stop Waiting. Start Selling.</title>
     <link rel="icon" href="icon.png">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>OutDials Landing Page</h1>
-    <p>Coming soon...</p>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="broken-o">
+                    <svg viewBox="0 0 42 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <mask id="slitMask">
+                                <rect width="42" height="48" fill="white"/>
+                                <line x1="25" y1="20" x2="33" y2="8" stroke="black" stroke-width="5" stroke-linecap="round"/>
+                            </mask>
+                        </defs>
+                        <circle cx="21" cy="24" r="18" stroke="currentColor" stroke-width="6" fill="none" mask="url(#slitMask)"/>
+                    </svg>
+                </span>
+                <span>OutDials</span>
+            </div>
+            <div class="nav-links">
+                <a href="#how-it-works">How It Works</a>
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#contact" class="nav-cta">Book a Demo</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Stop Waiting.<br>
+                    Start Selling.
+                </h1>
+                <p class="hero-subtitle">
+                    Triple your conversations with zero dead air.<br>
+                    The power dialer built for high-velocity sales teams.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">3x</div>
+                        <div class="stat-label">More Dials</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-value">60%</div>
+                        <div class="stat-label">Talk Time</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-value">0ms</div>
+                        <div class="stat-label">Latency</div>
+                    </div>
+                </div>
+                <a href="#contact" class="btn-primary">Book a Demo</a>
+                <p class="hero-subtext">7-day deployment • Native Salesforce • $3,600/seat</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem/Solution Section -->
+    <section id="problem" class="section-problem">
+        <div class="container">
+            <div class="problem-grid">
+                <div class="problem-card problem-before">
+                    <div class="problem-icon">❌</div>
+                    <h3>Manual Dialing</h3>
+                    <div class="problem-stat">15%</div>
+                    <p>Talk Time</p>
+                    <ul class="problem-list">
+                        <li>70% of day wasted on dial tones</li>
+                        <li>2-second "dead air" lag</li>
+                        <li>Reps startled by random connections</li>
+                        <li>Manual CRM logging</li>
+                    </ul>
+                </div>
+                <div class="problem-arrow">→</div>
+                <div class="problem-card problem-after">
+                    <div class="problem-icon">✓</div>
+                    <h3>OutDials</h3>
+                    <div class="problem-stat">60%</div>
+                    <p>Talk Time</p>
+                    <ul class="problem-list">
+                        <li>3 calls dialed simultaneously</li>
+                        <li>Instant bridge (0ms lag)</li>
+                        <li>5-second visual heads-up</li>
+                        <li>Auto-sync to Salesforce</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="section-how">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">The Race Card: 3 calls. 1 winner. Zero dead air.</p>
+            
+            <div class="how-grid">
+                <div class="how-step">
+                    <div class="step-number">1</div>
+                    <h3>Select Your Team & Region</h3>
+                    <p>Pick your Salesforce segment (Team A, Northeast, etc.). OutDials pulls only contacts with verified consent.</p>
+                </div>
+                <div class="how-step">
+                    <div class="step-number">2</div>
+                    <h3>Start The Race</h3>
+                    <p>Click "Start Dialing" — OutDials calls 3 contacts simultaneously with a 4-second stagger. You see all 3 calls in real-time.</p>
+                </div>
+                <div class="how-step">
+                    <div class="step-number">3</div>
+                    <h3>First to Answer Wins</h3>
+                    <p>Whoever picks up first gets connected to you instantly. The other 2 calls stop automatically. No voicemails reach you.</p>
+                </div>
+                <div class="how-step">
+                    <div class="step-number">4</div>
+                    <h3>5-Second Heads-Up</h3>
+                    <p>Before the bridge, you see their name, company, region, licenses, and notes. You're prepared before they say "Hello."</p>
+                </div>
+            </div>
+
+            <div class="demo-placeholder">
+                <div class="demo-box">
+                    <p>🎥 Demo Video Coming Soon</p>
+                    <span>45-second walkthrough of the Race Card UI</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section-features">
+        <div class="container">
+            <h2 class="section-title">Built For Compliance & Speed</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Instant Bridge</h3>
+                    <p>0ms latency. No "dead air" pause. Prospects hear you the moment they answer.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Premium AMD</h3>
+                    <p>Answering Machine Detection filters voicemails automatically. You only talk to humans.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>TCPA Compliant</h3>
+                    <p>Time-zone enforcement, DNC filtering, consent verification, and audit trails built-in.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">☁️</div>
+                    <h3>Native Salesforce</h3>
+                    <p>Zero-bloat OAuth2 integration. Call notes, dispositions, and timestamps sync automatically.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📞</div>
+                    <h3>12-Number Rotation</h3>
+                    <p>We manage your Twilio numbers and replace any flagged as "Scam Likely" proactively.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Real-Time Analytics</h3>
+                    <p>Track connect rates, talk time, and calls/hour. Export session data anytime.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="section-pricing">
+        <div class="container">
+            <h2 class="section-title">The Elite Partner Model</h2>
+            <p class="section-subtitle">We're not a vendor. We're a 1% stakeholder in your success.</p>
+            
+            <div class="pricing-card">
+                <div class="pricing-header">
+                    <h3>Annual License</h3>
+                    <div class="pricing-amount">$3,600</div>
+                    <p>per seat / year</p>
+                </div>
+                <div class="pricing-includes">
+                    <h4>What's Included:</h4>
+                    <ul>
+                        <li>✓ Unlimited triple-dialing</li>
+                        <li>✓ 12 managed Twilio numbers per rep</li>
+                        <li>✓ Premium answering machine detection</li>
+                        <li>✓ Native Salesforce sync (zero-bloat)</li>
+                        <li>✓ TCPA compliance automation</li>
+                        <li>✓ 7-day deployment & training</li>
+                        <li>✓ White-glove support (Slack/email)</li>
+                    </ul>
+                </div>
+                <div class="pricing-divider"></div>
+                <div class="pricing-royalty">
+                    <h4>Success Royalty</h4>
+                    <div class="royalty-amount">1%</div>
+                    <p>of Gross Revenue on deals sourced via OutDials</p>
+                    <span class="royalty-note">Billed quarterly • First-touch attribution • Transparent reporting</span>
+                </div>
+                <div class="pricing-cta">
+                    <a href="#contact" class="btn-primary">Book a Demo</a>
+                    <p class="pricing-subtext">Start with a 7-day pilot • See 3x lift in talk time</p>
+                </div>
+            </div>
+
+            <div class="pricing-example">
+                <h4>Example: 10-Rep Team</h4>
+                <div class="example-grid">
+                    <div class="example-item">
+                        <span class="example-label">Upfront Cost</span>
+                        <span class="example-value">$36,000/year</span>
+                    </div>
+                    <div class="example-item">
+                        <span class="example-label">Est. Telephony Cost</span>
+                        <span class="example-value">Included</span>
+                    </div>
+                    <div class="example-item">
+                        <span class="example-label">Royalty (if $1M closed)</span>
+                        <span class="example-value">$10,000</span>
+                    </div>
+                    <div class="example-item">
+                        <span class="example-label">Total Net Profit (for OutDials)</span>
+                        <span class="example-value">$24,000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact/Demo Section -->
+    <section id="contact" class="section-contact">
+        <div class="container">
+            <h2 class="section-title">Ready to 3x Your Connect Rate?</h2>
+            <p class="section-subtitle">Book a 15-minute demo and see the Race Card in action.</p>
+            
+            <div class="contact-card">
+                <div class="contact-info">
+                    <h3>What to Expect:</h3>
+                    <ul>
+                        <li>✓ Live walkthrough of the Race Card UI</li>
+                        <li>✓ Salesforce integration deep-dive</li>
+                        <li>✓ Compliance & TCPA Q&A</li>
+                        <li>✓ Custom pricing for your team size</li>
+                        <li>✓ 7-day pilot eligibility</li>
+                    </ul>
+                </div>
+                <div class="contact-form">
+                    <p class="form-notice">📅 Add your Google Calendar booking link here</p>
+                    <a href="mailto:support@outdials.com" class="btn-primary">Contact Us</a>
+                    <p class="form-subtext">Or email <a href="mailto:support@outdials.com">support@outdials.com</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="nav-logo">
+                        <span class="broken-o">
+                            <svg viewBox="0 0 42 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <mask id="slitMaskFooter">
+                                        <rect width="42" height="48" fill="white"/>
+                                        <line x1="25" y1="20" x2="33" y2="8" stroke="black" stroke-width="5" stroke-linecap="round"/>
+                                    </mask>
+                                </defs>
+                                <circle cx="21" cy="24" r="18" stroke="currentColor" stroke-width="6" fill="none" mask="url(#slitMaskFooter)"/>
+                            </svg>
+                        </span>
+                        <span>OutDials</span>
+                    </div>
+                    <p>Stop Waiting. Start Selling.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Product</h4>
+                        <a href="#how-it-works">How It Works</a>
+                        <a href="#features">Features</a>
+                        <a href="#pricing">Pricing</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <a href="/privacy.html">Privacy Policy</a>
+                        <a href="/terms.html">Terms of Service</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Contact</h4>
+                        <a href="mailto:support@outdials.com">support@outdials.com</a>
+                        <a href="#contact">Book a Demo</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 OutDials LLC. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
