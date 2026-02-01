@@ -71,51 +71,54 @@ if (heroStats) {
     statObserver.observe(heroStats);
 }
 
-// ===== CARD FLIP ANIMATION (How It Works) =====
+// ===== CARD FLIP ANIMATION (How It Works) - Bidirectional =====
 
 const flipObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            const cards = entry.target.querySelectorAll('.how-step');
-            cards.forEach(card => {
-                card.classList.add('flip-in');
-            });
-            flipObserver.unobserve(entry.target);
+            entry.target.classList.add('flip-in');
+            entry.target.classList.remove('flip-out');
+        } else {
+            entry.target.classList.remove('flip-in');
+            entry.target.classList.add('flip-out');
         }
     });
 }, { threshold: 0.3 });
 
-const howGrid = document.querySelector('.how-grid');
-if (howGrid) {
-    flipObserver.observe(howGrid);
-}
+const howCards = document.querySelectorAll('.how-step-wrapper');
+howCards.forEach(card => {
+    flipObserver.observe(card);
+});
 
-// ===== FEATURE CARDS - DEAL FROM DECK =====
+// ===== FEATURE CARDS - SLIDE FROM TOP-LEFT - Bidirectional =====
 
-const dealObserver = new IntersectionObserver((entries) => {
+const slideObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            const cards = entry.target.querySelectorAll('.feature-card');
-            cards.forEach(card => {
-                card.classList.add('deal-card');
-            });
-            dealObserver.unobserve(entry.target);
+            entry.target.classList.add('slide-in');
+            entry.target.classList.remove('slide-out');
+        } else {
+            entry.target.classList.remove('slide-in');
+            entry.target.classList.add('slide-out');
         }
     });
 }, { threshold: 0.2 });
 
-const featuresGrid = document.querySelector('.features-grid');
-if (featuresGrid) {
-    dealObserver.observe(featuresGrid);
-}
+const featureCards = document.querySelectorAll('.feature-card');
+featureCards.forEach(card => {
+    slideObserver.observe(card);
+});
 
-// ===== PRICING CARD REVEAL =====
+// ===== PRICING CARD REVEAL - Bidirectional =====
 
 const priceObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('price-reveal');
-            priceObserver.unobserve(entry.target);
+            entry.target.classList.remove('price-hide');
+        } else {
+            entry.target.classList.remove('price-reveal');
+            entry.target.classList.add('price-hide');
         }
     });
 }, { threshold: 0.4 });
@@ -125,13 +128,16 @@ if (pricingCard) {
     priceObserver.observe(pricingCard);
 }
 
-// ===== CONTACT CARD REVEAL =====
+// ===== CONTACT CARD REVEAL - Bidirectional =====
 
 const contactObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('contact-reveal');
-            contactObserver.unobserve(entry.target);
+            entry.target.classList.remove('contact-hide');
+        } else {
+            entry.target.classList.remove('contact-reveal');
+            entry.target.classList.add('contact-hide');
         }
     });
 }, { threshold: 0.4 });
@@ -159,9 +165,36 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Add fade-in to problem cards (already animated via CSS)
-const problemCards = document.querySelectorAll('.problem-card');
-problemCards.forEach(card => observer.observe(card));
+// ===== PROBLEM CARDS - Bidirectional =====
+
+const problemObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            // Animate in
+            if (entry.target.classList.contains('problem-before')) {
+                entry.target.style.animation = 'slideInLeft 0.8s var(--spring) forwards';
+            } else if (entry.target.classList.contains('problem-after')) {
+                entry.target.style.animation = 'slideInRight 0.8s var(--spring) 0.2s forwards';
+            } else if (entry.target.classList.contains('problem-arrow')) {
+                entry.target.style.animation = 'pulseFade 0.8s var(--spring) 0.4s forwards';
+            }
+        } else {
+            // Animate out
+            if (entry.target.classList.contains('problem-before')) {
+                entry.target.style.animation = 'slideOutLeft 0.8s var(--spring) forwards';
+            } else if (entry.target.classList.contains('problem-after')) {
+                entry.target.style.animation = 'slideOutRight 0.8s var(--spring) forwards';
+            } else if (entry.target.classList.contains('problem-arrow')) {
+                entry.target.style.animation = 'fadeOut 0.8s var(--spring) forwards';
+            }
+        }
+    });
+}, { threshold: 0.3 });
+
+const problemCards = document.querySelectorAll('.problem-card, .problem-arrow');
+problemCards.forEach(card => {
+    problemObserver.observe(card);
+});
 
 // ===== BUTTON RIPPLE EFFECT =====
 
