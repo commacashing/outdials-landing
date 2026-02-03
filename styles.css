@@ -358,8 +358,18 @@ body {
     transition: transform 0.6s var(--spring);
 }
 
+/* Hover triggers one clean 360° spin */
 .how-step-wrapper:hover .how-step-inner {
-    transform: rotateY(180deg);
+    animation: spin360 0.8s var(--spring) forwards;
+}
+
+@keyframes spin360 {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(360deg);
+    }
 }
 
 .how-step-front,
@@ -786,6 +796,17 @@ body {
     }
 }
 
+@keyframes fadeOutDown {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+}
+
 /* Hero parallax effect */
 .hero-title {
     will-change: transform;
@@ -901,18 +922,17 @@ body {
     }
 }
 
-/* Card Flip Animation - How It Works (Bidirectional) */
+/* Card Flip Animation - How It Works (360° Spin on Scroll) */
 .how-step-wrapper {
     opacity: 0;
-    transform: rotateY(-90deg) scale(0.8);
 }
 
 .how-step-wrapper.flip-in {
-    animation: cardFlip 0.6s var(--spring) forwards;
+    animation: spin360In 1s var(--spring) forwards;
 }
 
 .how-step-wrapper.flip-out {
-    animation: cardFlipOut 0.6s var(--spring) forwards;
+    animation: spin360Out 0.6s var(--spring) forwards;
 }
 
 .how-step-wrapper:nth-child(1).flip-in {
@@ -931,33 +951,28 @@ body {
     animation-delay: 0.45s;
 }
 
-@keyframes cardFlip {
+@keyframes spin360In {
     0% {
         opacity: 0;
-        transform: rotateY(-90deg) scale(0.8);
+        transform: translateY(20px) rotateY(0deg);
     }
-    50% {
+    30% {
         opacity: 1;
-        transform: rotateY(-45deg) scale(1.05);
     }
     100% {
         opacity: 1;
-        transform: rotateY(0deg) scale(1);
+        transform: translateY(0) rotateY(360deg);
     }
 }
 
-@keyframes cardFlipOut {
+@keyframes spin360Out {
     0% {
         opacity: 1;
-        transform: rotateY(0deg) scale(1);
-    }
-    50% {
-        opacity: 0.5;
-        transform: rotateY(-45deg) scale(0.95);
+        transform: translateY(0) rotateY(0deg);
     }
     100% {
         opacity: 0;
-        transform: rotateY(-90deg) scale(0.8);
+        transform: translateY(20px) rotateY(-180deg);
     }
 }
 
