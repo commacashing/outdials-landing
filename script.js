@@ -48,23 +48,31 @@ function animateCounter(element, target) {
     }, 16);
 }
 
-// Trigger counters when hero stats are visible
+// Trigger counters when hero stats are visible (Bidirectional)
 const statObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
+            // Fade in and count up
+            entry.target.style.animation = 'fadeInUp 0.8s var(--spring) forwards';
+            entry.target.style.opacity = '1';
+            
             const statValues = entry.target.querySelectorAll('.stat-value');
             statValues.forEach(stat => {
                 const originalText = stat.textContent;
                 const number = parseInt(originalText);
-                if (!isNaN(number)) {
+                if (!isNaN(number) && !stat.dataset.counted) {
                     stat.dataset.suffix = originalText.replace(number, '');
+                    stat.dataset.counted = 'true';
                     animateCounter(stat, number);
                 }
             });
-            statObserver.unobserve(entry.target);
+        } else {
+            // Fade out
+            entry.target.style.animation = 'fadeOutDown 0.8s var(--spring) forwards';
+            entry.target.style.opacity = '0';
         }
     });
-}, { threshold: 0.5 });
+}, { threshold: 0.3 });
 
 const heroStats = document.querySelector('.hero-stats');
 if (heroStats) {
