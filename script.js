@@ -1,57 +1,29 @@
-// ===== SMOOTH SCROLL & NAVIGATION =====
+// ============================================
+// OUTDIALS LANDING PAGE - JAVASCRIPT
+// ============================================
 
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
-
-// Navigation background on scroll
-const nav = document.querySelector('.nav');
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        nav.classList.add('scrolled');
-    } else {
-        nav.classList.remove('scrolled');
-    }
-    
-    // Hero title parallax
-    const heroTitle = document.querySelector('.hero-title');
-    if (heroTitle) {
-        const scrolled = window.scrollY;
-        heroTitle.style.transform = `translateY(${scrolled * 0.4}px)`;
-        heroTitle.style.opacity = 1 - (scrolled / 500);
-    }
-});
-
-// ===== NUMBER COUNTER ANIMATION =====
-
+// Counter Animation for Hero Stats
 function animateCounter(element, target) {
     let current = 0;
-    const increment = target / 60;
+    const increment = target / 50;
+    const suffix = element.dataset.suffix || '';
+    
     const timer = setInterval(() => {
         current += increment;
         if (current >= target) {
-            element.textContent = target + (element.dataset.suffix || '');
+            element.textContent = target + suffix;
             clearInterval(timer);
         } else {
-            element.textContent = Math.floor(current) + (element.dataset.suffix || '');
+            element.textContent = Math.floor(current) + suffix;
         }
-    }, 16);
+    }, 30);
 }
 
-// Stats counter - Bidirectional
+// Trigger counters when hero stats are visible (Bidirectional)
 const statObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
+            // Fade in and count up
             entry.target.classList.remove('stats-fade-out');
             entry.target.classList.add('stats-fade-in');
             
@@ -66,9 +38,11 @@ const statObserver = new IntersectionObserver((entries) => {
                 }
             });
         } else {
+            // Fade out
             entry.target.classList.remove('stats-fade-in');
             entry.target.classList.add('stats-fade-out');
             
+            // Reset counter flag so it counts again next time
             const statValues = entry.target.querySelectorAll('.stat-value');
             statValues.forEach(stat => {
                 delete stat.dataset.counted;
@@ -82,121 +56,258 @@ if (heroStats) {
     statObserver.observe(heroStats);
 }
 
-// ===== DEMO CARDS - DEAL IN/OUT ANIMATION (Bidirectional) =====
+// ============================================
+// DEMO SECTION - AUTO-PLAY ANIMATION
+// ============================================
 
+let demoAnimationActive = false;
+let demoAnimationInterval;
+
+function startDemoAnimation() {
+    const cards = document.querySelectorAll('.demo-card-wrapper');
+    const demoCards = document.querySelectorAll('.demo-card');
+    
+    if (cards.length !== 3) return;
+    
+    // Reset all cards to ringing state
+    function resetCards() {
+        demoCards.forEach((card, index) => {
+            card.classList.remove('answered', 'ended');
+            const status = card.querySelector('.demo-card-status');
+            status.className = 'demo-card-status ringing';
+            status.innerHTML = '<span class="demo-status-dot"></span><span class="demo-status-text">Ringing...</span>';
+        });
+    }
+    
+    // Sequence animation
+    function runSequence() {
+        resetCards();
+        
+        // After 2 seconds, middle card (index 1) answers
+        setTimeout(() => {
+            const middleCard = demoCards[1];
+            const middleStatus = middleCard.querySelector('.demo-card-status');
+            
+            middleCard.classList.add('answered');
+            middleStatus.className = 'demo-card-status answered';
+            middleStatus.innerHTML = '<span class="demo-status-dot"></span><span class="demo-status-text">Human Answered</span>';
+            
+            // Other cards end
+            [0, 2].forEach(index => {
+                const card = demoCards[index];
+                const status = card.querySelector('.demo-card-status');
+                card.classList.add('ended');
+                status.className = 'demo-card-status ended';
+                status.innerHTML = '<span class="demo-status-dot"></span><span class="demo-status-text">Call Ended</span>';
+            });
+        }, 2000);
+    }
+    
+    // Run immediately
+    runSequence();
+    
+    // Loop every 5 seconds
+    demoAnimationInterval = setInterval(runSequence, 5000);
+}
+
+function stopDemoAnimation() {
+    if (demoAnimationInterval) {
+        clearInterval(demoAnimationInterval);
+        demoAnimationInterval = null;
+    }
+    
+    // Reset cards to initial state
+    const demoCards = document.querySelectorAll('.demo-card');
+    demoCards.forEach(card => {
+        card.classList.remove('answered', 'ended');
+        const status = card.querySelector('.demo-card-status');
+        status.className = 'demo-card-status ringing';
+        status.innerHTML = '<span class="demo-status-dot"></span><span class="demo-status-text">Ringing...</span>';
+    });
+}
+
+// Demo visibility observer (bidirectional)
 const demoObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
+        const wrappers = entry.target.querySelectorAll('.demo-card-wrapper');
+        
         if (entry.isIntersecting) {
-            // Deal in
-            const cards = entry.target.querySelectorAll('.demo-card-wrapper');
-            cards.forEach(card => {
-                card.classList.remove('deal-out');
-                card.classList.add('deal-in');
+            wrappers.forEach(wrapper => {
+                wrapper.classList.remove('demo-hidden');
+                wrapper.classList.add('demo-visible');
             });
+            
+            if (!demoAnimationActive) {
+                demoAnimationActive = true;
+                startDemoAnimation();
+            }
         } else {
-            // Deal out
-            const cards = entry.target.querySelectorAll('.demo-card-wrapper');
-            cards.forEach(card => {
-                card.classList.remove('deal-in');
-                card.classList.add('deal-out');
+            wrappers.forEach(wrapper => {
+                wrapper.classList.remove('demo-visible');
+                wrapper.classList.add('demo-hidden');
             });
+            
+            if (demoAnimationActive) {
+                demoAnimationActive = false;
+                stopDemoAnimation();
+            }
         }
     });
 }, { threshold: 0.2 });
 
-const demoContainer = document.querySelector('.demo-race-container');
-if (demoContainer) {
-    demoObserver.observe(demoContainer);
+const demoSection = document.querySelector('.section-demo');
+if (demoSection) {
+    demoObserver.observe(demoSection);
 }
 
-// ===== HOW IT WORKS - 360° SPIN (Bidirectional) =====
+// ============================================
+// HOW IT WORKS - SPINNING CARDS
+// ============================================
 
 const flipObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.classList.add('flip-in');
             entry.target.classList.remove('flip-out');
+            entry.target.classList.add('flip-in');
         } else {
             entry.target.classList.remove('flip-in');
             entry.target.classList.add('flip-out');
         }
     });
-}, { threshold: 0.3 });
+}, { threshold: 0.2 });
 
-const howCards = document.querySelectorAll('.how-step-wrapper');
-howCards.forEach(card => {
-    flipObserver.observe(card);
+const howStepWrappers = document.querySelectorAll('.how-step-wrapper');
+howStepWrappers.forEach(wrapper => {
+    flipObserver.observe(wrapper);
 });
 
-// ===== BENTO GRID - STAGGERED SLIDE (Bidirectional) =====
+// ============================================
+// FEATURE MARQUEE - INTERACTIVE
+// ============================================
 
-const bentoObserver = new IntersectionObserver((entries) => {
+const featureItems = document.querySelectorAll('.feature-item');
+const featureVisuals = document.querySelectorAll('.feature-visual-content');
+
+featureItems.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+        // Remove active from all items
+        featureItems.forEach(i => i.classList.remove('active'));
+        featureVisuals.forEach(v => v.classList.remove('active'));
+        
+        // Add active to hovered item
+        item.classList.add('active');
+        
+        // Show corresponding visual
+        const feature = item.dataset.feature;
+        const visual = document.querySelector(`[data-visual="${feature}"]`);
+        if (visual) {
+            visual.classList.add('active');
+        }
+    });
+});
+
+// Feature marquee visibility observer (bidirectional)
+const marqueeObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const cards = entry.target.querySelectorAll('.bento-card');
-            cards.forEach((card, index) => {
-                card.classList.remove(`bento-out-${index + 1}`);
-                card.classList.add(`bento-in-${index + 1}`);
-            });
-        } else {
-            const cards = entry.target.querySelectorAll('.bento-card');
-            cards.forEach((card, index) => {
-                card.classList.remove(`bento-in-${index + 1}`);
-                card.classList.add(`bento-out-${index + 1}`);
-            });
+        const marquee = entry.target.querySelector('.feature-marquee');
+        if (marquee) {
+            if (entry.isIntersecting) {
+                marquee.classList.remove('marquee-hidden');
+                marquee.classList.add('marquee-visible');
+            } else {
+                marquee.classList.remove('marquee-visible');
+                marquee.classList.add('marquee-hidden');
+            }
         }
     });
 }, { threshold: 0.2 });
 
-const bentoGrid = document.querySelector('.bento-grid');
-if (bentoGrid) {
-    bentoObserver.observe(bentoGrid);
+const featuresSection = document.querySelector('.section-features');
+if (featuresSection) {
+    marqueeObserver.observe(featuresSection);
 }
 
-// ===== PRICING CARD - SCALE & FADE (Bidirectional) =====
+// ============================================
+// PRICING - VISIBILITY ANIMATION
+// ============================================
 
-const priceObserver = new IntersectionObserver((entries) => {
+const pricingObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('price-reveal');
-            entry.target.classList.remove('price-hide');
-        } else {
-            entry.target.classList.remove('price-reveal');
-            entry.target.classList.add('price-hide');
-        }
-    });
-}, { threshold: 0.4 });
-
-const pricingCard = document.querySelector('.pricing-card');
-if (pricingCard) {
-    priceObserver.observe(pricingCard);
-}
-
-// ===== CALENDLY - GLOW REVEAL (Bidirectional) =====
-
-const calendlyObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('calendly-reveal');
-            entry.target.classList.remove('calendly-hide');
-        } else {
-            entry.target.classList.remove('calendly-reveal');
-            entry.target.classList.add('calendly-hide');
+        const pricingSimple = entry.target.querySelector('.pricing-simple');
+        if (pricingSimple) {
+            if (entry.isIntersecting) {
+                pricingSimple.classList.remove('pricing-hidden');
+                pricingSimple.classList.add('pricing-visible');
+            } else {
+                pricingSimple.classList.remove('pricing-visible');
+                pricingSimple.classList.add('pricing-hidden');
+            }
         }
     });
 }, { threshold: 0.3 });
 
-const calendlyWrapper = document.querySelector('.calendly-wrapper');
-if (calendlyWrapper) {
-    calendlyObserver.observe(calendlyWrapper);
+const pricingSection = document.querySelector('.section-pricing');
+if (pricingSection) {
+    pricingObserver.observe(pricingSection);
 }
 
-// ===== PERFORMANCE OPTIMIZATION =====
+// ============================================
+// CONTACT - VISIBILITY ANIMATION
+// ============================================
 
-// Reduce motion for users who prefer it
-if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.documentElement.style.setProperty('--spring', 'ease');
-    document.documentElement.style.setProperty('--spring-fast', 'ease');
+const contactObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        const contactCta = entry.target.querySelector('.contact-cta');
+        if (contactCta) {
+            if (entry.isIntersecting) {
+                contactCta.classList.remove('contact-hidden');
+                contactCta.classList.add('contact-visible');
+            } else {
+                contactCta.classList.remove('contact-visible');
+                contactCta.classList.add('contact-hidden');
+            }
+        }
+    });
+}, { threshold: 0.3 });
+
+const contactSection = document.querySelector('.section-contact');
+if (contactSection) {
+    contactObserver.observe(contactSection);
 }
 
-console.log('🚀 OutDials landing page loaded with bidirectional animations');
+// ============================================
+// SMOOTH SCROLL FOR NAV LINKS
+// ============================================
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            const navHeight = document.querySelector('.nav').offsetHeight;
+            const targetPosition = target.offsetTop - navHeight;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// ============================================
+// INITIALIZE ON LOAD
+// ============================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('OutDials landing page loaded');
+    
+    // Ensure first feature is active on load
+    const firstFeature = document.querySelector('.feature-item[data-feature="instant-bridge"]');
+    const firstVisual = document.querySelector('.feature-visual-content[data-visual="instant-bridge"]');
+    
+    if (firstFeature && firstVisual) {
+        firstFeature.classList.add('active');
+        firstVisual.classList.add('active');
+    }
+});
