@@ -14,7 +14,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Navigation background on scroll + morph effect
+// Navigation background on scroll
 const nav = document.querySelector('.nav');
 window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
@@ -23,7 +23,7 @@ window.addEventListener('scroll', () => {
         nav.classList.remove('scrolled');
     }
     
-    // Parallax on hero title
+    // Hero title parallax
     const heroTitle = document.querySelector('.hero-title');
     if (heroTitle) {
         const scrolled = window.scrollY;
@@ -36,7 +36,7 @@ window.addEventListener('scroll', () => {
 
 function animateCounter(element, target) {
     let current = 0;
-    const increment = target / 60; // 60 frames
+    const increment = target / 60;
     const timer = setInterval(() => {
         current += increment;
         if (current >= target) {
@@ -48,11 +48,10 @@ function animateCounter(element, target) {
     }, 16);
 }
 
-// Trigger counters when hero stats are visible (Bidirectional)
+// Stats counter - Bidirectional
 const statObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            // Fade in and count up
             entry.target.classList.remove('stats-fade-out');
             entry.target.classList.add('stats-fade-in');
             
@@ -67,11 +66,9 @@ const statObserver = new IntersectionObserver((entries) => {
                 }
             });
         } else {
-            // Fade out
             entry.target.classList.remove('stats-fade-in');
             entry.target.classList.add('stats-fade-out');
             
-            // Reset counter flag so it counts again next time
             const statValues = entry.target.querySelectorAll('.stat-value');
             statValues.forEach(stat => {
                 delete stat.dataset.counted;
@@ -85,7 +82,34 @@ if (heroStats) {
     statObserver.observe(heroStats);
 }
 
-// ===== CARD FLIP ANIMATION (How It Works) - Bidirectional =====
+// ===== DEMO CARDS - DEAL IN/OUT ANIMATION (Bidirectional) =====
+
+const demoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            // Deal in
+            const cards = entry.target.querySelectorAll('.demo-card-wrapper');
+            cards.forEach(card => {
+                card.classList.remove('deal-out');
+                card.classList.add('deal-in');
+            });
+        } else {
+            // Deal out
+            const cards = entry.target.querySelectorAll('.demo-card-wrapper');
+            cards.forEach(card => {
+                card.classList.remove('deal-in');
+                card.classList.add('deal-out');
+            });
+        }
+    });
+}, { threshold: 0.2 });
+
+const demoContainer = document.querySelector('.demo-race-container');
+if (demoContainer) {
+    demoObserver.observe(demoContainer);
+}
+
+// ===== HOW IT WORKS - 360° SPIN (Bidirectional) =====
 
 const flipObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -104,26 +128,32 @@ howCards.forEach(card => {
     flipObserver.observe(card);
 });
 
-// ===== FEATURE CARDS - SLIDE FROM TOP-LEFT - Bidirectional =====
+// ===== BENTO GRID - STAGGERED SLIDE (Bidirectional) =====
 
-const slideObserver = new IntersectionObserver((entries) => {
+const bentoObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.classList.add('slide-in');
-            entry.target.classList.remove('slide-out');
+            const cards = entry.target.querySelectorAll('.bento-card');
+            cards.forEach((card, index) => {
+                card.classList.remove(`bento-out-${index + 1}`);
+                card.classList.add(`bento-in-${index + 1}`);
+            });
         } else {
-            entry.target.classList.remove('slide-in');
-            entry.target.classList.add('slide-out');
+            const cards = entry.target.querySelectorAll('.bento-card');
+            cards.forEach((card, index) => {
+                card.classList.remove(`bento-in-${index + 1}`);
+                card.classList.add(`bento-out-${index + 1}`);
+            });
         }
     });
 }, { threshold: 0.2 });
 
-const featureCards = document.querySelectorAll('.feature-card');
-featureCards.forEach(card => {
-    slideObserver.observe(card);
-});
+const bentoGrid = document.querySelector('.bento-grid');
+if (bentoGrid) {
+    bentoObserver.observe(bentoGrid);
+}
 
-// ===== PRICING CARD REVEAL - Bidirectional =====
+// ===== PRICING CARD - SCALE & FADE (Bidirectional) =====
 
 const priceObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -142,86 +172,24 @@ if (pricingCard) {
     priceObserver.observe(pricingCard);
 }
 
-// ===== CONTACT CARD REVEAL - Bidirectional =====
+// ===== CALENDLY - GLOW REVEAL (Bidirectional) =====
 
-const contactObserver = new IntersectionObserver((entries) => {
+const calendlyObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.classList.add('contact-reveal');
-            entry.target.classList.remove('contact-hide');
+            entry.target.classList.add('calendly-reveal');
+            entry.target.classList.remove('calendly-hide');
         } else {
-            entry.target.classList.remove('contact-reveal');
-            entry.target.classList.add('contact-hide');
-        }
-    });
-}, { threshold: 0.4 });
-
-const contactCard = document.querySelector('.contact-card');
-if (contactCard) {
-    contactObserver.observe(contactCard);
-}
-
-// ===== SCROLL-TRIGGERED FADE-IN & BLUR =====
-
-const observerOptions = {
-    threshold: 0.15,
-    rootMargin: '0px 0px -100px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            if (entry.target.classList.contains('blur-in')) {
-                entry.target.classList.add('focused');
-            }
-        }
-    });
-}, observerOptions);
-
-// ===== PROBLEM CARDS - Bidirectional =====
-
-const problemObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            // Animate in
-            if (entry.target.classList.contains('problem-before')) {
-                entry.target.style.animation = 'slideInLeft 0.8s var(--spring) forwards';
-            } else if (entry.target.classList.contains('problem-after')) {
-                entry.target.style.animation = 'slideInRight 0.8s var(--spring) 0.2s forwards';
-            } else if (entry.target.classList.contains('problem-arrow')) {
-                entry.target.style.animation = 'pulseFade 0.8s var(--spring) 0.4s forwards';
-            }
-        } else {
-            // Animate out
-            if (entry.target.classList.contains('problem-before')) {
-                entry.target.style.animation = 'slideOutLeft 0.8s var(--spring) forwards';
-            } else if (entry.target.classList.contains('problem-after')) {
-                entry.target.style.animation = 'slideOutRight 0.8s var(--spring) forwards';
-            } else if (entry.target.classList.contains('problem-arrow')) {
-                entry.target.style.animation = 'fadeOut 0.8s var(--spring) forwards';
-            }
+            entry.target.classList.remove('calendly-reveal');
+            entry.target.classList.add('calendly-hide');
         }
     });
 }, { threshold: 0.3 });
 
-const problemCards = document.querySelectorAll('.problem-card, .problem-arrow');
-problemCards.forEach(card => {
-    problemObserver.observe(card);
-});
-
-// ===== BUTTON RIPPLE EFFECT =====
-
-const buttons = document.querySelectorAll('.btn-primary');
-buttons.forEach(button => {
-    button.addEventListener('click', function(e) {
-        const ripple = document.createElement('span');
-        ripple.classList.add('ripple');
-        this.appendChild(ripple);
-        
-        setTimeout(() => ripple.remove(), 600);
-    });
-});
+const calendlyWrapper = document.querySelector('.calendly-wrapper');
+if (calendlyWrapper) {
+    calendlyObserver.observe(calendlyWrapper);
+}
 
 // ===== PERFORMANCE OPTIMIZATION =====
 
@@ -231,12 +199,4 @@ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.documentElement.style.setProperty('--spring-fast', 'ease');
 }
 
-// Lazy load any future images
-if ('loading' in HTMLImageElement.prototype) {
-    const images = document.querySelectorAll('img[loading="lazy"]');
-    images.forEach(img => {
-        img.src = img.dataset.src;
-    });
-}
-
-console.log('🚀 OutDials landing page loaded with aggressive animations');
+console.log('🚀 OutDials landing page loaded with bidirectional animations');
