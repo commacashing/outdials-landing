@@ -181,6 +181,14 @@ body {
     animation: fadeInUp 0.8s var(--spring) 0.2s forwards;
 }
 
+.hero-stats.stats-fade-in {
+    animation: fadeInUp 0.8s var(--spring) forwards;
+}
+
+.hero-stats.stats-fade-out {
+    animation: fadeOutDown 0.8s var(--spring) forwards;
+}
+
 .stat-item {
     text-align: center;
 }
@@ -360,7 +368,7 @@ body {
 
 /* Hover triggers one clean 360° spin */
 .how-step-wrapper:hover .how-step-inner {
-    animation: spin360 0.8s var(--spring) forwards;
+    animation: spin360 1.6s var(--spring) forwards;
 }
 
 @keyframes spin360 {
