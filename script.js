@@ -53,8 +53,8 @@ const statObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             // Fade in and count up
-            entry.target.style.animation = 'fadeInUp 0.8s var(--spring) forwards';
-            entry.target.style.opacity = '1';
+            entry.target.classList.remove('stats-fade-out');
+            entry.target.classList.add('stats-fade-in');
             
             const statValues = entry.target.querySelectorAll('.stat-value');
             statValues.forEach(stat => {
@@ -68,8 +68,14 @@ const statObserver = new IntersectionObserver((entries) => {
             });
         } else {
             // Fade out
-            entry.target.style.animation = 'fadeOutDown 0.8s var(--spring) forwards';
-            entry.target.style.opacity = '0';
+            entry.target.classList.remove('stats-fade-in');
+            entry.target.classList.add('stats-fade-out');
+            
+            // Reset counter flag so it counts again next time
+            const statValues = entry.target.querySelectorAll('.stat-value');
+            statValues.forEach(stat => {
+                delete stat.dataset.counted;
+            });
         }
     });
 }, { threshold: 0.3 });
