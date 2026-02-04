@@ -71,22 +71,22 @@
     <!-- Trust Bar -->
     <section class="trust-bar">
         <div class="trust-container">
-            <p class="trust-label">Integrates with:</p>
+            <p class="trust-label">Integrates with your CRM:</p>
             <div class="trust-ticker-wrapper">
                 <div class="trust-ticker">
-                    <div class="trust-logo">Salesforce</div>
-                    <div class="trust-logo">HubSpot</div>
-                    <div class="trust-logo">Pipedrive</div>
-                    <div class="trust-logo">Zoho CRM</div>
-                    <div class="trust-logo">Monday.com</div>
-                    <div class="trust-logo">Copper</div>
+                    <img src="logos/salesforce.jpeg" alt="Salesforce" class="trust-logo">
+                    <img src="logos/hubspot.svg" alt="HubSpot" class="trust-logo">
+                    <img src="logos/pipedrive.svg" alt="Pipedrive" class="trust-logo">
+                    <img src="logos/zoho.png" alt="Zoho CRM" class="trust-logo">
+                    <img src="logos/monday.svg" alt="Monday.com" class="trust-logo">
+                    <img src="logos/close.png" alt="Close CRM" class="trust-logo">
                     <!-- Duplicate for seamless loop -->
-                    <div class="trust-logo">Salesforce</div>
-                    <div class="trust-logo">HubSpot</div>
-                    <div class="trust-logo">Pipedrive</div>
-                    <div class="trust-logo">Zoho CRM</div>
-                    <div class="trust-logo">Monday.com</div>
-                    <div class="trust-logo">Copper</div>
+                    <img src="logos/salesforce.jpeg" alt="Salesforce" class="trust-logo">
+                    <img src="logos/hubspot.svg" alt="HubSpot" class="trust-logo">
+                    <img src="logos/pipedrive.svg" alt="Pipedrive" class="trust-logo">
+                    <img src="logos/zoho.png" alt="Zoho CRM" class="trust-logo">
+                    <img src="logos/monday.svg" alt="Monday.com" class="trust-logo">
+                    <img src="logos/close.png" alt="Close CRM" class="trust-logo">
                 </div>
             </div>
         </div>
@@ -101,92 +101,44 @@
             <div class="demo-race-container">
                 <div class="demo-race-grid">
                     <!-- Card 1 -->
-                    <div class="demo-card-wrapper card-1">
-                        <div class="demo-card-back">
-                            <span class="broken-o">
-                                <svg viewBox="0 0 42 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <defs>
-                                        <mask id="slitMaskDemo1">
-                                            <rect width="42" height="48" fill="white"/>
-                                            <line x1="25" y1="20" x2="33" y2="8" stroke="black" stroke-width="5" stroke-linecap="round"/>
-                                        </mask>
-                                    </defs>
-                                    <circle cx="21" cy="24" r="18" stroke="currentColor" stroke-width="6" fill="none" mask="url(#slitMaskDemo1)"/>
-                                </svg>
-                            </span>
-                        </div>
-                        <div class="demo-card-front">
-                            <div class="demo-card">
-                                <div class="demo-card-status">
-                                    <span class="demo-status-icon">📞</span>
-                                    <span>Ringing...</span>
-                                </div>
-                                <div class="demo-card-name">Sarah Johnson</div>
-                                <div class="demo-card-info"><strong>Acme Insurance Co.</strong></div>
-                                <div class="demo-card-info">(555) 123-4567</div>
-                                <div class="demo-card-info">Northeast • Team A</div>
-                                <div class="demo-card-info">Licenses: Series 6, 63</div>
+                    <div class="demo-card-wrapper">
+                        <div class="demo-card">
+                            <div class="demo-card-status ringing">
+                                <span class="demo-status-dot"></span>
+                                <span class="demo-status-text">Ringing...</span>
                             </div>
+                            <div class="demo-card-name">Sarah Johnson</div>
+                            <div class="demo-card-company">Acme Insurance Co.</div>
+                            <div class="demo-card-detail">(555) 123-4567</div>
+                            <div class="demo-card-detail">Northeast • Team A</div>
                         </div>
                     </div>
 
                     <!-- Card 2 -->
-                    <div class="demo-card-wrapper card-2">
-                        <div class="demo-card-back">
-                            <span class="broken-o">
-                                <svg viewBox="0 0 42 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <defs>
-                                        <mask id="slitMaskDemo2">
-                                            <rect width="42" height="48" fill="white"/>
-                                            <line x1="25" y1="20" x2="33" y2="8" stroke="black" stroke-width="5" stroke-linecap="round"/>
-                                        </mask>
-                                    </defs>
-                                    <circle cx="21" cy="24" r="18" stroke="currentColor" stroke-width="6" fill="none" mask="url(#slitMaskDemo2)"/>
-                                </svg>
-                            </span>
-                        </div>
-                        <div class="demo-card-front">
-                            <div class="demo-card">
-                                <div class="demo-card-status">
-                                    <span class="demo-status-icon">📞</span>
-                                    <span>Ringing...</span>
-                                </div>
-                                <div class="demo-card-name">Michael Chen</div>
-                                <div class="demo-card-info"><strong>Summit Financial</strong></div>
-                                <div class="demo-card-info">(555) 987-6543</div>
-                                <div class="demo-card-info">Southwest • Team B</div>
-                                <div class="demo-card-info">Licenses: Series 7, 24</div>
+                    <div class="demo-card-wrapper">
+                        <div class="demo-card">
+                            <div class="demo-card-status ringing">
+                                <span class="demo-status-dot"></span>
+                                <span class="demo-status-text">Ringing...</span>
                             </div>
+                            <div class="demo-card-name">Michael Chen</div>
+                            <div class="demo-card-company">Summit Financial</div>
+                            <div class="demo-card-detail">(555) 987-6543</div>
+                            <div class="demo-card-detail">Southwest • Team B</div>
                         </div>
                     </div>
 
                     <!-- Card 3 -->
-                    <div class="demo-card-wrapper card-3">
-                        <div class="demo-card-back">
-                            <span class="broken-o">
-                                <svg viewBox="0 0 42 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <defs>
-                                        <mask id="slitMaskDemo3">
-                                            <rect width="42" height="48" fill="white"/>
-                                            <line x1="25" y1="20" x2="33" y2="8" stroke="black" stroke-width="5" stroke-linecap="round"/>
-                                        </mask>
-                                    </defs>
-                                    <circle cx="21" cy="24" r="18" stroke="currentColor" stroke-width="6" fill="none" mask="url(#slitMaskDemo3)"/>
-                                </svg>
-                            </span>
-                        </div>
-                        <div class="demo-card-front">
-                            <div class="demo-card">
-                                <div class="demo-card-status">
-                                    <span class="demo-status-icon">📞</span>
-                                    <span>Ringing...</span>
-                                </div>
-                                <div class="demo-card-name">David Martinez</div>
-                                <div class="demo-card-info"><strong>Elite Advisors LLC</strong></div>
-                                <div class="demo-card-info">(555) 456-7890</div>
-                                <div class="demo-card-info">Midwest • Team C</div>
-                                <div class="demo-card-info">Licenses: Series 65, 66</div>
+                    <div class="demo-card-wrapper">
+                        <div class="demo-card">
+                            <div class="demo-card-status ringing">
+                                <span class="demo-status-dot"></span>
+                                <span class="demo-status-text">Ringing...</span>
                             </div>
+                            <div class="demo-card-name">David Martinez</div>
+                            <div class="demo-card-company">Elite Advisors LLC</div>
+                            <div class="demo-card-detail">(555) 456-7890</div>
+                            <div class="demo-card-detail">Midwest • Team C</div>
                         </div>
                     </div>
                 </div>
@@ -293,47 +245,165 @@
         </div>
     </section>
 
-    <!-- Why OutDials (Bento Grid Features) -->
+    <!-- Why OutDials - Feature Marquee -->
     <section id="features" class="section-features">
-        <div class="container">
+        <div class="container-wide">
             <h2 class="section-title">Why OutDials</h2>
             <p class="section-subtitle">Built for compliance, speed, and results</p>
             
-            <div class="bento-grid">
-                <!-- Large Feature 1: Instant Bridge -->
-                <div class="bento-card bento-large">
-                    <div class="bento-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                        </svg>
+            <div class="feature-marquee">
+                <!-- Left: Feature List -->
+                <div class="feature-list">
+                    <div class="feature-item active" data-feature="instant-bridge">
+                        <div class="feature-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                            </svg>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Instant Bridge</h3>
+                            <p>0ms latency. No "dead air" pause. Prospects hear you the moment they answer.</p>
+                        </div>
                     </div>
-                    <h3>Instant Bridge</h3>
-                    <p>0ms latency. No "dead air" pause. Prospects hear you the moment they answer — no awkward silence that makes them hang up.</p>
-                    <div class="bento-stat">0ms</div>
+
+                    <div class="feature-item" data-feature="premium-amd">
+                        <div class="feature-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Premium AMD</h3>
+                            <p>Answering Machine Detection filters voicemails automatically, saving 45+ seconds per non-answer.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item" data-feature="tcpa-compliant">
+                        <div class="feature-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                        </div>
+                        <div class="feature-content">
+                            <h3>TCPA Compliant</h3>
+                            <p>Hard-coded consent checks, time-zone enforcement, DNC filtering, and audit trails built-in.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item" data-feature="crm-sync">
+                        <div class="feature-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                                <path d="M3 3v5h5"></path>
+                                <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"></path>
+                                <path d="M16 21h5v-5"></path>
+                            </svg>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Native CRM Sync</h3>
+                            <p>Zero-bloat OAuth2 integration. Call notes, dispositions, and timestamps sync automatically.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item" data-feature="number-rotation">
+                        <div class="feature-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                        </div>
+                        <div class="feature-content">
+                            <h3>12-Number Rotation</h3>
+                            <p>We manage your Twilio numbers and replace any flagged as "Scam Likely" proactively.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item" data-feature="analytics">
+                        <div class="feature-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="20" x2="18" y2="10"></line>
+                                <line x1="12" y1="20" x2="12" y2="4"></line>
+                                <line x1="6" y1="20" x2="6" y2="14"></line>
+                            </svg>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Real-Time Analytics</h3>
+                            <p>Track connect rates, talk time, and calls per hour. Export session data anytime.</p>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Medium Feature 2: Premium AMD -->
-                <div class="bento-card bento-medium">
-                    <div class="bento-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <path d="m21 21-4.35-4.35"></path>
-                        </svg>
+                <!-- Right: Feature Visual -->
+                <div class="feature-visual">
+                    <div class="feature-visual-content active" data-visual="instant-bridge">
+                        <div class="visual-icon">
+                            <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                            </svg>
+                        </div>
+                        <div class="visual-stat">0ms</div>
+                        <div class="visual-label">Zero Latency</div>
                     </div>
-                    <h3>Premium AMD</h3>
-                    <p>Answering Machine Detection filters voicemails automatically, saving 45+ seconds per non-answer.</p>
-                </div>
 
-                <!-- Medium Feature 3: TCPA Compliant -->
-                <div class="bento-card bento-medium">
-                    <div class="bento-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                        </svg>
+                    <div class="feature-visual-content" data-visual="premium-amd">
+                        <div class="visual-icon">
+                            <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                        </div>
+                        <div class="visual-stat">45s</div>
+                        <div class="visual-label">Saved Per Voicemail</div>
                     </div>
-                    <h3>TCPA Compliant</h3>
-                    <p>Hard-coded consent checks, time-zone enforcement, DNC filtering, and audit trails built-in.</p>
+
+                    <div class="feature-visual-content" data-visual="tcpa-compliant">
+                        <div class="visual-icon">
+                            <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                <polyline points="9 12 11 14 15 10"></polyline>
+                            </svg>
+                        </div>
+                        <div class="visual-stat">100%</div>
+                        <div class="visual-label">TCPA Compliant</div>
+                    </div>
+
+                    <div class="feature-visual-content" data-visual="crm-sync">
+                        <div class="visual-icon">
+                            <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                                <path d="M3 3v5h5"></path>
+                                <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"></path>
+                                <path d="M16 21h5v-5"></path>
+                            </svg>
+                        </div>
+                        <div class="visual-stat">Zero-Bloat</div>
+                        <div class="visual-label">OAuth2 Integration</div>
+                    </div>
+
+                    <div class="feature-visual-content" data-visual="number-rotation">
+                        <div class="visual-icon">
+                            <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                <path d="M14.05 2a9 9 0 0 1 8 7.94" stroke-dasharray="3 3"></path>
+                                <path d="M14.05 6A5 5 0 0 1 18 10" stroke-dasharray="3 3"></path>
+                            </svg>
+                        </div>
+                        <div class="visual-stat">12</div>
+                        <div class="visual-label">Managed Numbers</div>
+                    </div>
+
+                    <div class="feature-visual-content" data-visual="analytics">
+                        <div class="visual-icon">
+                            <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="20" x2="18" y2="10"></line>
+                                <line x1="12" y1="20" x2="12" y2="4"></line>
+                                <line x1="6" y1="20" x2="6" y2="14"></line>
+                            </svg>
+                        </div>
+                        <div class="visual-stat">Real-Time</div>
+                        <div class="visual-label">Live Analytics</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -342,24 +412,24 @@
     <!-- Pricing Section -->
     <section id="pricing" class="section-pricing">
         <div class="container">
-            <h2 class="section-title">Simple, Transparent Pricing</h2>
-            <p class="section-subtitle">We're not a vendor. We're a 1% stakeholder in your success.</p>
+            <h2 class="section-title">Transparent Pricing</h2>
+            <p class="section-subtitle">We're a 1% stakeholder in your success</p>
             
-            <div class="pricing-card">
-                <div class="pricing-header">
-                    <h3>Annual License</h3>
+            <div class="pricing-simple">
+                <div class="pricing-block">
+                    <div class="pricing-label">Annual License</div>
                     <div class="pricing-amount">$3,600</div>
-                    <p>per seat / year</p>
+                    <div class="pricing-detail">per seat / year</div>
                 </div>
-                
+
                 <div class="pricing-divider"></div>
-                
-                <div class="pricing-royalty">
-                    <h4>Success Royalty</h4>
-                    <div class="royalty-amount">1%</div>
-                    <p>of gross revenue on deals sourced via OutDials</p>
+
+                <div class="pricing-block">
+                    <div class="pricing-label">Success Royalty</div>
+                    <div class="pricing-royalty">1%</div>
+                    <div class="pricing-detail">of gross revenue on deals sourced via OutDials</div>
                 </div>
-                
+
                 <div class="pricing-cta">
                     <a href="#contact" class="btn-primary">Book a Demo</a>
                 </div>
@@ -367,22 +437,17 @@
         </div>
     </section>
 
-    <!-- Contact/Demo Section with Calendly -->
+    <!-- Contact Section -->
     <section id="contact" class="section-contact">
         <div class="container">
             <h2 class="section-title">Ready to 3x Your Connect Rate?</h2>
-            <p class="section-subtitle">Book a 15-minute demo and see the Race Card in action.</p>
+            <p class="section-subtitle">Book a 15-minute demo and see the Race Card in action</p>
             
-            <div class="calendly-container">
-                <div class="calendly-wrapper">
-                    <!-- Calendly inline widget begin -->
-                    <div class="calendly-inline-widget" 
-                         data-url="https://calendly.com/outdials/demo?hide_gdpr_banner=1&primary_color=22c55e" 
-                         style="min-width:320px;height:700px;">
-                    </div>
-                    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-                    <!-- Calendly inline widget end -->
-                </div>
+            <div class="contact-cta">
+                <a href="https://calendly.com/outdials/demo" target="_blank" rel="noopener noreferrer" class="btn-primary btn-large">
+                    Book a Demo
+                </a>
+                <p class="contact-note">or email <a href="mailto:support@outdials.com">support@outdials.com</a></p>
             </div>
         </div>
     </section>
