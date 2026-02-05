@@ -162,43 +162,112 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===============================================
-    // FLOW DIAGRAM ANIMATION
+    // INFINITE ZOOM - HOW IT WORKS
     // ===============================================
     
-    let flowAnimationPlayed = false;
+    let currentZoomLayer = 1;
+    let isZooming = false;
+    const totalLayers = 4;
 
-    const flowDiagramObserver = new IntersectionObserver((entries) => {
+    const zoomObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting && !flowAnimationPlayed) {
-                flowAnimationPlayed = true;
-                animateFlowDiagram();
+            if (entry.isIntersecting) {
+                initZoomInteraction();
             }
         });
     }, { threshold: 0.3 });
 
-    const howSection = document.querySelector('.section-how');
-    if (howSection) {
-        flowDiagramObserver.observe(howSection);
+    const zoomContainer = document.querySelector('.zoom-container');
+    if (zoomContainer) {
+        zoomObserver.observe(zoomContainer);
     }
 
-    function animateFlowDiagram() {
-        const animatedPath = document.getElementById('flow-path-animated');
-        const nodes = document.querySelectorAll('.flow-node');
-        
-        if (!animatedPath || !nodes.length) return;
+    function initZoomInteraction() {
+        const zoomSection = document.querySelector('.section-how');
+        const layers = document.querySelectorAll('.zoom-layer');
+        const progressDots = document.querySelectorAll('.zoom-progress-dot');
 
-        // Animate the line
-        animatedPath.style.transition = 'stroke-dasharray 2s cubic-bezier(0.16, 1, 0.3, 1)';
-        setTimeout(() => {
-            animatedPath.style.strokeDasharray = '1000 0';
-        }, 100);
+        // Auto-play zoom sequence
+        let autoZoomInterval = setInterval(() => {
+            if (!isZooming && currentZoomLayer < totalLayers) {
+                zoomToNextLayer();
+            } else if (currentZoomLayer >= totalLayers) {
+                clearInterval(autoZoomInterval);
+            }
+        }, 3000);
 
-        // Activate nodes sequentially
-        nodes.forEach((node, index) => {
-            setTimeout(() => {
-                node.classList.add('active');
-            }, 500 * index + 300);
+        // Manual control with progress dots
+        progressDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                clearInterval(autoZoomInterval);
+                zoomToLayer(index + 1);
+            });
         });
+
+        // Scroll-based zoom
+        window.addEventListener('wheel', (e) => {
+            const rect = zoomSection.getBoundingClientRect();
+            const isInZoomSection = rect.top <= 100 && rect.bottom >= window.innerHeight;
+
+            if (isInZoomSection && !isZooming) {
+                const scrollingDown = e.deltaY > 0;
+
+                if (scrollingDown && currentZoomLayer < totalLayers) {
+                    e.preventDefault();
+                    clearInterval(autoZoomInterval);
+                    zoomToNextLayer();
+                } else if (!scrollingDown && currentZoomLayer > 1) {
+                    e.preventDefault();
+                    clearInterval(autoZoomInterval);
+                    zoomToPreviousLayer();
+                }
+            }
+        }, { passive: false });
+    }
+
+    function zoomToLayer(targetLayer) {
+        if (isZooming || targetLayer === currentZoomLayer) return;
+        
+        isZooming = true;
+        const layers = document.querySelectorAll('.zoom-layer');
+        const progressDots = document.querySelectorAll('.zoom-progress-dot');
+
+        // Update layers
+        layers.forEach((layer, index) => {
+            const layerNum = index + 1;
+            layer.classList.remove('zoom-in', 'zoom-active', 'zoom-out');
+
+            if (layerNum < targetLayer) {
+                layer.classList.add('zoom-in');
+            } else if (layerNum === targetLayer) {
+                layer.classList.add('zoom-active');
+            } else {
+                layer.classList.add('zoom-out');
+            }
+        });
+
+        // Update progress dots
+        progressDots.forEach((dot, index) => {
+            dot.classList.toggle('active', index + 1 === targetLayer);
+        });
+
+        currentZoomLayer = targetLayer;
+
+        setTimeout(() => {
+            isZooming = false;
+        }, 1200);
+    }
+
+    function zoomToNextLayer() {
+        if (currentZoomLayer < totalLayers) {
+            zoomToLayer(currentZoomLayer + 1);
+        }
+    }
+
+    function zoomToPreviousLayer() {
+        if (currentZoomLayer > 1) {
+            zoomToLayer(currentZoomLayer - 1);
+        }
     }
 
     // ===============================================
@@ -399,7 +468,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('🚀 OutDials Landing Page Loaded');
     console.log('✅ All animations initialized');
     console.log('✅ Race Card demo ready');
-    console.log('✅ Flow diagram active');
+    console.log('✅ Infinite zoom active');
     console.log('✅ Feature scroll-snap enabled');
     console.log('✅ Book demo animation ready');
 });
