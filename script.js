@@ -1,5 +1,5 @@
 // ===============================================
-// OUTDIALS LANDING PAGE - FINAL JAVASCRIPT V2
+// OUTDIALS LANDING PAGE - FINAL JAVASCRIPT V3
 // ===============================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -15,9 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         statValues.forEach((stat, index) => {
             const target = parseInt(stat.getAttribute('data-target'));
-            const suffix = stat.nextElementSibling;
-            const suffixText = suffix ? suffix.textContent : '';
-            
             const duration = 1500;
             const startTime = Date.now();
             
@@ -68,27 +65,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===============================================
-    // WORKFLOW DROPDOWN INTERACTIONS
+    // WORKFLOW STEP INTERACTIONS
     // ===============================================
     
     const workflowSteps = document.querySelectorAll('.workflow-step');
     
     workflowSteps.forEach(step => {
         step.addEventListener('click', () => {
-            // Toggle active class
             const isActive = step.classList.contains('active');
             
-            // Close all dropdowns
+            // Close all
             workflowSteps.forEach(s => s.classList.remove('active'));
             
-            // Open clicked one if it wasn't active
+            // Open clicked if wasn't active
             if (!isActive) {
                 step.classList.add('active');
             }
         });
     });
 
-    // Close dropdowns when clicking outside
+    // Close when clicking outside
     document.addEventListener('click', (e) => {
         if (!e.target.closest('.workflow-step')) {
             workflowSteps.forEach(s => s.classList.remove('active'));
@@ -109,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const statuses = document.querySelectorAll('.demo-card-status');
 
         const playSequence = () => {
-            // Reset all cards to ringing
+            // Reset all to ringing
             statuses.forEach(status => {
                 status.className = 'demo-card-status ringing';
                 status.querySelector('.demo-status-text').textContent = 'Ringing...';
@@ -163,7 +159,86 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===============================================
-    // SCROLLJACKING - FEATURES SECTION
+    // AMD JAR FILLING ANIMATION
+    // ===============================================
+    
+    const amdPanel = document.querySelector('[data-feature="premium-amd"]');
+    
+    if (amdPanel) {
+        const jars = {
+            busy: { element: amdPanel.querySelector('.busy-jar .jar-count'), count: 0, fill: amdPanel.querySelector('.busy-jar .jar-fill') },
+            voicemail: { element: amdPanel.querySelector('.voicemail-jar .jar-count'), count: 0, fill: amdPanel.querySelector('.voicemail-jar .jar-fill') },
+            human: { element: amdPanel.querySelector('.human-jar .jar-count'), count: 0, fill: amdPanel.querySelector('.human-jar .jar-fill') }
+        };
+
+        const balls = amdPanel.querySelectorAll('.number-ball');
+        
+        balls.forEach((ball, index) => {
+            const type = ball.getAttribute('data-type');
+            const delay = parseFloat(ball.style.getPropertyValue('--delay').replace('s', '')) * 1000;
+            
+            // Reset jars when panel becomes active
+            const panelObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Reset counts
+                        Object.values(jars).forEach(jar => {
+                            jar.count = 0;
+                            jar.element.textContent = '0';
+                            jar.fill.style.height = '0%';
+                        });
+
+                        // Start incrementing after each ball drops
+                        balls.forEach((b, i) => {
+                            const bType = b.getAttribute('data-type');
+                            const bDelay = parseFloat(b.style.getPropertyValue('--delay').replace('s', '')) * 1000;
+                            
+                            // Ball takes 3s to complete animation, increment at 70% (2.1s)
+                            setTimeout(() => {
+                                if (jars[bType]) {
+                                    jars[bType].count++;
+                                    jars[bType].element.textContent = jars[bType].count;
+                                    
+                                    // Update fill height (each ball = ~16.67% for 6 balls max)
+                                    const fillPercent = Math.min((jars[bType].count / 6) * 100, 100);
+                                    jars[bType].fill.style.height = fillPercent + '%';
+                                }
+                            }, bDelay + 2100);
+                        });
+
+                        // Loop the counts every 3s * 6 balls = 18s
+                        setInterval(() => {
+                            Object.values(jars).forEach(jar => {
+                                jar.count = 0;
+                                jar.element.textContent = '0';
+                                jar.fill.style.height = '0%';
+                            });
+
+                            balls.forEach((b, i) => {
+                                const bType = b.getAttribute('data-type');
+                                const bDelay = parseFloat(b.style.getPropertyValue('--delay').replace('s', '')) * 1000;
+                                
+                                setTimeout(() => {
+                                    if (jars[bType]) {
+                                        jars[bType].count++;
+                                        jars[bType].element.textContent = jars[bType].count;
+                                        
+                                        const fillPercent = Math.min((jars[bType].count / 6) * 100, 100);
+                                        jars[bType].fill.style.height = fillPercent + '%';
+                                    }
+                                }, bDelay + 2100);
+                            });
+                        }, 18000);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            panelObserver.observe(amdPanel);
+        });
+    }
+
+    // ===============================================
+    // SCROLLJACKING - FEATURES SECTION (IMPROVED)
     // ===============================================
     
     const featuresSection = document.querySelector('.section-features-scrolljack');
@@ -172,10 +247,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     let currentPanelIndex = 0;
     let isScrollLocked = false;
-    let scrollTimeout;
+    let lastScrollTime = 0;
 
     const updateActivePanel = (index) => {
-        // Update panels
         featurePanels.forEach((panel, i) => {
             if (i === index) {
                 panel.classList.add('active');
@@ -184,7 +258,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Update progress dots
         progressDots.forEach((dot, i) => {
             if (i === index) {
                 dot.classList.add('active');
@@ -196,51 +269,52 @@ document.addEventListener('DOMContentLoaded', () => {
         currentPanelIndex = index;
     };
 
-    const handleScroll = (e) => {
+    const handleFeatureScroll = (e) => {
         if (!featuresSection) return;
+
+        const now = Date.now();
+        if (now - lastScrollTime < 50) return; // Debounce
+        lastScrollTime = now;
 
         const sectionRect = featuresSection.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
+        const navHeight = document.querySelector('.nav').offsetHeight;
 
-        // Check if we're in the features section
-        const isInSection = sectionRect.top <= 0 && sectionRect.bottom >= viewportHeight;
+        // Check if features section is in view
+        const isInSection = sectionRect.top <= navHeight && sectionRect.bottom >= viewportHeight;
 
         if (isInSection && !isScrollLocked) {
-            e.preventDefault();
-
-            isScrollLocked = true;
-
-            // Determine scroll direction
-            const delta = e.deltaY || e.detail || e.wheelDelta;
+            const delta = e.deltaY || e.detail || -e.wheelDelta;
             
+            if (Math.abs(delta) < 10) return; // Ignore tiny scrolls
+
             if (delta > 0 && currentPanelIndex < featurePanels.length - 1) {
                 // Scroll down - next panel
+                e.preventDefault();
+                isScrollLocked = true;
                 updateActivePanel(currentPanelIndex + 1);
+                
+                setTimeout(() => {
+                    isScrollLocked = false;
+                }, 600);
             } else if (delta < 0 && currentPanelIndex > 0) {
                 // Scroll up - previous panel
+                e.preventDefault();
+                isScrollLocked = true;
                 updateActivePanel(currentPanelIndex - 1);
-            } else if (delta > 0 && currentPanelIndex === featurePanels.length - 1) {
-                // Last panel, allow scroll to next section
-                isScrollLocked = false;
-                return;
-            } else if (delta < 0 && currentPanelIndex === 0) {
-                // First panel, allow scroll to previous section
-                isScrollLocked = false;
-                return;
+                
+                setTimeout(() => {
+                    isScrollLocked = false;
+                }, 600);
             }
-
-            // Unlock after delay
-            setTimeout(() => {
-                isScrollLocked = false;
-            }, 800);
+            // If at first panel and scrolling up, OR at last panel and scrolling down, allow natural scroll
         }
     };
 
-    // Add scroll event listeners
-    window.addEventListener('wheel', handleScroll, { passive: false });
-    window.addEventListener('DOMMouseScroll', handleScroll, { passive: false });
+    window.addEventListener('wheel', handleFeatureScroll, { passive: false });
+    window.addEventListener('DOMMouseScroll', handleFeatureScroll, { passive: false });
 
-    // Progress dots click navigation
+    // Progress dots navigation
     progressDots.forEach((dot, index) => {
         dot.addEventListener('click', () => {
             updateActivePanel(index);
@@ -253,27 +327,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Initialize first panel
+    // Initialize
     if (featurePanels.length > 0) {
         updateActivePanel(0);
     }
 
-    // Reset panel when leaving section
-    const sectionObserver = new IntersectionObserver((entries) => {
+    // Show/hide progress dots based on features section visibility
+    const progressObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (!entry.isIntersecting && entry.boundingClientRect.top > 0) {
-                // Scrolled past features section upwards, reset to first panel
-                updateActivePanel(0);
+            if (entry.isIntersecting) {
+                featuresSection.classList.add('in-view');
+            } else {
+                featuresSection.classList.remove('in-view');
+                // Reset to first panel when leaving section
+                if (entry.boundingClientRect.top > 0) {
+                    updateActivePanel(0);
+                }
             }
         });
-    }, { threshold: 0 });
+    }, { threshold: 0.1 });
 
     if (featuresSection) {
-        sectionObserver.observe(featuresSection);
+        progressObserver.observe(featuresSection);
     }
 
     // ===============================================
-    // STANDARD SCROLL ANIMATIONS (BIDIRECTIONAL)
+    // STANDARD SCROLL ANIMATIONS
     // ===============================================
     
     const observerOptions = {
@@ -297,10 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     animatedElements.forEach(el => observer.observe(el));
 
-    // ===============================================
-    // STAGGER DEMO CARDS
-    // ===============================================
-    
+    // Stagger demo cards
     const demoCards = document.querySelectorAll('.demo-card-wrapper');
     const demoCardsObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
@@ -371,47 +447,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ===============================================
-    // PHONE ANIMATION - INSTANT BRIDGE
-    // ===============================================
-    
-    const instantBridgePanel = document.querySelector('[data-feature="instant-bridge"]');
-    if (instantBridgePanel) {
-        const phoneLeft = instantBridgePanel.querySelector('.phone-left');
-        const phoneRight = instantBridgePanel.querySelector('.phone-right');
-        const arrow = instantBridgePanel.querySelector('.connection-arrow');
-
-        const panelObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Trigger animation sequence
-                    setTimeout(() => {
-                        // Phone 1 answers
-                        phoneLeft.querySelector('.phone-answer-btn').style.background = 'var(--accent-green)';
-                        
-                        // Arrow appears
-                        setTimeout(() => {
-                            arrow.style.opacity = '1';
-                            
-                            // Phone 2 starts ringing
-                            setTimeout(() => {
-                                phoneRight.querySelector('.phone-timer').style.display = 'block';
-                            }, 500);
-                        }, 300);
-                    }, 500);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        panelObserver.observe(instantBridgePanel);
-    }
-
-    // ===============================================
     // CONSOLE LOG
     // ===============================================
     
-    console.log('🚀 OutDials Landing Page V2 Loaded');
-    console.log('✅ Bidirectional hero stats');
-    console.log('✅ Workflow dropdowns');
-    console.log('✅ Scrolljacking features');
-    console.log('✅ Race Card demo');
+    console.log('🚀 OutDials Landing Page V3 Loaded');
+    console.log('✅ Hero glow effects');
+    console.log('✅ Workflow centered on line');
+    console.log('✅ Improved phone mockups');
+    console.log('✅ AMD jar filling animation');
+    console.log('✅ Smooth scrolljacking');
+    console.log('✅ Progress dots only in features');
 });
