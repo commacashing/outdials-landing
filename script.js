@@ -1,10 +1,279 @@
 // ===============================================
-// OUTDIALS LANDING PAGE - FINAL JAVASCRIPT
+// OUTDIALS LANDING PAGE - FINAL JAVASCRIPT V2
 // ===============================================
 
 document.addEventListener('DOMContentLoaded', () => {
     // ===============================================
-    // SCROLL-TRIGGERED ANIMATIONS (BIDIRECTIONAL)
+    // HERO STATS - BIDIRECTIONAL COUNTING
+    // ===============================================
+    
+    let isCountingUp = false;
+    let isCountingDown = false;
+
+    const countStats = (direction) => {
+        const statValues = document.querySelectorAll('.stat-value');
+        
+        statValues.forEach((stat, index) => {
+            const target = parseInt(stat.getAttribute('data-target'));
+            const suffix = stat.nextElementSibling;
+            const suffixText = suffix ? suffix.textContent : '';
+            
+            const duration = 1500;
+            const startTime = Date.now();
+            
+            const animate = () => {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                
+                let current;
+                if (direction === 'up') {
+                    current = Math.floor(easeOut * target);
+                } else {
+                    current = Math.floor((1 - easeOut) * target);
+                }
+                
+                stat.textContent = current;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                } else {
+                    stat.textContent = direction === 'up' ? target : 0;
+                }
+            };
+            
+            setTimeout(() => animate(), index * 200);
+        });
+    };
+
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !isCountingUp) {
+                isCountingUp = true;
+                isCountingDown = false;
+                entry.target.classList.add('visible');
+                countStats('up');
+            } else if (!entry.isIntersecting && !isCountingDown) {
+                isCountingDown = true;
+                isCountingUp = false;
+                entry.target.classList.remove('visible');
+                countStats('down');
+            }
+        });
+    }, { threshold: 0.3 });
+    
+    const heroStats = document.querySelector('.hero-stats');
+    if (heroStats) {
+        statsObserver.observe(heroStats);
+    }
+
+    // ===============================================
+    // WORKFLOW DROPDOWN INTERACTIONS
+    // ===============================================
+    
+    const workflowSteps = document.querySelectorAll('.workflow-step');
+    
+    workflowSteps.forEach(step => {
+        step.addEventListener('click', () => {
+            // Toggle active class
+            const isActive = step.classList.contains('active');
+            
+            // Close all dropdowns
+            workflowSteps.forEach(s => s.classList.remove('active'));
+            
+            // Open clicked one if it wasn't active
+            if (!isActive) {
+                step.classList.add('active');
+            }
+        });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.workflow-step')) {
+            workflowSteps.forEach(s => s.classList.remove('active'));
+        }
+    });
+
+    // ===============================================
+    // RACE CARD DEMO AUTO-PLAY
+    // ===============================================
+    
+    let demoInterval;
+    let isPlaying = false;
+
+    const startDemo = () => {
+        if (isPlaying) return;
+        isPlaying = true;
+
+        const statuses = document.querySelectorAll('.demo-card-status');
+
+        const playSequence = () => {
+            // Reset all cards to ringing
+            statuses.forEach(status => {
+                status.className = 'demo-card-status ringing';
+                status.querySelector('.demo-status-text').textContent = 'Ringing...';
+            });
+
+            // After 2 seconds, middle card answers
+            setTimeout(() => {
+                statuses[1].className = 'demo-card-status answered';
+                statuses[1].querySelector('.demo-status-text').textContent = 'Connected';
+
+                statuses[0].className = 'demo-card-status failed';
+                statuses[0].querySelector('.demo-status-text').textContent = 'Ended';
+
+                statuses[2].className = 'demo-card-status amd';
+                statuses[2].querySelector('.demo-status-text').textContent = 'Voicemail';
+            }, 2000);
+        };
+
+        playSequence();
+        demoInterval = setInterval(playSequence, 5000);
+    };
+
+    const stopDemo = () => {
+        if (!isPlaying) return;
+        isPlaying = false;
+
+        if (demoInterval) {
+            clearInterval(demoInterval);
+        }
+
+        const statuses = document.querySelectorAll('.demo-card-status');
+        statuses.forEach(status => {
+            status.className = 'demo-card-status ringing';
+            status.querySelector('.demo-status-text').textContent = 'Ringing...';
+        });
+    };
+
+    const demoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                startDemo();
+            } else {
+                stopDemo();
+            }
+        });
+    }, { threshold: 0.5 });
+
+    const demoSection = document.querySelector('.section-demo');
+    if (demoSection) {
+        demoObserver.observe(demoSection);
+    }
+
+    // ===============================================
+    // SCROLLJACKING - FEATURES SECTION
+    // ===============================================
+    
+    const featuresSection = document.querySelector('.section-features-scrolljack');
+    const featurePanels = document.querySelectorAll('.feature-panel');
+    const progressDots = document.querySelectorAll('.progress-dot');
+    
+    let currentPanelIndex = 0;
+    let isScrollLocked = false;
+    let scrollTimeout;
+
+    const updateActivePanel = (index) => {
+        // Update panels
+        featurePanels.forEach((panel, i) => {
+            if (i === index) {
+                panel.classList.add('active');
+            } else {
+                panel.classList.remove('active');
+            }
+        });
+
+        // Update progress dots
+        progressDots.forEach((dot, i) => {
+            if (i === index) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+
+        currentPanelIndex = index;
+    };
+
+    const handleScroll = (e) => {
+        if (!featuresSection) return;
+
+        const sectionRect = featuresSection.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+
+        // Check if we're in the features section
+        const isInSection = sectionRect.top <= 0 && sectionRect.bottom >= viewportHeight;
+
+        if (isInSection && !isScrollLocked) {
+            e.preventDefault();
+
+            isScrollLocked = true;
+
+            // Determine scroll direction
+            const delta = e.deltaY || e.detail || e.wheelDelta;
+            
+            if (delta > 0 && currentPanelIndex < featurePanels.length - 1) {
+                // Scroll down - next panel
+                updateActivePanel(currentPanelIndex + 1);
+            } else if (delta < 0 && currentPanelIndex > 0) {
+                // Scroll up - previous panel
+                updateActivePanel(currentPanelIndex - 1);
+            } else if (delta > 0 && currentPanelIndex === featurePanels.length - 1) {
+                // Last panel, allow scroll to next section
+                isScrollLocked = false;
+                return;
+            } else if (delta < 0 && currentPanelIndex === 0) {
+                // First panel, allow scroll to previous section
+                isScrollLocked = false;
+                return;
+            }
+
+            // Unlock after delay
+            setTimeout(() => {
+                isScrollLocked = false;
+            }, 800);
+        }
+    };
+
+    // Add scroll event listeners
+    window.addEventListener('wheel', handleScroll, { passive: false });
+    window.addEventListener('DOMMouseScroll', handleScroll, { passive: false });
+
+    // Progress dots click navigation
+    progressDots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            updateActivePanel(index);
+            
+            // Scroll to features section if not in view
+            const sectionRect = featuresSection.getBoundingClientRect();
+            if (sectionRect.top > 0 || sectionRect.bottom < window.innerHeight) {
+                featuresSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+
+    // Initialize first panel
+    if (featurePanels.length > 0) {
+        updateActivePanel(0);
+    }
+
+    // Reset panel when leaving section
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting && entry.boundingClientRect.top > 0) {
+                // Scrolled past features section upwards, reset to first panel
+                updateActivePanel(0);
+            }
+        });
+    }, { threshold: 0 });
+
+    if (featuresSection) {
+        sectionObserver.observe(featuresSection);
+    }
+
+    // ===============================================
+    // STANDARD SCROLL ANIMATIONS (BIDIRECTIONAL)
     // ===============================================
     
     const observerOptions = {
@@ -22,220 +291,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    // Observe all animated sections
     const animatedElements = document.querySelectorAll(
-        '.hero-stats, .section-demo, .demo-card-wrapper, .how-step-wrapper, .section-features, .section-pricing, .section-contact'
+        '.section-demo, .demo-card-wrapper, .section-pricing, .section-contact'
     );
     
     animatedElements.forEach(el => observer.observe(el));
 
     // ===============================================
-    // HERO STATS COUNTER (BIDIRECTIONAL)
+    // STAGGER DEMO CARDS
     // ===============================================
     
-    const statsObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            const statValues = entry.target.querySelectorAll('.stat-value');
-            
+    const demoCards = document.querySelectorAll('.demo-card-wrapper');
+    const demoCardsObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
-                // Animate in
-                statValues.forEach((stat, index) => {
-                    const originalValue = stat.textContent;
-                    const endValue = originalValue;
-                    
-                    // Determine if it's a number or percentage
-                    const isPercentage = endValue.includes('%');
-                    const isMultiplier = endValue.includes('x');
-                    const hasMs = endValue.includes('ms');
-                    
-                    let numericValue;
-                    if (isPercentage) {
-                        numericValue = parseInt(endValue);
-                    } else if (isMultiplier) {
-                        numericValue = parseInt(endValue);
-                    } else if (hasMs) {
-                        numericValue = parseInt(endValue);
-                    } else {
-                        numericValue = parseInt(endValue);
-                    }
-                    
-                    const duration = 1500;
-                    const startTime = Date.now();
-                    
-                    const animate = () => {
-                        const elapsed = Date.now() - startTime;
-                        const progress = Math.min(elapsed / duration, 1);
-                        
-                        // Easing function
-                        const easeOut = 1 - Math.pow(1 - progress, 3);
-                        const current = Math.floor(easeOut * numericValue);
-                        
-                        if (isPercentage) {
-                            stat.textContent = current + '%';
-                        } else if (isMultiplier) {
-                            stat.textContent = current + 'x';
-                        } else if (hasMs) {
-                            stat.textContent = current + 'ms';
-                        } else {
-                            stat.textContent = current;
-                        }
-                        
-                        if (progress < 1) {
-                            requestAnimationFrame(animate);
-                        } else {
-                            stat.textContent = endValue;
-                        }
-                    };
-                    
-                    setTimeout(() => animate(), index * 200);
-                });
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, index * 150);
             } else {
-                // Reset to 0 when scrolling out
-                statValues.forEach(stat => {
-                    const originalValue = stat.textContent;
-                    if (originalValue.includes('%')) {
-                        stat.textContent = '0%';
-                    } else if (originalValue.includes('x')) {
-                        stat.textContent = '0x';
-                    } else if (originalValue.includes('ms')) {
-                        stat.textContent = '0ms';
-                    } else {
-                        stat.textContent = '0';
-                    }
-                });
+                entry.target.classList.remove('visible');
             }
         });
-    }, { threshold: 0.3 });
-    
-    const heroStats = document.querySelector('.hero-stats');
-    if (heroStats) {
-        statsObserver.observe(heroStats);
-    }
+    }, { threshold: 0.2 });
 
-    // ===============================================
-    // RACE CARD DEMO AUTO-PLAY
-    // ===============================================
-    
-    let demoInterval;
-    let isPlaying = false;
-
-    const startDemo = () => {
-        if (isPlaying) return;
-        isPlaying = true;
-
-        const cards = document.querySelectorAll('.demo-card');
-        const statuses = document.querySelectorAll('.demo-card-status');
-
-        const playSequence = () => {
-            // Reset all cards to ringing
-            statuses.forEach(status => {
-                status.className = 'demo-card-status ringing';
-                status.querySelector('.demo-status-text').textContent = 'Ringing...';
-            });
-
-            // After 2 seconds, middle card answers
-            setTimeout(() => {
-                // Middle card (index 1) answers
-                statuses[1].className = 'demo-card-status answered';
-                statuses[1].querySelector('.demo-status-text').textContent = 'Connected';
-
-                // Other cards fail
-                statuses[0].className = 'demo-card-status failed';
-                statuses[0].querySelector('.demo-status-text').textContent = 'Ended';
-
-                statuses[2].className = 'demo-card-status amd';
-                statuses[2].querySelector('.demo-status-text').textContent = 'Voicemail';
-            }, 2000);
-        };
-
-        // Play sequence immediately
-        playSequence();
-
-        // Loop every 5 seconds
-        demoInterval = setInterval(playSequence, 5000);
-    };
-
-    const stopDemo = () => {
-        if (!isPlaying) return;
-        isPlaying = false;
-
-        if (demoInterval) {
-            clearInterval(demoInterval);
-        }
-
-        // Reset all cards to ringing
-        const statuses = document.querySelectorAll('.demo-card-status');
-        statuses.forEach(status => {
-            status.className = 'demo-card-status ringing';
-            status.querySelector('.demo-status-text').textContent = 'Ringing...';
-        });
-    };
-
-    // Observe demo section to start/stop auto-play
-    const demoObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                startDemo();
-            } else {
-                stopDemo();
-            }
-        });
-    }, { threshold: 0.5 });
-
-    const demoSection = document.querySelector('.section-demo');
-    if (demoSection) {
-        demoObserver.observe(demoSection);
-    }
-
-    // ===============================================
-    // FEATURE MARQUEE INTERACTIVITY
-    // ===============================================
-    
-    const featureItems = document.querySelectorAll('.feature-item');
-    const featureVisuals = document.querySelectorAll('.feature-visual-content');
-
-    featureItems.forEach(item => {
-        item.addEventListener('click', () => {
-            // Remove active from all items
-            featureItems.forEach(i => i.classList.remove('active'));
-            
-            // Add active to clicked item
-            item.classList.add('active');
-            
-            // Get the feature type
-            const featureType = item.getAttribute('data-feature');
-            
-            // Hide all visuals
-            featureVisuals.forEach(v => v.classList.remove('active'));
-            
-            // Show corresponding visual
-            const targetVisual = document.querySelector(`[data-visual="${featureType}"]`);
-            if (targetVisual) {
-                targetVisual.classList.add('active');
-            }
-        });
-
-        // Also trigger on hover for better UX
-        item.addEventListener('mouseenter', () => {
-            // Remove active from all items
-            featureItems.forEach(i => i.classList.remove('active'));
-            
-            // Add active to hovered item
-            item.classList.add('active');
-            
-            // Get the feature type
-            const featureType = item.getAttribute('data-feature');
-            
-            // Hide all visuals
-            featureVisuals.forEach(v => v.classList.remove('active'));
-            
-            // Show corresponding visual
-            const targetVisual = document.querySelector(`[data-visual="${featureType}"]`);
-            if (targetVisual) {
-                targetVisual.classList.add('active');
-            }
-        });
-    });
+    demoCards.forEach(card => demoCardsObserver.observe(card));
 
     // ===============================================
     // SMOOTH SCROLLING FOR ANCHOR LINKS
@@ -280,8 +359,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===============================================
     
     const nav = document.querySelector('.nav');
-    let lastScroll = 0;
-
+    
     window.addEventListener('scroll', () => {
         const currentScroll = window.pageYOffset;
         
@@ -290,54 +368,50 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             nav.style.background = 'rgba(0, 0, 0, 0.8)';
         }
-        
-        lastScroll = currentScroll;
     });
 
     // ===============================================
-    // STAGGER DEMO CARDS VISIBILITY
+    // PHONE ANIMATION - INSTANT BRIDGE
     // ===============================================
     
-    const demoCards = document.querySelectorAll('.demo-card-wrapper');
-    const demoCardsObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.classList.add('visible');
-                }, index * 150);
-            } else {
-                entry.target.classList.remove('visible');
-            }
-        });
-    }, { threshold: 0.2 });
+    const instantBridgePanel = document.querySelector('[data-feature="instant-bridge"]');
+    if (instantBridgePanel) {
+        const phoneLeft = instantBridgePanel.querySelector('.phone-left');
+        const phoneRight = instantBridgePanel.querySelector('.phone-right');
+        const arrow = instantBridgePanel.querySelector('.connection-arrow');
 
-    demoCards.forEach(card => demoCardsObserver.observe(card));
+        const panelObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Trigger animation sequence
+                    setTimeout(() => {
+                        // Phone 1 answers
+                        phoneLeft.querySelector('.phone-answer-btn').style.background = 'var(--accent-green)';
+                        
+                        // Arrow appears
+                        setTimeout(() => {
+                            arrow.style.opacity = '1';
+                            
+                            // Phone 2 starts ringing
+                            setTimeout(() => {
+                                phoneRight.querySelector('.phone-timer').style.display = 'block';
+                            }, 500);
+                        }, 300);
+                    }, 500);
+                }
+            });
+        }, { threshold: 0.5 });
 
-    // ===============================================
-    // STAGGER HOW IT WORKS CARDS
-    // ===============================================
-    
-    const howSteps = document.querySelectorAll('.how-step-wrapper');
-    const howStepsObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.classList.add('visible');
-                }, index * 150);
-            } else {
-                entry.target.classList.remove('visible');
-            }
-        });
-    }, { threshold: 0.2 });
-
-    howSteps.forEach(step => howStepsObserver.observe(step));
+        panelObserver.observe(instantBridgePanel);
+    }
 
     // ===============================================
-    // CONSOLE LOG (OPTIONAL - CAN BE REMOVED)
+    // CONSOLE LOG
     // ===============================================
     
-    console.log('🚀 OutDials Landing Page Loaded');
-    console.log('✅ All animations initialized');
-    console.log('✅ Race Card demo ready');
-    console.log('✅ Feature marquee active');
+    console.log('🚀 OutDials Landing Page V2 Loaded');
+    console.log('✅ Bidirectional hero stats');
+    console.log('✅ Workflow dropdowns');
+    console.log('✅ Scrolljacking features');
+    console.log('✅ Race Card demo');
 });
