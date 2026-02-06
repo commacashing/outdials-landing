@@ -23,7 +23,7 @@
                         <circle cx="21" cy="24" r="18" stroke="currentColor" stroke-width="6" fill="none" mask="url(#slitMask)"/>
                     </svg>
                 </span>
-                <span class="logo-text">OutDials</span>
+                <span class="logo-text">utDials</span>
             </div>
             <div class="nav-links">
                 <a href="#demo">Product</a>
@@ -39,7 +39,7 @@
     <section id="hero" class="hero">
         <div class="hero-container">
             <div class="hero-content">
-                <h1 class="hero-title">
+                <h1 class="hero-title glow-text">
                     Stop Waiting.<br>
                     Start Selling.
                 </h1>
@@ -48,24 +48,30 @@
                 </p>
                 <div class="hero-stats">
                     <div class="stat-item">
-                        <div class="stat-value" data-target="3">0</div>
-                        <div class="stat-suffix">x</div>
+                        <div class="stat-display glow-text">
+                            <span class="stat-value" data-target="3">0</span>
+                            <span class="stat-suffix">x</span>
+                        </div>
                         <div class="stat-label">More Dials</div>
                     </div>
                     <div class="stat-divider"></div>
                     <div class="stat-item">
-                        <div class="stat-value" data-target="60">0</div>
-                        <div class="stat-suffix">%</div>
+                        <div class="stat-display glow-text">
+                            <span class="stat-value" data-target="60">0</span>
+                            <span class="stat-suffix">%</span>
+                        </div>
                         <div class="stat-label">Talk Time</div>
                     </div>
                     <div class="stat-divider"></div>
                     <div class="stat-item">
-                        <div class="stat-value" data-target="0">0</div>
-                        <div class="stat-suffix">ms</div>
+                        <div class="stat-display glow-text">
+                            <span class="stat-value" data-target="0">0</span>
+                            <span class="stat-suffix">ms</span>
+                        </div>
                         <div class="stat-label">Latency</div>
                     </div>
                 </div>
-                <a href="#contact" class="btn-primary">Book a Demo</a>
+                <a href="#contact" class="btn-primary glow-button">Book a Demo</a>
                 <p class="hero-subtext">7-day deployment • Native CRM • $3,600/seat</p>
             </div>
         </div>
@@ -149,40 +155,40 @@
 
             <!-- Workflow Steps -->
             <div class="workflow-container">
-                <svg class="workflow-line" viewBox="0 0 1000 100" preserveAspectRatio="none">
-                    <path d="M 0,50 Q 250,10 500,50 T 1000,50" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+                <svg class="workflow-line" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M 0,60 Q 300,20 600,60 T 1200,60" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
                 </svg>
                 
                 <div class="workflow-steps">
-                    <div class="workflow-step" data-step="1" style="left: 10%;">
-                        <div class="workflow-dot">1</div>
+                    <div class="workflow-step" data-step="1">
+                        <div class="workflow-number">1</div>
                         <div class="workflow-label">Select Filter</div>
-                        <div class="workflow-dropdown">
-                            <p>Choose your CRM segment, team, region, and date range. OutDials automatically pulls contacts with verified consent and TCPA compliance.</p>
+                        <div class="workflow-description">
+                            Choose your CRM segment, team, region, and date range. OutDials automatically pulls contacts with verified consent and TCPA compliance.
                         </div>
                     </div>
 
-                    <div class="workflow-step" data-step="2" style="left: 35%;">
-                        <div class="workflow-dot">2</div>
+                    <div class="workflow-step" data-step="2">
+                        <div class="workflow-number">2</div>
                         <div class="workflow-label">Start Dialing</div>
-                        <div class="workflow-dropdown">
-                            <p>Click "Start Dialing" and OutDials races 3 contacts simultaneously. You see all 3 cards in real-time as they ring.</p>
+                        <div class="workflow-description">
+                            Click "Start Dialing" and OutDials races 3 contacts simultaneously. You see all 3 cards in real-time as they ring.
                         </div>
                     </div>
 
-                    <div class="workflow-step" data-step="3" style="left: 65%;">
-                        <div class="workflow-dot">3</div>
+                    <div class="workflow-step" data-step="3">
+                        <div class="workflow-number">3</div>
                         <div class="workflow-label">Human Answers</div>
-                        <div class="workflow-dropdown">
-                            <p>First person to pick up wins the race. You're instantly bridged with 0ms latency. Other calls end automatically. AMD filters voicemails.</p>
+                        <div class="workflow-description">
+                            First person to pick up wins the race. You're instantly bridged with 0ms latency. Other calls end automatically. AMD filters voicemails.
                         </div>
                     </div>
 
-                    <div class="workflow-step" data-step="4" style="left: 90%;">
-                        <div class="workflow-dot">4</div>
+                    <div class="workflow-step" data-step="4">
+                        <div class="workflow-number">4</div>
                         <div class="workflow-label">Update Info</div>
-                        <div class="workflow-dropdown">
-                            <p>After the call, add notes and dispositions. Everything syncs to your CRM automatically via OAuth2. No manual logging required.</p>
+                        <div class="workflow-description">
+                            After the call, add notes and dispositions. Everything syncs to your CRM automatically via OAuth2. No manual logging required.
                         </div>
                     </div>
                 </div>
@@ -208,34 +214,49 @@
                     </div>
                     <div class="feature-panel-right">
                         <div class="instant-bridge-visual">
-                            <div class="phone-container phone-left">
+                            <!-- Phone 1: Incoming Call -->
+                            <div class="phone-mockup phone-left">
+                                <div class="phone-notch"></div>
                                 <div class="phone-screen">
-                                    <div class="phone-incoming-call">
-                                        <div class="phone-caller-info">
-                                            <div class="phone-avatar">👤</div>
-                                            <div class="phone-name">OutDials</div>
-                                        </div>
-                                        <div class="phone-answer-btn">Answer</div>
+                                    <div class="phone-header">OutDials</div>
+                                    <div class="phone-caller">
+                                        <div class="caller-avatar">📞</div>
+                                        <div class="caller-name">Incoming Call</div>
+                                    </div>
+                                    <div class="phone-buttons">
+                                        <div class="phone-button decline">✕</div>
+                                        <div class="phone-button accept">✓</div>
                                     </div>
                                 </div>
                             </div>
                             
-                            <div class="connection-arrow">
-                                <svg width="80" height="40" viewBox="0 0 80 40">
-                                    <path d="M 5,20 L 65,20" stroke="currentColor" stroke-width="2" fill="none"/>
-                                    <polygon points="65,15 75,20 65,25" fill="currentColor"/>
+                            <!-- Connection Arrow -->
+                            <div class="bridge-arrow">
+                                <svg width="100" height="60" viewBox="0 0 100 60">
+                                    <defs>
+                                        <linearGradient id="arrowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" style="stop-color:rgba(255,255,255,0.3);stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:rgba(255,255,255,0.8);stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <path d="M 10,30 L 80,30" stroke="url(#arrowGradient)" stroke-width="3" fill="none"/>
+                                    <polygon points="75,25 90,30 75,35" fill="rgba(255,255,255,0.8)"/>
                                 </svg>
-                                <div class="latency-badge">0ms</div>
+                                <div class="bridge-badge">0ms</div>
                             </div>
 
-                            <div class="phone-container phone-right">
+                            <!-- Phone 2: Connected -->
+                            <div class="phone-mockup phone-right">
+                                <div class="phone-notch"></div>
                                 <div class="phone-screen">
-                                    <div class="phone-active-call">
-                                        <div class="phone-caller-info">
-                                            <div class="phone-avatar">📞</div>
-                                            <div class="phone-name">Connected</div>
-                                        </div>
-                                        <div class="phone-timer">00:00</div>
+                                    <div class="phone-header">Lead Name</div>
+                                    <div class="phone-caller">
+                                        <div class="caller-avatar">👤</div>
+                                        <div class="caller-status">Connected</div>
+                                        <div class="call-timer">00:03</div>
+                                    </div>
+                                    <div class="phone-buttons">
+                                        <div class="phone-button end-call">End Call</div>
                                     </div>
                                 </div>
                             </div>
@@ -259,31 +280,65 @@
                     </div>
                     <div class="feature-panel-right">
                         <div class="amd-visual">
-                            <div class="amd-filter">
-                                <div class="filter-funnel">
-                                    <svg viewBox="0 0 200 200" class="funnel-svg">
-                                        <path d="M 40,20 L 160,20 L 120,100 L 80,100 Z" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
-                                        <path d="M 80,100 L 80,180 L 120,180 L 120,100 Z" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
-                                    </svg>
-                                    <div class="number-ball" style="--delay: 0s;">#1</div>
-                                    <div class="number-ball" style="--delay: 0.3s;">#2</div>
-                                    <div class="number-ball" style="--delay: 0.6s;">#3</div>
-                                    <div class="number-ball" style="--delay: 0.9s;">#4</div>
-                                    <div class="number-ball" style="--delay: 1.2s;">#5</div>
+                            <!-- Filter Funnel -->
+                            <div class="amd-filter-container">
+                                <svg class="filter-funnel-svg" viewBox="0 0 300 350">
+                                    <!-- Funnel shape -->
+                                    <defs>
+                                        <linearGradient id="funnelGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                            <stop offset="0%" style="stop-color:rgba(255,255,255,0.1);stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:rgba(255,255,255,0.05);stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <!-- Top opening -->
+                                    <path d="M 60,40 L 240,40 L 200,160 L 100,160 Z" 
+                                          fill="url(#funnelGradient)" 
+                                          stroke="rgba(255,255,255,0.3)" 
+                                          stroke-width="2"/>
+                                    <!-- Bottom pipe -->
+                                    <rect x="110" y="160" width="80" height="140" 
+                                          fill="rgba(255,255,255,0.05)" 
+                                          stroke="rgba(255,255,255,0.3)" 
+                                          stroke-width="2"/>
+                                    <!-- Filter text -->
+                                    <text x="150" y="120" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="16" font-weight="600">AMD Filter</text>
+                                </svg>
+                                
+                                <!-- Animated number balls -->
+                                <div class="number-balls-container">
+                                    <div class="number-ball" data-type="busy" style="--delay: 0s;">#1</div>
+                                    <div class="number-ball" data-type="voicemail" style="--delay: 0.4s;">#2</div>
+                                    <div class="number-ball" data-type="human" style="--delay: 0.8s;">#3</div>
+                                    <div class="number-ball" data-type="busy" style="--delay: 1.2s;">#4</div>
+                                    <div class="number-ball" data-type="voicemail" style="--delay: 1.6s;">#5</div>
+                                    <div class="number-ball" data-type="human" style="--delay: 2s;">#6</div>
                                 </div>
                             </div>
-                            <div class="amd-jars">
-                                <div class="amd-jar busy">
-                                    <div class="jar-label">Busy</div>
-                                    <div class="jar-count">12</div>
+                            
+                            <!-- Collection Jars -->
+                            <div class="amd-jars-container">
+                                <div class="amd-jar busy-jar">
+                                    <div class="jar-container">
+                                        <div class="jar-fill"></div>
+                                        <div class="jar-count" data-count="0">0</div>
+                                    </div>
+                                    <div class="jar-label">Busy/Failed</div>
                                 </div>
-                                <div class="amd-jar voicemail">
+                                
+                                <div class="amd-jar voicemail-jar">
+                                    <div class="jar-container">
+                                        <div class="jar-fill"></div>
+                                        <div class="jar-count" data-count="0">0</div>
+                                    </div>
                                     <div class="jar-label">Voicemail</div>
-                                    <div class="jar-count">8</div>
                                 </div>
-                                <div class="amd-jar human">
+                                
+                                <div class="amd-jar human-jar">
+                                    <div class="jar-container">
+                                        <div class="jar-fill"></div>
+                                        <div class="jar-count" data-count="0">0</div>
+                                    </div>
                                     <div class="jar-label">Human</div>
-                                    <div class="jar-count">5</div>
                                 </div>
                             </div>
                         </div>
@@ -306,7 +361,10 @@
                     </div>
                     <div class="feature-panel-right">
                         <div class="tcpa-visual">
-                            <img src="images/timezones-map.png" alt="US Time Zones" class="timezone-map">
+                            <!-- Placeholder for timezone map - add your image here -->
+                            <div class="timezone-map-placeholder">
+                                <p style="color: var(--text-secondary); font-size: 14px;">Upload your timezone map image to:<br><code>/images/timezones-map.png</code></p>
+                            </div>
                             <div class="compliance-badge">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
                                     <path d="M20 6L9 17l-5-5"></path>
@@ -332,68 +390,70 @@
                     </div>
                     <div class="feature-panel-right">
                         <div class="number-rotation-visual">
-                            <div class="number-list-large">
-                                <div class="number-row-large active">
-                                    <div class="number-phone">(555) 123-4501</div>
-                                    <div class="number-status-bar active">
-                                        <span class="status-text">Active</span>
-                                        <span class="week-calls">156 calls this week</span>
-                                    </div>
+                            <div class="number-table-container">
+                                <!-- Table Header -->
+                                <div class="number-table-header">
+                                    <div class="header-cell">Number</div>
+                                    <div class="header-cell">Status</div>
+                                    <div class="header-cell">Today</div>
+                                    <div class="header-cell">This Week</div>
                                 </div>
-                                <div class="number-row-large active">
-                                    <div class="number-phone">(555) 123-4502</div>
-                                    <div class="number-status-bar active">
-                                        <span class="status-text">Active</span>
-                                        <span class="week-calls">142 calls this week</span>
+                                
+                                <!-- Table Rows -->
+                                <div class="number-table-body">
+                                    <div class="number-row" data-status="active">
+                                        <div class="number-cell">(555) 123-4501</div>
+                                        <div class="status-cell"><span class="status-badge active">Active</span></div>
+                                        <div class="calls-cell">24</div>
+                                        <div class="calls-cell">156</div>
                                     </div>
-                                </div>
-                                <div class="number-row-large active">
-                                    <div class="number-phone">(555) 123-4503</div>
-                                    <div class="number-status-bar active">
-                                        <span class="status-text">Active</span>
-                                        <span class="week-calls">138 calls this week</span>
+                                    <div class="number-row" data-status="active">
+                                        <div class="number-cell">(555) 123-4502</div>
+                                        <div class="status-cell"><span class="status-badge active">Active</span></div>
+                                        <div class="calls-cell">18</div>
+                                        <div class="calls-cell">142</div>
                                     </div>
-                                </div>
-                                <div class="number-row-large flagged">
-                                    <div class="number-phone">(555) 123-4504</div>
-                                    <div class="number-status-bar flagged">
-                                        <span class="status-text">Flagged</span>
-                                        <span class="week-calls">89 calls this week</span>
+                                    <div class="number-row" data-status="active">
+                                        <div class="number-cell">(555) 123-4503</div>
+                                        <div class="status-cell"><span class="status-badge active">Active</span></div>
+                                        <div class="calls-cell">22</div>
+                                        <div class="calls-cell">138</div>
                                     </div>
-                                </div>
-                                <div class="number-row-large pending">
-                                    <div class="number-phone">(555) 123-4505</div>
-                                    <div class="number-status-bar pending">
-                                        <span class="status-text">Replacing</span>
-                                        <span class="week-calls">Provisioning...</span>
+                                    <div class="number-row" data-status="flagged">
+                                        <div class="number-cell">(555) 123-4504</div>
+                                        <div class="status-cell"><span class="status-badge flagged">Flagged</span></div>
+                                        <div class="calls-cell">0</div>
+                                        <div class="calls-cell">89</div>
                                     </div>
-                                </div>
-                                <div class="number-row-large active">
-                                    <div class="number-phone">(555) 123-4506</div>
-                                    <div class="number-status-bar active">
-                                        <span class="status-text">Active</span>
-                                        <span class="week-calls">124 calls this week</span>
+                                    <div class="number-row" data-status="pending">
+                                        <div class="number-cell">(555) 123-4505</div>
+                                        <div class="status-cell"><span class="status-badge pending">Replacing</span></div>
+                                        <div class="calls-cell">-</div>
+                                        <div class="calls-cell">-</div>
                                     </div>
-                                </div>
-                                <div class="number-row-large active">
-                                    <div class="number-phone">(555) 123-4507</div>
-                                    <div class="number-status-bar active">
-                                        <span class="status-text">Active</span>
-                                        <span class="week-calls">118 calls this week</span>
+                                    <div class="number-row" data-status="active">
+                                        <div class="number-cell">(555) 123-4506</div>
+                                        <div class="status-cell"><span class="status-badge active">Active</span></div>
+                                        <div class="calls-cell">19</div>
+                                        <div class="calls-cell">124</div>
                                     </div>
-                                </div>
-                                <div class="number-row-large active">
-                                    <div class="number-phone">(555) 123-4508</div>
-                                    <div class="number-status-bar active">
-                                        <span class="status-text">Active</span>
-                                        <span class="week-calls">102 calls this week</span>
+                                    <div class="number-row" data-status="active">
+                                        <div class="number-cell">(555) 123-4507</div>
+                                        <div class="status-cell"><span class="status-badge active">Active</span></div>
+                                        <div class="calls-cell">16</div>
+                                        <div class="calls-cell">118</div>
                                     </div>
-                                </div>
-                                <div class="number-row-large active">
-                                    <div class="number-phone">(555) 123-4509</div>
-                                    <div class="number-status-bar active">
-                                        <span class="status-text">Active</span>
-                                        <span class="week-calls">95 calls this week</span>
+                                    <div class="number-row" data-status="active">
+                                        <div class="number-cell">(555) 123-4508</div>
+                                        <div class="status-cell"><span class="status-badge active">Active</span></div>
+                                        <div class="calls-cell">14</div>
+                                        <div class="calls-cell">102</div>
+                                    </div>
+                                    <div class="number-row" data-status="active">
+                                        <div class="number-cell">(555) 123-4509</div>
+                                        <div class="status-cell"><span class="status-badge active">Active</span></div>
+                                        <div class="calls-cell">12</div>
+                                        <div class="calls-cell">95</div>
                                     </div>
                                 </div>
                             </div>
@@ -455,7 +515,7 @@
 
         </div>
         
-        <!-- Scroll Progress Indicator -->
+        <!-- Scroll Progress Indicator (only visible in features section) -->
         <div class="scroll-progress">
             <div class="progress-dot active" data-index="0"></div>
             <div class="progress-dot" data-index="1"></div>
@@ -521,7 +581,7 @@
                                 <circle cx="21" cy="24" r="18" stroke="currentColor" stroke-width="6" fill="none" mask="url(#slitMaskFooter)"/>
                             </svg>
                         </span>
-                        <span class="logo-text">OutDials</span>
+                        <span class="logo-text">utDials</span>
                     </div>
                     <p>Stop Waiting. Start Selling.</p>
                 </div>
