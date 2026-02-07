@@ -546,11 +546,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // CONSOLE LOG
     // ===============================================
     
-    console.log('🚀 OutDials Landing Page V4 Loaded');
-    console.log('✅ Workflow numbers on line');
-    console.log('✅ iPhone mockups with animation');
-    console.log('✅ Sequential AMD ball drops (15/5/1)');
-    console.log('✅ Pulsing timezone map');
-    console.log('✅ All 9 numbers visible');
-    console.log('✅ Pulsing status badges');
+    console.log('🚀 OutDials Landing Page V5 Loaded');
+    console.log('✅ Hologram projection animation added');
 });
