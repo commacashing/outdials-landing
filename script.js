@@ -1,5 +1,5 @@
 // ===============================================
-// OUTDIALS LANDING PAGE - FINAL JAVASCRIPT V3
+// OUTDIALS LANDING PAGE - FINAL JAVASCRIPT V4
 // ===============================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===============================================
-    // WORKFLOW STEP INTERACTIONS
+    // WORKFLOW INTERACTIONS
     // ===============================================
     
     const workflowSteps = document.querySelectorAll('.workflow-step');
@@ -74,17 +74,14 @@ document.addEventListener('DOMContentLoaded', () => {
         step.addEventListener('click', () => {
             const isActive = step.classList.contains('active');
             
-            // Close all
             workflowSteps.forEach(s => s.classList.remove('active'));
             
-            // Open clicked if wasn't active
             if (!isActive) {
                 step.classList.add('active');
             }
         });
     });
 
-    // Close when clicking outside
     document.addEventListener('click', (e) => {
         if (!e.target.closest('.workflow-step')) {
             workflowSteps.forEach(s => s.classList.remove('active'));
@@ -105,13 +102,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const statuses = document.querySelectorAll('.demo-card-status');
 
         const playSequence = () => {
-            // Reset all to ringing
             statuses.forEach(status => {
                 status.className = 'demo-card-status ringing';
                 status.querySelector('.demo-status-text').textContent = 'Ringing...';
             });
 
-            // After 2 seconds, middle card answers
             setTimeout(() => {
                 statuses[1].className = 'demo-card-status answered';
                 statuses[1].querySelector('.demo-status-text').textContent = 'Connected';
@@ -159,86 +154,197 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===============================================
-    // AMD JAR FILLING ANIMATION
+    // INSTANT BRIDGE - PHONE ANIMATION
+    // ===============================================
+    
+    const instantBridgePanel = document.querySelector('[data-feature="instant-bridge"]');
+    let phoneAnimationRunning = false;
+
+    const runPhoneAnimation = () => {
+        if (phoneAnimationRunning) return;
+        phoneAnimationRunning = true;
+
+        const acceptBtn = instantBridgePanel.querySelector('.accept-btn');
+        const arrow = instantBridgePanel.querySelector('.bridge-connection');
+        const transferText = instantBridgePanel.querySelector('.transfer-text');
+        const connectedText = instantBridgePanel.querySelector('.connected-text');
+
+        // Reset
+        acceptBtn.classList.add('flashing');
+        arrow.style.opacity = '0';
+        transferText.style.display = 'block';
+        connectedText.style.display = 'none';
+
+        // Step 1: Flash accept button (already flashing)
+        setTimeout(() => {
+            // Step 2: Show arrow
+            arrow.style.opacity = '1';
+            
+            // Step 3: Show "Transferring..." on right phone
+            setTimeout(() => {
+                // Step 4: Change to "Connected"
+                setTimeout(() => {
+                    transferText.style.display = 'none';
+                    connectedText.style.display = 'block';
+                    acceptBtn.classList.remove('flashing');
+                }, 1500);
+            }, 500);
+        }, 1500);
+
+        // Loop
+        setTimeout(() => {
+            phoneAnimationRunning = false;
+            runPhoneAnimation();
+        }, 6000);
+    };
+
+    const phoneObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                runPhoneAnimation();
+            } else {
+                phoneAnimationRunning = false;
+            }
+        });
+    }, { threshold: 0.5 });
+
+    if (instantBridgePanel) {
+        phoneObserver.observe(instantBridgePanel);
+    }
+
+    // ===============================================
+    // AMD - SEQUENTIAL BALL DROP ANIMATION
     // ===============================================
     
     const amdPanel = document.querySelector('[data-feature="premium-amd"]');
     
     if (amdPanel) {
-        const jars = {
-            busy: { element: amdPanel.querySelector('.busy-jar .jar-count'), count: 0, fill: amdPanel.querySelector('.busy-jar .jar-fill') },
-            voicemail: { element: amdPanel.querySelector('.voicemail-jar .jar-count'), count: 0, fill: amdPanel.querySelector('.voicemail-jar .jar-fill') },
-            human: { element: amdPanel.querySelector('.human-jar .jar-count'), count: 0, fill: amdPanel.querySelector('.human-jar .jar-fill') }
+        const balls = amdPanel.querySelectorAll('.number-ball');
+        const busyJar = amdPanel.querySelector('.busy-jar');
+        const voicemailJar = amdPanel.querySelector('.voicemail-jar');
+        const humanJar = amdPanel.querySelector('.human-jar');
+        
+        const busyCount = busyJar.querySelector('.jar-count');
+        const voicemailCount = voicemailJar.querySelector('.jar-count');
+        const humanCount = humanJar.querySelector('.jar-count');
+        
+        const busyLiquid = busyJar.querySelector('.jar-liquid');
+        const voicemailLiquid = voicemailJar.querySelector('.jar-liquid');
+        const humanLiquid = humanJar.querySelector('.jar-liquid');
+
+        let busyTotal = 0;
+        let voicemailTotal = 0;
+        let humanTotal = 0;
+        let animationRunning = false;
+
+        const dropBall = (ball, index) => {
+            const type = ball.getAttribute('data-type');
+            
+            // Create CSS animation
+            const keyframes = `
+                @keyframes ballDrop${index} {
+                    0% {
+                        top: 40px;
+                        opacity: 0;
+                    }
+                    10% {
+                        opacity: 1;
+                    }
+                    40% {
+                        top: 180px;
+                    }
+                    65% {
+                        top: 350px;
+                    }
+                    80% {
+                        top: 350px;
+                        opacity: 1;
+                    }
+                    100% {
+                        top: 350px;
+                        opacity: 0;
+                    }
+                }
+            `;
+            
+            // Inject keyframes
+            const styleSheet = document.createElement('style');
+            styleSheet.textContent = keyframes;
+            document.head.appendChild(styleSheet);
+            
+            // Apply animation
+            ball.style.animation = `ballDrop${index} 2.5s ease-in-out`;
+            
+            // Update jar counts when ball reaches bottom (at 80% of animation = 2s)
+            setTimeout(() => {
+                if (type === 'busy' && busyTotal < 15) {
+                    busyTotal++;
+                    busyCount.textContent = busyTotal;
+                    busyLiquid.style.height = `${(busyTotal / 15) * 100}%`;
+                } else if (type === 'voicemail' && voicemailTotal < 5) {
+                    voicemailTotal++;
+                    voicemailCount.textContent = voicemailTotal;
+                    voicemailLiquid.style.height = `${(voicemailTotal / 5) * 100}%`;
+                } else if (type === 'human' && humanTotal < 1) {
+                    humanTotal++;
+                    humanCount.textContent = humanTotal;
+                    humanLiquid.style.height = `100%`;
+                }
+            }, 2000);
+            
+            // Reset ball after animation
+            setTimeout(() => {
+                ball.style.animation = '';
+                styleSheet.remove();
+            }, 2500);
         };
 
-        const balls = amdPanel.querySelectorAll('.number-ball');
-        
-        balls.forEach((ball, index) => {
-            const type = ball.getAttribute('data-type');
-            const delay = parseFloat(ball.style.getPropertyValue('--delay').replace('s', '')) * 1000;
-            
-            // Reset jars when panel becomes active
-            const panelObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        // Reset counts
-                        Object.values(jars).forEach(jar => {
-                            jar.count = 0;
-                            jar.element.textContent = '0';
-                            jar.fill.style.height = '0%';
-                        });
+        const runAMDAnimation = () => {
+            if (animationRunning) return;
+            animationRunning = true;
 
-                        // Start incrementing after each ball drops
-                        balls.forEach((b, i) => {
-                            const bType = b.getAttribute('data-type');
-                            const bDelay = parseFloat(b.style.getPropertyValue('--delay').replace('s', '')) * 1000;
-                            
-                            // Ball takes 3s to complete animation, increment at 70% (2.1s)
-                            setTimeout(() => {
-                                if (jars[bType]) {
-                                    jars[bType].count++;
-                                    jars[bType].element.textContent = jars[bType].count;
-                                    
-                                    // Update fill height (each ball = ~16.67% for 6 balls max)
-                                    const fillPercent = Math.min((jars[bType].count / 6) * 100, 100);
-                                    jars[bType].fill.style.height = fillPercent + '%';
-                                }
-                            }, bDelay + 2100);
-                        });
+            // Reset
+            busyTotal = 0;
+            voicemailTotal = 0;
+            humanTotal = 0;
+            busyCount.textContent = '0';
+            voicemailCount.textContent = '0';
+            humanCount.textContent = '0';
+            busyLiquid.style.height = '0%';
+            voicemailLiquid.style.height = '0%';
+            humanLiquid.style.height = '0%';
 
-                        // Loop the counts every 3s * 6 balls = 18s
-                        setInterval(() => {
-                            Object.values(jars).forEach(jar => {
-                                jar.count = 0;
-                                jar.element.textContent = '0';
-                                jar.fill.style.height = '0%';
-                            });
-
-                            balls.forEach((b, i) => {
-                                const bType = b.getAttribute('data-type');
-                                const bDelay = parseFloat(b.style.getPropertyValue('--delay').replace('s', '')) * 1000;
-                                
-                                setTimeout(() => {
-                                    if (jars[bType]) {
-                                        jars[bType].count++;
-                                        jars[bType].element.textContent = jars[bType].count;
-                                        
-                                        const fillPercent = Math.min((jars[bType].count / 6) * 100, 100);
-                                        jars[bType].fill.style.height = fillPercent + '%';
-                                    }
-                                }, bDelay + 2100);
-                            });
-                        }, 18000);
+            // Drop balls sequentially
+            balls.forEach((ball, index) => {
+                setTimeout(() => {
+                    dropBall(ball, index);
+                    
+                    // If last ball, restart after delay
+                    if (index === balls.length - 1) {
+                        setTimeout(() => {
+                            animationRunning = false;
+                            runAMDAnimation();
+                        }, 4000);
                     }
-                });
-            }, { threshold: 0.5 });
+                }, index * 400); // 400ms delay between each ball
+            });
+        };
 
-            panelObserver.observe(amdPanel);
-        });
+        const amdObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    runAMDAnimation();
+                } else {
+                    animationRunning = false;
+                }
+            });
+        }, { threshold: 0.5 });
+
+        amdObserver.observe(amdPanel);
     }
 
     // ===============================================
-    // SCROLLJACKING - FEATURES SECTION (IMPROVED)
+    // SCROLLJACKING - FEATURES
     // ===============================================
     
     const featuresSection = document.querySelector('.section-features-scrolljack');
@@ -273,23 +379,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!featuresSection) return;
 
         const now = Date.now();
-        if (now - lastScrollTime < 50) return; // Debounce
+        if (now - lastScrollTime < 50) return;
         lastScrollTime = now;
 
         const sectionRect = featuresSection.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
         const navHeight = document.querySelector('.nav').offsetHeight;
 
-        // Check if features section is in view
         const isInSection = sectionRect.top <= navHeight && sectionRect.bottom >= viewportHeight;
 
         if (isInSection && !isScrollLocked) {
             const delta = e.deltaY || e.detail || -e.wheelDelta;
             
-            if (Math.abs(delta) < 10) return; // Ignore tiny scrolls
+            if (Math.abs(delta) < 10) return;
 
             if (delta > 0 && currentPanelIndex < featurePanels.length - 1) {
-                // Scroll down - next panel
                 e.preventDefault();
                 isScrollLocked = true;
                 updateActivePanel(currentPanelIndex + 1);
@@ -298,7 +402,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     isScrollLocked = false;
                 }, 600);
             } else if (delta < 0 && currentPanelIndex > 0) {
-                // Scroll up - previous panel
                 e.preventDefault();
                 isScrollLocked = true;
                 updateActivePanel(currentPanelIndex - 1);
@@ -307,19 +410,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     isScrollLocked = false;
                 }, 600);
             }
-            // If at first panel and scrolling up, OR at last panel and scrolling down, allow natural scroll
         }
     };
 
     window.addEventListener('wheel', handleFeatureScroll, { passive: false });
     window.addEventListener('DOMMouseScroll', handleFeatureScroll, { passive: false });
 
-    // Progress dots navigation
     progressDots.forEach((dot, index) => {
         dot.addEventListener('click', () => {
             updateActivePanel(index);
             
-            // Scroll to features section if not in view
             const sectionRect = featuresSection.getBoundingClientRect();
             if (sectionRect.top > 0 || sectionRect.bottom < window.innerHeight) {
                 featuresSection.scrollIntoView({ behavior: 'smooth' });
@@ -327,19 +427,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Initialize
     if (featurePanels.length > 0) {
         updateActivePanel(0);
     }
 
-    // Show/hide progress dots based on features section visibility
     const progressObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 featuresSection.classList.add('in-view');
             } else {
                 featuresSection.classList.remove('in-view');
-                // Reset to first panel when leaving section
                 if (entry.boundingClientRect.top > 0) {
                     updateActivePanel(0);
                 }
@@ -376,7 +473,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     animatedElements.forEach(el => observer.observe(el));
 
-    // Stagger demo cards
     const demoCards = document.querySelectorAll('.demo-card-wrapper');
     const demoCardsObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
@@ -393,7 +489,7 @@ document.addEventListener('DOMContentLoaded', () => {
     demoCards.forEach(card => demoCardsObserver.observe(card));
 
     // ===============================================
-    // SMOOTH SCROLLING FOR ANCHOR LINKS
+    // SMOOTH SCROLLING
     // ===============================================
     
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -416,7 +512,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ===============================================
-    // TRUST BAR - PAUSE ON HOVER
+    // TRUST BAR
     // ===============================================
     
     const trustTicker = document.querySelector('.trust-ticker');
@@ -431,7 +527,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===============================================
-    // NAV BACKGROUND ON SCROLL
+    // NAV BACKGROUND
     // ===============================================
     
     const nav = document.querySelector('.nav');
@@ -450,11 +546,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // CONSOLE LOG
     // ===============================================
     
-    console.log('🚀 OutDials Landing Page V3 Loaded');
-    console.log('✅ Hero glow effects');
-    console.log('✅ Workflow centered on line');
-    console.log('✅ Improved phone mockups');
-    console.log('✅ AMD jar filling animation');
-    console.log('✅ Smooth scrolljacking');
-    console.log('✅ Progress dots only in features');
+    console.log('🚀 OutDials Landing Page V4 Loaded');
+    console.log('✅ Workflow numbers on line');
+    console.log('✅ iPhone mockups with animation');
+    console.log('✅ Sequential AMD ball drops (15/5/1)');
+    console.log('✅ Pulsing timezone map');
+    console.log('✅ All 9 numbers visible');
+    console.log('✅ Pulsing status badges');
 });
