@@ -549,26 +549,54 @@ document.addEventListener('DOMContentLoaded', () => {
     const lottieContainer = document.getElementById('lottie-hologram');
     let hologramAnimation = null;
     
-    if (lottieContainer && typeof lottie !== 'undefined') {
-        hologramAnimation = lottie.loadAnimation({
-            container: lottieContainer,
-            renderer: 'svg',
-            loop: true,
-            autoplay: false,
-            path: 'hologram-animation.json'
-        });
+    if (lottieContainer) {
+        // Wait for Lottie library to load
+        const initLottie = () => {
+            if (typeof lottie !== 'undefined') {
+                console.log('Loading Lottie animation...');
+                
+                try {
+                    hologramAnimation = lottie.loadAnimation({
+                        container: lottieContainer,
+                        renderer: 'svg',
+                        loop: true,
+                        autoplay: false,
+                        path: 'hologram-animation.json'
+                    });
 
-        const lottieObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    hologramAnimation.play();
-                } else {
-                    hologramAnimation.stop();
+                    hologramAnimation.addEventListener('DOMLoaded', () => {
+                        console.log('✅ Lottie animation loaded successfully');
+                    });
+
+                    hologramAnimation.addEventListener('data_failed', () => {
+                        console.error('❌ Failed to load hologram-animation.json');
+                    });
+
+                    const lottieObserver = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                hologramAnimation.play();
+                            } else {
+                                hologramAnimation.stop();
+                            }
+                        });
+                    }, { threshold: 0.3 });
+
+                    lottieObserver.observe(lottieContainer);
+                } catch (error) {
+                    console.error('Lottie error:', error);
                 }
-            });
-        }, { threshold: 0.3 });
+            } else {
+                console.error('Lottie library not loaded');
+            }
+        };
 
-        lottieObserver.observe(lottieContainer);
+        // Try to init immediately, or wait for window load
+        if (document.readyState === 'complete') {
+            initLottie();
+        } else {
+            window.addEventListener('load', initLottie);
+        }
     }
 
     // ===============================================
@@ -576,5 +604,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===============================================
     
     console.log('🚀 OutDials Landing Page V5 Loaded');
-    console.log('✅ Lottie hologram animation integrated');
 });
