@@ -543,9 +543,38 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ===============================================
+    // LOTTIE HOLOGRAM ANIMATION
+    // ===============================================
+    
+    const lottieContainer = document.getElementById('lottie-hologram');
+    let hologramAnimation = null;
+    
+    if (lottieContainer && typeof lottie !== 'undefined') {
+        hologramAnimation = lottie.loadAnimation({
+            container: lottieContainer,
+            renderer: 'svg',
+            loop: true,
+            autoplay: false,
+            path: 'hologram-animation.json'
+        });
+
+        const lottieObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    hologramAnimation.play();
+                } else {
+                    hologramAnimation.stop();
+                }
+            });
+        }, { threshold: 0.3 });
+
+        lottieObserver.observe(lottieContainer);
+    }
+
+    // ===============================================
     // CONSOLE LOG
     // ===============================================
     
     console.log('🚀 OutDials Landing Page V5 Loaded');
-    console.log('✅ Hologram projection animation added');
+    console.log('✅ Lottie hologram animation integrated');
 });
