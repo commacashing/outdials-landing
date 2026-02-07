@@ -1,5 +1,5 @@
 /* ===============================================
-   OUTDIALS LANDING PAGE - FINAL STYLES V4
+   OUTDIALS LANDING PAGE - FINAL STYLES V4 + HOLOGRAM
    =============================================== */
 
 :root {
@@ -1297,6 +1297,214 @@ body {
 }
 
 /* ===============================================
+   HOLOGRAM PROJECTION - CONTACT SECTION
+   =============================================== */
+
+.hologram-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 450px;
+    margin: 60px auto 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/* Projector Base */
+.projector-base {
+    position: relative;
+    width: 200px;
+    height: 60px;
+    background: linear-gradient(145deg, #2a2a2a 0%, #1a1a1a 100%);
+    border-radius: 50% / 20%;
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.6),
+        inset 0 -5px 15px rgba(0, 0, 0, 0.4),
+        inset 0 5px 10px rgba(255, 255, 255, 0.05);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1;
+}
+
+.section-contact.visible .projector-base {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.projector-ring {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 30px;
+    background: radial-gradient(ellipse at center, #00d4ff 0%, transparent 70%);
+    border-radius: 50%;
+    opacity: 0;
+    animation: ringPulse 3s ease-in-out infinite;
+    animation-delay: 0.8s;
+}
+
+.section-contact.visible .projector-ring {
+    opacity: 0.6;
+}
+
+@keyframes ringPulse {
+    0%, 100% {
+        opacity: 0.4;
+        transform: translateX(-50%) scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: translateX(-50%) scale(1.1);
+    }
+}
+
+.projector-details {
+    position: absolute;
+    bottom: 15px;
+    right: 30px;
+    width: 20px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    box-shadow: 
+        -8px 0 0 rgba(255, 255, 255, 0.1),
+        -16px 0 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Light Beam */
+.hologram-beam {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-bottom: 320px solid rgba(0, 212, 255, 0.15);
+    opacity: 0;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: 0.4s;
+    z-index: 2;
+    filter: blur(2px);
+}
+
+.section-contact.visible .hologram-beam {
+    opacity: 1;
+}
+
+/* Scan Lines */
+.scan-line {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(0, 212, 255, 0.8) 50%, 
+        transparent 100%);
+    opacity: 0;
+    animation: scanUp 3s linear infinite;
+}
+
+.section-contact.visible .scan-line {
+    opacity: 1;
+}
+
+.scan-line-1 {
+    animation-delay: 1.2s;
+}
+
+.scan-line-2 {
+    animation-delay: 1.5s;
+}
+
+.scan-line-3 {
+    animation-delay: 1.8s;
+}
+
+.scan-line-4 {
+    animation-delay: 2.1s;
+}
+
+@keyframes scanUp {
+    0% {
+        bottom: 0;
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% {
+        bottom: 320px;
+        opacity: 0;
+    }
+}
+
+/* Hologram Logo */
+.hologram-logo {
+    position: absolute;
+    bottom: 200px;
+    left: 50%;
+    transform: translateX(-50%) translateZ(0);
+    width: 120px;
+    height: 120px;
+    opacity: 0;
+    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: 0.8s;
+    z-index: 3;
+}
+
+.section-contact.visible .hologram-logo {
+    opacity: 1;
+    transform: translateX(-50%) translateZ(0) scale(1);
+}
+
+.logo-hologram {
+    width: 100%;
+    height: 100%;
+    color: #00d4ff;
+    filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.8))
+            drop-shadow(0 0 40px rgba(0, 212, 255, 0.4))
+            drop-shadow(0 0 60px rgba(0, 212, 255, 0.2));
+    animation: logoRotate 20s linear infinite, logoFloat 4s ease-in-out infinite;
+    animation-delay: 1.5s, 1.5s;
+    transform-style: preserve-3d;
+}
+
+@keyframes logoRotate {
+    0% {
+        transform: rotateY(0deg) rotateX(0deg);
+    }
+    100% {
+        transform: rotateY(360deg) rotateX(0deg);
+    }
+}
+
+@keyframes logoFloat {
+    0%, 100% {
+        transform: translateY(0) rotateY(0deg);
+    }
+    50% {
+        transform: translateY(-10px) rotateY(180deg);
+    }
+}
+
+/* Add 3D depth effect */
+.logo-hologram circle {
+    stroke-width: 8;
+    filter: drop-shadow(0 4px 8px rgba(0, 212, 255, 0.4));
+}
+
+/* ===============================================
    FOOTER
    =============================================== */
 
@@ -1434,5 +1642,45 @@ body {
         gap: 8px;
         padding: 14px 16px;
         font-size: 13px;
+    }
+
+    /* Hologram Mobile */
+    .hologram-container {
+        height: 350px;
+        max-width: 100%;
+    }
+    
+    .projector-base {
+        width: 150px;
+        height: 45px;
+    }
+    
+    .hologram-beam {
+        border-left: 100px solid transparent;
+        border-right: 100px solid transparent;
+        border-bottom: 240px solid rgba(0, 212, 255, 0.15);
+    }
+    
+    .hologram-logo {
+        width: 90px;
+        height: 90px;
+        bottom: 150px;
+    }
+    
+    @keyframes scanUp {
+        0% {
+            bottom: 0;
+            opacity: 0;
+        }
+        10% {
+            opacity: 0.8;
+        }
+        90% {
+            opacity: 0.8;
+        }
+        100% {
+            bottom: 240px;
+            opacity: 0;
+        }
     }
 }
