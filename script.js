@@ -154,11 +154,38 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===============================================
-    // INSTANT BRIDGE - PHONE ANIMATION (PLAYS ONCE)
+    // INSTANT BRIDGE - PHONE ANIMATION (RESETS ON SCROLL)
     // ===============================================
     
     const instantBridgePanel = document.querySelector('[data-feature="instant-bridge"]');
     let phoneAnimationPlayed = false;
+    let phoneAnimationTimeout = null;
+
+    const resetPhoneAnimation = () => {
+        if (!instantBridgePanel) return;
+        
+        // Clear any running timeouts
+        if (phoneAnimationTimeout) {
+            clearTimeout(phoneAnimationTimeout);
+        }
+        
+        const phoneIncoming = instantBridgePanel.querySelector('.phone-incoming');
+        const phoneConnected = instantBridgePanel.querySelector('.phone-connected');
+        const acceptBtn = instantBridgePanel.querySelector('.phone-incoming .accept-btn');
+        const arrow = instantBridgePanel.querySelector('.bridge-connection');
+        const transferText = instantBridgePanel.querySelector('.transfer-text');
+        const connectedText = instantBridgePanel.querySelector('.connected-text');
+
+        // Reset all states
+        phoneIncoming.classList.remove('vibrating');
+        phoneConnected.classList.remove('vibrating');
+        acceptBtn.classList.remove('flashing', 'pressed');
+        arrow.classList.remove('visible');
+        transferText.style.display = 'block';
+        connectedText.style.display = 'none';
+        
+        phoneAnimationPlayed = false;
+    };
 
     const runPhoneAnimation = () => {
         if (phoneAnimationPlayed) return;
@@ -171,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const transferText = instantBridgePanel.querySelector('.transfer-text');
         const connectedText = instantBridgePanel.querySelector('.connected-text');
 
-        // Reset state
+        // Reset state first
         phoneIncoming.classList.remove('vibrating');
         phoneConnected.classList.remove('vibrating');
         acceptBtn.classList.remove('flashing', 'pressed');
@@ -180,45 +207,45 @@ document.addEventListener('DOMContentLoaded', () => {
         connectedText.style.display = 'none';
 
         // Step 1: Left phone vibrates (shake 1s, pause 1s, shake 1s)
-        setTimeout(() => {
+        phoneAnimationTimeout = setTimeout(() => {
             phoneIncoming.classList.add('vibrating');
             acceptBtn.classList.add('flashing');
         }, 500);
 
         // Pause after first shake
-        setTimeout(() => {
+        phoneAnimationTimeout = setTimeout(() => {
             phoneIncoming.classList.remove('vibrating');
         }, 1500);
 
         // Resume vibration
-        setTimeout(() => {
+        phoneAnimationTimeout = setTimeout(() => {
             phoneIncoming.classList.add('vibrating');
         }, 2500);
 
         // Step 2: Button pressed
-        setTimeout(() => {
+        phoneAnimationTimeout = setTimeout(() => {
             phoneIncoming.classList.remove('vibrating');
             acceptBtn.classList.remove('flashing');
             acceptBtn.classList.add('pressed');
         }, 3500);
 
         // Step 3: Show arrow
-        setTimeout(() => {
+        phoneAnimationTimeout = setTimeout(() => {
             arrow.classList.add('visible');
         }, 4000);
 
         // Step 4: Right phone vibrates
-        setTimeout(() => {
+        phoneAnimationTimeout = setTimeout(() => {
             phoneConnected.classList.add('vibrating');
         }, 4500);
 
         // Step 5: Stop vibration, show "Transferring..."
-        setTimeout(() => {
+        phoneAnimationTimeout = setTimeout(() => {
             phoneConnected.classList.remove('vibrating');
         }, 5500);
 
-        // Step 6: Change to "Lead Name" (connected)
-        setTimeout(() => {
+        // Step 6: Change to "OutDials" (connected)
+        phoneAnimationTimeout = setTimeout(() => {
             transferText.style.display = 'none';
             connectedText.style.display = 'block';
         }, 6500);
@@ -226,11 +253,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const phoneObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting && !phoneAnimationPlayed) {
+            if (entry.isIntersecting) {
                 runPhoneAnimation();
-            } else if (!entry.isIntersecting) {
+            } else {
                 // Reset when scrolled away so it plays again
-                phoneAnimationPlayed = false;
+                resetPhoneAnimation();
             }
         });
     }, { threshold: 0.5 });
@@ -240,7 +267,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===============================================
-    // AMD - FIXED SEQUENTIAL BALL DROP (PLAYS ONCE)
+    // AMD - FIXED SEQUENTIAL BALL DROP (RESETS ON SCROLL)
     // ===============================================
     
     const amdPanel = document.querySelector('[data-feature="premium-amd"]');
@@ -263,6 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let voicemailTotal = 0;
         let humanTotal = 0;
         let amdAnimationPlayed = false;
+        let animationTimeout = null;
 
         // Adjusted counts for 11 balls: 7 busy, 3 voicemail, 1 human
         const maxBusy = 7;
@@ -272,17 +300,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const dropBall = (ball, index) => {
             const type = ball.getAttribute('data-type');
             
-            // Determine target position based on type
-            let targetJar;
-            if (type === 'busy') targetJar = busyJar;
-            else if (type === 'voicemail') targetJar = voicemailJar;
-            else targetJar = humanJar;
-            
-            const jarRect = targetJar.getBoundingClientRect();
-            const filterRect = amdPanel.querySelector('.amd-filter-3d').getBoundingClientRect();
-            
-            // Calculate the target Y position (jar location)
-            const targetY = jarRect.top - filterRect.top + 50;
+            // Simple fixed positions for each jar type
+            let targetY;
+            if (type === 'busy') {
+                targetY = 300; // Adjust based on visual
+            } else if (type === 'voicemail') {
+                targetY = 300;
+            } else {
+                targetY = 300;
+            }
             
             // Create unique animation
             const keyframes = `
@@ -295,9 +321,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         opacity: 1;
                     }
                     50% {
+                        top: 160px;
+                    }
+                    75% {
                         top: ${targetY}px;
                     }
-                    80% {
+                    85% {
                         top: ${targetY}px;
                         opacity: 1;
                     }
@@ -342,11 +371,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 2000);
         };
 
-        const runAMDAnimation = () => {
-            if (amdAnimationPlayed) return;
-            amdAnimationPlayed = true;
-
-            // Reset
+        const resetAMD = () => {
+            // Clear any running animation
+            if (animationTimeout) {
+                clearTimeout(animationTimeout);
+            }
+            
+            // Reset all counters
             busyTotal = 0;
             voicemailTotal = 0;
             humanTotal = 0;
@@ -356,10 +387,27 @@ document.addEventListener('DOMContentLoaded', () => {
             busyLiquid.style.height = '0%';
             voicemailLiquid.style.height = '0%';
             humanLiquid.style.height = '0%';
+            
+            // Clear all ball animations
+            balls.forEach((ball, index) => {
+                ball.style.animation = '';
+                const oldStyle = document.getElementById(`ballDropStyle${index}`);
+                if (oldStyle) oldStyle.remove();
+            });
+            
+            amdAnimationPlayed = false;
+        };
+
+        const runAMDAnimation = () => {
+            if (amdAnimationPlayed) return;
+            amdAnimationPlayed = true;
+
+            // Reset first
+            resetAMD();
 
             // Drop balls sequentially
             balls.forEach((ball, index) => {
-                setTimeout(() => {
+                animationTimeout = setTimeout(() => {
                     dropBall(ball, index);
                 }, index * 300);
             });
@@ -367,11 +415,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const amdObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting && !amdAnimationPlayed) {
+                if (entry.isIntersecting) {
                     runAMDAnimation();
-                } else if (!entry.isIntersecting) {
-                    // Reset when scrolled away
-                    amdAnimationPlayed = false;
+                } else {
+                    // Reset when scrolled away so it plays again
+                    resetAMD();
                 }
             });
         }, { threshold: 0.5 });
