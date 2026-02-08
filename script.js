@@ -1,5 +1,5 @@
 // ===============================================
-// OUTDIALS LANDING PAGE - FINAL JAVASCRIPT V4
+// OUTDIALS LANDING PAGE - UPDATED JAVASCRIPT V5
 // ===============================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -154,56 +154,83 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===============================================
-    // INSTANT BRIDGE - PHONE ANIMATION
+    // INSTANT BRIDGE - PHONE ANIMATION (PLAYS ONCE)
     // ===============================================
     
     const instantBridgePanel = document.querySelector('[data-feature="instant-bridge"]');
-    let phoneAnimationRunning = false;
+    let phoneAnimationPlayed = false;
 
     const runPhoneAnimation = () => {
-        if (phoneAnimationRunning) return;
-        phoneAnimationRunning = true;
+        if (phoneAnimationPlayed) return;
+        phoneAnimationPlayed = true;
 
-        const acceptBtn = instantBridgePanel.querySelector('.accept-btn');
+        const phoneIncoming = instantBridgePanel.querySelector('.phone-incoming');
+        const phoneConnected = instantBridgePanel.querySelector('.phone-connected');
+        const acceptBtn = instantBridgePanel.querySelector('.phone-incoming .accept-btn');
         const arrow = instantBridgePanel.querySelector('.bridge-connection');
         const transferText = instantBridgePanel.querySelector('.transfer-text');
         const connectedText = instantBridgePanel.querySelector('.connected-text');
 
-        // Reset
-        acceptBtn.classList.add('flashing');
-        arrow.style.opacity = '0';
+        // Reset state
+        phoneIncoming.classList.remove('vibrating');
+        phoneConnected.classList.remove('vibrating');
+        acceptBtn.classList.remove('flashing', 'pressed');
+        arrow.classList.remove('visible');
         transferText.style.display = 'block';
         connectedText.style.display = 'none';
 
-        // Step 1: Flash accept button (already flashing)
+        // Step 1: Left phone vibrates (shake 1s, pause 1s, shake 1s)
         setTimeout(() => {
-            // Step 2: Show arrow
-            arrow.style.opacity = '1';
-            
-            // Step 3: Show "Transferring..." on right phone
-            setTimeout(() => {
-                // Step 4: Change to "Connected"
-                setTimeout(() => {
-                    transferText.style.display = 'none';
-                    connectedText.style.display = 'block';
-                    acceptBtn.classList.remove('flashing');
-                }, 1500);
-            }, 500);
+            phoneIncoming.classList.add('vibrating');
+            acceptBtn.classList.add('flashing');
+        }, 500);
+
+        // Pause after first shake
+        setTimeout(() => {
+            phoneIncoming.classList.remove('vibrating');
         }, 1500);
 
-        // Loop
+        // Resume vibration
         setTimeout(() => {
-            phoneAnimationRunning = false;
-            runPhoneAnimation();
-        }, 6000);
+            phoneIncoming.classList.add('vibrating');
+        }, 2500);
+
+        // Step 2: Button pressed
+        setTimeout(() => {
+            phoneIncoming.classList.remove('vibrating');
+            acceptBtn.classList.remove('flashing');
+            acceptBtn.classList.add('pressed');
+        }, 3500);
+
+        // Step 3: Show arrow
+        setTimeout(() => {
+            arrow.classList.add('visible');
+        }, 4000);
+
+        // Step 4: Right phone vibrates
+        setTimeout(() => {
+            phoneConnected.classList.add('vibrating');
+        }, 4500);
+
+        // Step 5: Stop vibration, show "Transferring..."
+        setTimeout(() => {
+            phoneConnected.classList.remove('vibrating');
+        }, 5500);
+
+        // Step 6: Change to "Lead Name" (connected)
+        setTimeout(() => {
+            transferText.style.display = 'none';
+            connectedText.style.display = 'block';
+        }, 6500);
     };
 
     const phoneObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
+            if (entry.isIntersecting && !phoneAnimationPlayed) {
                 runPhoneAnimation();
-            } else {
-                phoneAnimationRunning = false;
+            } else if (!entry.isIntersecting) {
+                // Reset when scrolled away so it plays again
+                phoneAnimationPlayed = false;
             }
         });
     }, { threshold: 0.5 });
@@ -213,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===============================================
-    // AMD - SEQUENTIAL BALL DROP ANIMATION
+    // AMD - FIXED SEQUENTIAL BALL DROP (PLAYS ONCE)
     // ===============================================
     
     const amdPanel = document.querySelector('[data-feature="premium-amd"]');
@@ -235,12 +262,29 @@ document.addEventListener('DOMContentLoaded', () => {
         let busyTotal = 0;
         let voicemailTotal = 0;
         let humanTotal = 0;
-        let animationRunning = false;
+        let amdAnimationPlayed = false;
+
+        // Adjusted counts for 11 balls: 7 busy, 3 voicemail, 1 human
+        const maxBusy = 7;
+        const maxVoicemail = 3;
+        const maxHuman = 1;
 
         const dropBall = (ball, index) => {
             const type = ball.getAttribute('data-type');
             
-            // Create CSS animation
+            // Determine target position based on type
+            let targetJar;
+            if (type === 'busy') targetJar = busyJar;
+            else if (type === 'voicemail') targetJar = voicemailJar;
+            else targetJar = humanJar;
+            
+            const jarRect = targetJar.getBoundingClientRect();
+            const filterRect = amdPanel.querySelector('.amd-filter-3d').getBoundingClientRect();
+            
+            // Calculate the target Y position (jar location)
+            const targetY = jarRect.top - filterRect.top + 50;
+            
+            // Create unique animation
             const keyframes = `
                 @keyframes ballDrop${index} {
                     0% {
@@ -250,18 +294,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     10% {
                         opacity: 1;
                     }
-                    40% {
-                        top: 180px;
-                    }
-                    65% {
-                        top: 350px;
+                    50% {
+                        top: ${targetY}px;
                     }
                     80% {
-                        top: 350px;
+                        top: ${targetY}px;
                         opacity: 1;
                     }
                     100% {
-                        top: 350px;
+                        top: ${targetY}px;
                         opacity: 0;
                     }
                 }
@@ -269,39 +310,41 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Inject keyframes
             const styleSheet = document.createElement('style');
+            styleSheet.id = `ballDropStyle${index}`;
             styleSheet.textContent = keyframes;
             document.head.appendChild(styleSheet);
             
             // Apply animation
-            ball.style.animation = `ballDrop${index} 2.5s ease-in-out`;
+            ball.style.animation = `ballDrop${index} 2s ease-in`;
             
-            // Update jar counts when ball reaches bottom (at 80% of animation = 2s)
+            // Update jar counts when ball reaches jar
             setTimeout(() => {
-                if (type === 'busy' && busyTotal < 15) {
+                if (type === 'busy' && busyTotal < maxBusy) {
                     busyTotal++;
                     busyCount.textContent = busyTotal;
-                    busyLiquid.style.height = `${(busyTotal / 15) * 100}%`;
-                } else if (type === 'voicemail' && voicemailTotal < 5) {
+                    busyLiquid.style.height = `${(busyTotal / maxBusy) * 100}%`;
+                } else if (type === 'voicemail' && voicemailTotal < maxVoicemail) {
                     voicemailTotal++;
                     voicemailCount.textContent = voicemailTotal;
-                    voicemailLiquid.style.height = `${(voicemailTotal / 5) * 100}%`;
-                } else if (type === 'human' && humanTotal < 1) {
+                    voicemailLiquid.style.height = `${(voicemailTotal / maxVoicemail) * 100}%`;
+                } else if (type === 'human' && humanTotal < maxHuman) {
                     humanTotal++;
                     humanCount.textContent = humanTotal;
                     humanLiquid.style.height = `100%`;
                 }
-            }, 2000);
+            }, 1000);
             
-            // Reset ball after animation
+            // Reset ball and remove style after animation
             setTimeout(() => {
                 ball.style.animation = '';
-                styleSheet.remove();
-            }, 2500);
+                const oldStyle = document.getElementById(`ballDropStyle${index}`);
+                if (oldStyle) oldStyle.remove();
+            }, 2000);
         };
 
         const runAMDAnimation = () => {
-            if (animationRunning) return;
-            animationRunning = true;
+            if (amdAnimationPlayed) return;
+            amdAnimationPlayed = true;
 
             // Reset
             busyTotal = 0;
@@ -318,24 +361,17 @@ document.addEventListener('DOMContentLoaded', () => {
             balls.forEach((ball, index) => {
                 setTimeout(() => {
                     dropBall(ball, index);
-                    
-                    // If last ball, restart after delay
-                    if (index === balls.length - 1) {
-                        setTimeout(() => {
-                            animationRunning = false;
-                            runAMDAnimation();
-                        }, 4000);
-                    }
-                }, index * 400); // 400ms delay between each ball
+                }, index * 300);
             });
         };
 
         const amdObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
+                if (entry.isIntersecting && !amdAnimationPlayed) {
                     runAMDAnimation();
-                } else {
-                    animationRunning = false;
+                } else if (!entry.isIntersecting) {
+                    // Reset when scrolled away
+                    amdAnimationPlayed = false;
                 }
             });
         }, { threshold: 0.5 });
@@ -344,7 +380,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===============================================
-    // SCROLLJACKING - FEATURES
+    // SCROLLJACKING - FEATURES (FIXED)
     // ===============================================
     
     const featuresSection = document.querySelector('.section-features-scrolljack');
@@ -379,16 +415,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!featuresSection) return;
 
         const now = Date.now();
-        if (now - lastScrollTime < 50) return;
+        if (now - lastScrollTime < 100) return; // Increased debounce
         lastScrollTime = now;
 
         const sectionRect = featuresSection.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
-        const navHeight = document.querySelector('.nav').offsetHeight;
+        const navHeight = document.querySelector('.nav')?.offsetHeight || 0;
 
+        // Check if we're in the section
         const isInSection = sectionRect.top <= navHeight && sectionRect.bottom >= viewportHeight;
+        
+        // Check if we're at section boundaries
+        const atTop = sectionRect.top >= navHeight && currentPanelIndex === 0;
+        const atBottom = sectionRect.bottom <= viewportHeight && currentPanelIndex === featurePanels.length - 1;
 
-        if (isInSection && !isScrollLocked) {
+        if (isInSection && !isScrollLocked && !atTop && !atBottom) {
             const delta = e.deltaY || e.detail || -e.wheelDelta;
             
             if (Math.abs(delta) < 10) return;
@@ -400,7 +441,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 setTimeout(() => {
                     isScrollLocked = false;
-                }, 600);
+                }, 800); // Increased lock time for smoother transition
             } else if (delta < 0 && currentPanelIndex > 0) {
                 e.preventDefault();
                 isScrollLocked = true;
@@ -408,7 +449,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 setTimeout(() => {
                     isScrollLocked = false;
-                }, 600);
+                }, 800);
             }
         }
     };
@@ -550,7 +591,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let hologramAnimation = null;
     
     if (lottieContainer) {
-        // Wait for Lottie library to load
         const initLottie = () => {
             if (typeof lottie !== 'undefined') {
                 console.log('Loading Lottie animation...');
@@ -591,7 +631,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        // Try to init immediately, or wait for window load
         if (document.readyState === 'complete') {
             initLottie();
         } else {
@@ -603,5 +642,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // CONSOLE LOG
     // ===============================================
     
-    console.log('🚀 OutDials Landing Page V5 Loaded');
+    console.log('🚀 OutDials Landing Page V5 - Updated');
 });
