@@ -222,19 +222,32 @@
                                     <div class="phone-status-bar">
                                         <span>9:41</span>
                                         <div class="status-icons">
-                                            <span>📶</span>
-                                            <span>🔋</span>
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+                                                <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+                                                <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                                                <line x1="12" y1="20" x2="12.01" y2="20"></line>
+                                            </svg>
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <rect x="1" y="6" width="18" height="12" rx="2" ry="2"></rect>
+                                                <line x1="23" y1="13" x2="23" y2="11"></line>
+                                            </svg>
                                         </div>
                                     </div>
                                     <div class="phone-caller-section">
                                         <div class="caller-label">Incoming Call</div>
-                                        <div class="phone-icon">☎️</div>
+                                        <div class="caller-number">(123) 456-7890</div>
+                                        <div class="phone-icon">
+                                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                            </svg>
+                                        </div>
                                     </div>
                                     <div class="phone-action-buttons">
                                         <div class="phone-btn decline-btn">
                                             <span class="btn-icon">✕</span>
                                         </div>
-                                        <div class="phone-btn accept-btn flashing">
+                                        <div class="phone-btn accept-btn">
                                             <span class="btn-icon">✓</span>
                                         </div>
                                     </div>
@@ -243,16 +256,7 @@
                             
                             <!-- Connection Arrow -->
                             <div class="bridge-connection">
-                                <svg class="bridge-arrow-svg" width="120" height="60" viewBox="0 0 120 60">
-                                    <defs>
-                                        <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                                            <stop offset="0%" style="stop-color:rgba(255,255,255,0.2);stop-opacity:1" />
-                                            <stop offset="100%" style="stop-color:rgba(255,255,255,0.8);stop-opacity:1" />
-                                        </linearGradient>
-                                    </defs>
-                                    <path d="M 10,30 L 100,30" stroke="url(#arrowGrad)" stroke-width="3" fill="none"/>
-                                    <polygon points="95,25 110,30 95,35" fill="rgba(255,255,255,0.8)"/>
-                                </svg>
+                                <div class="bridge-arrow">→</div>
                                 <div class="latency-badge">0ms</div>
                             </div>
 
@@ -263,13 +267,27 @@
                                     <div class="phone-status-bar">
                                         <span>9:41</span>
                                         <div class="status-icons">
-                                            <span>📶</span>
-                                            <span>🔋</span>
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+                                                <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+                                                <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                                                <line x1="12" y1="20" x2="12.01" y2="20"></line>
+                                            </svg>
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <rect x="1" y="6" width="18" height="12" rx="2" ry="2"></rect>
+                                                <line x1="23" y1="13" x2="23" y2="11"></line>
+                                            </svg>
                                         </div>
                                     </div>
                                     <div class="phone-caller-section">
-                                        <div class="caller-label transfer-text">Transferring...</div>
-                                        <div class="phone-icon">👤</div>
+                                        <div class="caller-label transfer-text">Transferring</div>
+                                        <div class="caller-number">(123) 456-7890</div>
+                                        <div class="phone-icon">
+                                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                                <circle cx="12" cy="7" r="4"></circle>
+                                            </svg>
+                                        </div>
                                         <div class="caller-label connected-text" style="display: none;">Lead Name</div>
                                     </div>
                                     <div class="phone-action-buttons">
@@ -302,52 +320,28 @@
                     </div>
                     <div class="feature-panel-right">
                         <div class="amd-visual-container">
-                            <!-- 3D Filter Funnel -->
+                            <!-- Simple Funnel -->
                             <div class="amd-filter-3d">
-                                <svg class="filter-svg-3d" viewBox="0 0 400 400">
-                                    <!-- 3D Funnel with depth -->
+                                <svg class="filter-svg-3d" viewBox="0 0 300 350">
                                     <defs>
-                                        <linearGradient id="filterGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <linearGradient id="filterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                                             <stop offset="0%" style="stop-color:rgba(255,255,255,0.15);stop-opacity:1" />
                                             <stop offset="100%" style="stop-color:rgba(255,255,255,0.05);stop-opacity:1" />
                                         </linearGradient>
-                                        <linearGradient id="filterGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
-                                            <stop offset="0%" style="stop-color:rgba(255,255,255,0.1);stop-opacity:1" />
-                                            <stop offset="100%" style="stop-color:rgba(255,255,255,0.03);stop-opacity:1" />
-                                        </linearGradient>
                                     </defs>
                                     
-                                    <!-- Front face -->
-                                    <path d="M 80,60 L 320,60 L 260,200 L 140,200 Z" 
-                                          fill="url(#filterGrad1)" 
+                                    <!-- Single unified funnel shape -->
+                                    <path d="M 50,40 L 250,40 L 180,160 L 180,300 L 120,300 L 120,160 Z" 
+                                          fill="url(#filterGrad)" 
                                           stroke="rgba(255,255,255,0.4)" 
                                           stroke-width="3"/>
-                                    
-                                    <!-- Right side (3D depth) -->
-                                    <path d="M 320,60 L 340,80 L 280,220 L 260,200 Z" 
-                                          fill="url(#filterGrad2)" 
-                                          stroke="rgba(255,255,255,0.3)" 
-                                          stroke-width="2"/>
-                                    
-                                    <!-- Bottom pipe front -->
-                                    <rect x="150" y="200" width="100" height="160" 
-                                          fill="rgba(255,255,255,0.08)" 
-                                          stroke="rgba(255,255,255,0.4)" 
-                                          stroke-width="3"/>
-                                    
-                                    <!-- Bottom pipe right side -->
-                                    <path d="M 250,200 L 270,220 L 270,380 L 250,360 Z" 
-                                          fill="rgba(255,255,255,0.05)" 
-                                          stroke="rgba(255,255,255,0.3)" 
-                                          stroke-width="2"/>
                                     
                                     <!-- AMD Text -->
-                                    <text x="200" y="140" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="28" font-weight="700" letter-spacing="3">AMD</text>
+                                    <text x="150" y="110" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="28" font-weight="700" letter-spacing="3">AMD</text>
                                 </svg>
                                 
-                                <!-- Number Balls Container -->
+                                <!-- Number Balls Container - Reduced to 11 balls -->
                                 <div class="number-balls-wrapper">
-                                    <!-- 21 balls total: 15 busy, 5 voicemail, 1 human -->
                                     <div class="number-ball" data-type="busy" data-ball-id="1">#</div>
                                     <div class="number-ball" data-type="busy" data-ball-id="2">#</div>
                                     <div class="number-ball" data-type="voicemail" data-ball-id="3">#</div>
@@ -358,17 +352,7 @@
                                     <div class="number-ball" data-type="busy" data-ball-id="8">#</div>
                                     <div class="number-ball" data-type="voicemail" data-ball-id="9">#</div>
                                     <div class="number-ball" data-type="busy" data-ball-id="10">#</div>
-                                    <div class="number-ball" data-type="busy" data-ball-id="11">#</div>
-                                    <div class="number-ball" data-type="voicemail" data-ball-id="12">#</div>
-                                    <div class="number-ball" data-type="busy" data-ball-id="13">#</div>
-                                    <div class="number-ball" data-type="busy" data-ball-id="14">#</div>
-                                    <div class="number-ball" data-type="voicemail" data-ball-id="15">#</div>
-                                    <div class="number-ball" data-type="busy" data-ball-id="16">#</div>
-                                    <div class="number-ball" data-type="busy" data-ball-id="17">#</div>
-                                    <div class="number-ball" data-type="busy" data-ball-id="18">#</div>
-                                    <div class="number-ball" data-type="busy" data-ball-id="19">#</div>
-                                    <div class="number-ball" data-type="busy" data-ball-id="20">#</div>
-                                    <div class="number-ball" data-type="human" data-ball-id="21">#</div>
+                                    <div class="number-ball" data-type="human" data-ball-id="11">#</div>
                                 </div>
                             </div>
                             
@@ -420,50 +404,55 @@
                         <div class="tcpa-map-container">
                             <svg class="us-timezone-map" viewBox="0 0 960 600" preserveAspectRatio="xMidYMid meet">
                                 <!-- Alaska -->
-                                <path class="timezone-zone alaska" d="M 80,80 L 140,60 L 180,100 L 160,140 L 100,150 Z" 
+                                <path class="timezone-zone alaska" 
+                                      d="M 60,60 L 100,50 L 140,60 L 150,90 L 130,120 L 90,130 L 60,120 Z" 
                                       fill="rgba(147, 112, 219, 0.3)" 
                                       stroke="rgba(147, 112, 219, 0.6)" 
                                       stroke-width="2"/>
-                                <text x="130" y="110" fill="white" font-size="14" font-weight="600">Alaska</text>
+                                <text x="100" y="95" fill="white" font-size="12" font-weight="600" text-anchor="middle">Alaska</text>
                                 
                                 <!-- Pacific -->
-                                <path class="timezone-zone pacific" d="M 120,180 L 220,160 L 240,220 L 230,340 L 200,400 L 140,380 Z" 
+                                <path class="timezone-zone pacific" 
+                                      d="M 100,180 L 180,160 L 200,200 L 210,280 L 200,350 L 180,380 L 140,390 L 110,360 L 100,320 Z" 
                                       fill="rgba(255, 140, 0, 0.3)" 
                                       stroke="rgba(255, 140, 0, 0.6)" 
                                       stroke-width="2"/>
-                                <text x="175" y="290" fill="white" font-size="16" font-weight="600">Pacific</text>
+                                <text x="155" y="280" fill="white" font-size="14" font-weight="600" text-anchor="middle">Pacific</text>
                                 
                                 <!-- Mountain -->
-                                <path class="timezone-zone mountain" d="M 240,200 L 380,190 L 390,340 L 370,400 L 230,390 Z" 
+                                <path class="timezone-zone mountain" 
+                                      d="M 200,180 L 340,170 L 360,200 L 370,280 L 360,350 L 340,380 L 200,390 L 210,320 Z" 
                                       fill="rgba(50, 205, 50, 0.3)" 
                                       stroke="rgba(50, 205, 50, 0.6)" 
                                       stroke-width="2"/>
-                                <text x="290" y="290" fill="white" font-size="16" font-weight="600">Mountain</text>
+                                <text x="280" y="280" fill="white" font-size="14" font-weight="600" text-anchor="middle">Mountain</text>
                                 
                                 <!-- Central -->
-                                <path class="timezone-zone central" d="M 390,200 L 630,190 L 640,380 L 620,420 L 380,410 Z" 
+                                <path class="timezone-zone central" 
+                                      d="M 360,180 L 620,170 L 640,200 L 650,240 L 660,300 L 650,350 L 630,390 L 360,395 L 370,320 Z" 
                                       fill="rgba(30, 144, 255, 0.3)" 
                                       stroke="rgba(30, 144, 255, 0.6)" 
                                       stroke-width="2"/>
-                                <text x="490" y="290" fill="white" font-size="16" font-weight="600">Central</text>
+                                <text x="500" y="280" fill="white" font-size="14" font-weight="600" text-anchor="middle">Central</text>
                                 
                                 <!-- Eastern -->
-                                <path class="timezone-zone eastern" d="M 640,200 L 840,190 L 850,240 L 860,320 L 840,400 L 630,410 Z" 
+                                <path class="timezone-zone eastern" 
+                                      d="M 640,180 L 820,170 L 860,200 L 880,260 L 890,310 L 870,360 L 840,390 L 630,395 L 650,320 Z" 
                                       fill="rgba(255, 215, 0, 0.3)" 
                                       stroke="rgba(255, 215, 0, 0.6)" 
                                       stroke-width="2"/>
-                                <text x="730" y="290" fill="white" font-size="16" font-weight="600">Eastern</text>
+                                <text x="750" y="280" fill="white" font-size="14" font-weight="600" text-anchor="middle">Eastern</text>
                                 
                                 <!-- Hawaii -->
-                                <ellipse class="timezone-zone hawaii" cx="150" cy="480" rx="40" ry="25" 
+                                <ellipse class="timezone-zone hawaii" cx="140" cy="480" rx="35" ry="22" 
                                          fill="rgba(255, 105, 180, 0.3)" 
                                          stroke="rgba(255, 105, 180, 0.6)" 
                                          stroke-width="2"/>
-                                <text x="150" y="490" fill="white" font-size="12" font-weight="600" text-anchor="middle">Hawaii</text>
+                                <text x="140" y="487" fill="white" font-size="11" font-weight="600" text-anchor="middle">Hawaii</text>
                             </svg>
                             
                             <div class="compliance-badge">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
                                     <path d="M20 6L9 17l-5-5"></path>
                                 </svg>
                                 <span>100% TCPA Compliant</span>
@@ -646,7 +635,7 @@
         </div>
     </section>
 
-    <!-- Contact Section - Hologram Projection -->
+    <!-- Contact Section -->
     <section id="contact" class="section-contact">
         <div class="container">
             <h2 class="section-title">Stop Waiting. Start Selling.</h2>
@@ -659,7 +648,7 @@
                 <a href="https://calendly.com/outdials/demo" target="_blank" rel="noopener noreferrer" class="btn-primary btn-large">
                     Book a Demo
                 </a>
-                <p class="contact-note">or email <a href="/cdn-cgi/l/email-protection#1d6e686d6d726f695d72686979747c716e337e7270"><span class="__cf_email__" data-cfemail="31424441415e4345715e44455558505d421f525e5c">[email&#160;protected]</span></a></p>
+                <p class="contact-note">or email <a href="mailto:hello@outdials.com">hello@outdials.com</a></p>
             </div>
         </div>
     </section>
@@ -699,9 +688,9 @@
                     </div>
                     <div class="footer-column">
                         <h4>Contact</h4>
-                        <a href="/cdn-cgi/l/email-protection#d6a5a3a6a6b9a4a296b9a3a2b2bfb7baa5f8b5b9bb"><span class="__cf_email__" data-cfemail="fe8d8b8e8e918c8abe918b8a9a979f928dd09d9193">[email&#160;protected]</span></a>
+                        <a href="mailto:hello@outdials.com">hello@outdials.com</a>
                         <a href="#contact">Book a Demo</a>
-                            </div>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
