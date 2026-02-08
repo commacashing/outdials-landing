@@ -331,8 +331,8 @@ body {
 
 .section-demo {
     padding: 120px 0 80px;
-    opacity: 0;
-    transform: translateY(40px);
+    opacity: 1;
+    transform: translateY(0);
     transition: opacity 0.8s var(--spring), transform 0.8s var(--spring);
 }
 
@@ -368,8 +368,8 @@ body {
 }
 
 .demo-card-wrapper {
-    opacity: 0;
-    transform: translateY(30px);
+    opacity: 1;
+    transform: translateY(0);
     transition: opacity 0.6s var(--spring), transform 0.6s var(--spring);
 }
 
@@ -577,6 +577,11 @@ body {
     pointer-events: none;
     transition: opacity 0.6s var(--spring);
     padding: 80px 24px;
+}
+
+.feature-panel:first-child {
+    opacity: 1;
+    pointer-events: all;
 }
 
 .feature-panel.active {
@@ -1250,8 +1255,8 @@ body {
 
 .section-pricing {
     padding: 120px 0;
-    opacity: 0;
-    transform: translateY(40px);
+    opacity: 1;
+    transform: translateY(0);
     transition: opacity 0.8s var(--spring), transform 0.8s var(--spring);
 }
 
@@ -1305,8 +1310,8 @@ body {
 
 .section-contact {
     padding: 120px 0;
-    opacity: 0;
-    transform: scale(0.95);
+    opacity: 1;
+    transform: scale(1);
     transition: opacity 0.8s var(--spring), transform 0.8s var(--spring);
 }
 
