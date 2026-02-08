@@ -1,5 +1,5 @@
 /* ===============================================
-   OUTDIALS LANDING PAGE - FINAL STYLES V4 + HOLOGRAM
+   OUTDIALS LANDING PAGE - UPDATED STYLES V5
    =============================================== */
 
 :root {
@@ -634,7 +634,7 @@ body {
 .instant-bridge-visual {
     display: flex;
     align-items: center;
-    gap: 60px;
+    gap: 40px;
 }
 
 .iphone-mockup {
@@ -645,6 +645,17 @@ body {
     padding: 14px;
     box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6);
     position: relative;
+}
+
+.iphone-mockup.vibrating {
+    animation: vibrate 0.3s ease-in-out infinite;
+}
+
+@keyframes vibrate {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(-2px, -2px); }
+    50% { transform: translate(2px, 2px); }
+    75% { transform: translate(-2px, 2px); }
 }
 
 .iphone-notch {
@@ -694,19 +705,29 @@ body {
     gap: 8px;
 }
 
+.status-icons svg {
+    color: var(--text-primary);
+}
+
 .phone-caller-section {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 16px;
 }
 
 .caller-label {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     color: var(--text-primary);
+}
+
+.caller-number {
+    font-size: 16px;
+    color: var(--text-secondary);
+    font-family: 'Courier New', monospace;
 }
 
 .transfer-text {
@@ -719,7 +740,13 @@ body {
 }
 
 .phone-icon {
-    font-size: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.phone-icon svg {
+    color: var(--text-primary);
 }
 
 .phone-action-buttons {
@@ -772,39 +799,53 @@ body {
     }
 }
 
+.accept-btn.pressed {
+    background: var(--accent-green);
+    transform: scale(0.9);
+}
+
 /* Bridge Connection */
 .bridge-connection {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 16px;
+    opacity: 0;
+    transition: opacity 0.4s var(--spring);
+}
+
+.bridge-connection.visible {
+    opacity: 1;
+}
+
+.bridge-arrow {
+    font-size: 48px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.6);
 }
 
 .latency-badge {
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    padding: 8px 20px;
-    border-radius: 20px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     color: var(--accent-white);
+    padding: 4px 0;
 }
 
 /* ===============================================
-   AMD - 3D FILTER WITH SEQUENTIAL BALLS
+   AMD - SIMPLIFIED ROUND FILTER
    =============================================== */
 
 .amd-visual-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 70px;
+    gap: 60px;
 }
 
 .amd-filter-3d {
     position: relative;
-    width: 400px;
-    height: 400px;
+    width: 300px;
+    height: 350px;
 }
 
 .filter-svg-3d {
@@ -929,7 +970,7 @@ body {
 }
 
 /* ===============================================
-   TCPA - PULSING US TIMEZONE MAP
+   TCPA - US TIMEZONE MAP
    =============================================== */
 
 .tcpa-map-container {
@@ -945,7 +986,7 @@ body {
 
 .timezone-zone {
     transition: all 0.3s var(--spring);
-    animation: zonePulse 3s ease-in-out infinite;
+    animation: zonePulseSubtle 4s ease-in-out infinite;
 }
 
 .timezone-zone.alaska {
@@ -953,32 +994,31 @@ body {
 }
 
 .timezone-zone.pacific {
-    animation-delay: 0.3s;
+    animation-delay: 0.5s;
 }
 
 .timezone-zone.mountain {
-    animation-delay: 0.6s;
+    animation-delay: 1s;
 }
 
 .timezone-zone.central {
-    animation-delay: 0.9s;
-}
-
-.timezone-zone.eastern {
-    animation-delay: 1.2s;
-}
-
-.timezone-zone.hawaii {
     animation-delay: 1.5s;
 }
 
-@keyframes zonePulse {
+.timezone-zone.eastern {
+    animation-delay: 2s;
+}
+
+.timezone-zone.hawaii {
+    animation-delay: 2.5s;
+}
+
+@keyframes zonePulseSubtle {
     0%, 100% {
-        opacity: 0.6;
+        opacity: 0.5;
     }
     50% {
-        opacity: 1;
-        filter: brightness(1.2);
+        opacity: 0.7;
     }
 }
 
@@ -986,20 +1026,20 @@ body {
     position: absolute;
     bottom: 30px;
     right: 30px;
-    background: rgba(16, 185, 129, 0.15);
-    border: 2px solid var(--accent-green);
-    padding: 14px 28px;
-    border-radius: 28px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 15px;
+    color: var(--accent-green);
+}
+
+.compliance-badge svg {
     color: var(--accent-green);
 }
 
 /* ===============================================
-   NUMBER ROTATION - VISIBLE TABLE
+   NUMBER ROTATION - NO GRIDLINES
    =============================================== */
 
 .number-rotation-table {
@@ -1009,7 +1049,6 @@ body {
 
 .number-table-wrapper {
     background: rgba(255, 255, 255, 0.02);
-    border: 1px solid var(--border-subtle);
     border-radius: 12px;
     overflow: hidden;
 }
@@ -1020,7 +1059,6 @@ body {
     gap: 16px;
     padding: 18px 28px;
     background: rgba(255, 255, 255, 0.05);
-    border-bottom: 2px solid var(--border-subtle);
 }
 
 .header-col {
@@ -1032,7 +1070,7 @@ body {
 }
 
 .number-data-rows {
-    /* No max-height, all rows visible */
+    /* No borders between rows */
 }
 
 .number-data-row {
@@ -1040,12 +1078,7 @@ body {
     grid-template-columns: 2fr 1.2fr 1.4fr 1.2fr;
     gap: 16px;
     padding: 16px 28px;
-    border-bottom: 1px solid var(--border-subtle);
     transition: background 0.2s var(--spring);
-}
-
-.number-data-row:last-child {
-    border-bottom: none;
 }
 
 .number-data-row:hover {
@@ -1096,17 +1129,15 @@ body {
 }
 
 .status-tag.pulsing {
-    animation: statusPulse 2s ease-in-out infinite;
+    animation: statusPulseSubtle 2.5s ease-in-out infinite;
 }
 
-@keyframes statusPulse {
+@keyframes statusPulseSubtle {
     0%, 100% {
         opacity: 1;
-        transform: scale(1);
     }
     50% {
-        opacity: 0.7;
-        transform: scale(1.05);
+        opacity: 0.6;
     }
 }
 
@@ -1454,43 +1485,8 @@ body {
         font-size: 13px;
     }
 
-    /* Hologram Mobile */
-    .hologram-container {
+    .lottie-container {
         height: 350px;
         max-width: 100%;
-    }
-    
-    .projector-base {
-        width: 150px;
-        height: 45px;
-    }
-    
-    .hologram-beam {
-        border-left: 100px solid transparent;
-        border-right: 100px solid transparent;
-        border-bottom: 240px solid rgba(0, 212, 255, 0.15);
-    }
-    
-    .hologram-logo {
-        width: 90px;
-        height: 90px;
-        bottom: 150px;
-    }
-    
-    @keyframes scanUp {
-        0% {
-            bottom: 0;
-            opacity: 0;
-        }
-        10% {
-            opacity: 0.8;
-        }
-        90% {
-            opacity: 0.8;
-        }
-        100% {
-            bottom: 240px;
-            opacity: 0;
-        }
     }
 }
