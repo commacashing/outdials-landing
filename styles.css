@@ -579,11 +579,6 @@ body {
     padding: 80px 24px;
 }
 
-.feature-panel:first-child {
-    opacity: 1;
-    pointer-events: all;
-}
-
 .feature-panel.active {
     opacity: 1;
     pointer-events: all;
