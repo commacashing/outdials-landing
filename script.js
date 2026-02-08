@@ -289,7 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Determine target position based on type
             let targetX = '50%'; // default center
-            let targetY = 300;
+            let targetY = 380; // Deeper into the jar
             
             // Calculate jar positions
             if (type === 'busy') {
@@ -403,15 +403,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const amdObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
+                // Only run animation if AMD panel is actually active
+                const isAMDActive = amdPanel.classList.contains('active');
+                
+                if (entry.isIntersecting && isAMDActive) {
                     runAMDAnimation();
-                } else {
+                } else if (!entry.isIntersecting || !isAMDActive) {
                     resetAMD();
                 }
             });
         }, { threshold: 0.5 });
 
         amdObserver.observe(amdPanel);
+        
+        // Also listen for panel becoming active
+        amdPanel.addEventListener('amdPanelActive', () => {
+            if (amdPanel.classList.contains('active')) {
+                runAMDAnimation();
+            }
+        });
     }
 
     // ===============================================
@@ -444,6 +454,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         currentPanelIndex = index;
+        
+        // Trigger AMD animation when its panel becomes active
+        const amdPanel = document.querySelector('[data-feature="premium-amd"]');
+        if (amdPanel && featurePanels[index] === amdPanel && amdPanel.classList.contains('active')) {
+            // Small delay to ensure panel is visible
+            setTimeout(() => {
+                const event = new CustomEvent('amdPanelActive');
+                amdPanel.dispatchEvent(event);
+            }, 100);
+        }
     };
 
     const handleFeatureScroll = (e) => {
