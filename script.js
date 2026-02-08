@@ -159,15 +159,14 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const instantBridgePanel = document.querySelector('[data-feature="instant-bridge"]');
     let phoneAnimationPlayed = false;
-    let phoneAnimationTimeout = null;
+    let phoneTimeouts = [];
 
     const resetPhoneAnimation = () => {
         if (!instantBridgePanel) return;
         
-        // Clear any running timeouts
-        if (phoneAnimationTimeout) {
-            clearTimeout(phoneAnimationTimeout);
-        }
+        // Clear all timeouts
+        phoneTimeouts.forEach(t => clearTimeout(t));
+        phoneTimeouts = [];
         
         const phoneIncoming = instantBridgePanel.querySelector('.phone-incoming');
         const phoneConnected = instantBridgePanel.querySelector('.phone-connected');
@@ -176,7 +175,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const transferText = instantBridgePanel.querySelector('.transfer-text');
         const connectedText = instantBridgePanel.querySelector('.connected-text');
 
-        // Reset all states
         phoneIncoming.classList.remove('vibrating');
         phoneConnected.classList.remove('vibrating');
         acceptBtn.classList.remove('flashing', 'pressed');
@@ -198,7 +196,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const transferText = instantBridgePanel.querySelector('.transfer-text');
         const connectedText = instantBridgePanel.querySelector('.connected-text');
 
-        // Reset state first
         phoneIncoming.classList.remove('vibrating');
         phoneConnected.classList.remove('vibrating');
         acceptBtn.classList.remove('flashing', 'pressed');
@@ -206,49 +203,41 @@ document.addEventListener('DOMContentLoaded', () => {
         transferText.style.display = 'block';
         connectedText.style.display = 'none';
 
-        // Step 1: Left phone vibrates (shake 1s, pause 1s, shake 1s)
-        phoneAnimationTimeout = setTimeout(() => {
+        phoneTimeouts.push(setTimeout(() => {
             phoneIncoming.classList.add('vibrating');
             acceptBtn.classList.add('flashing');
-        }, 500);
+        }, 500));
 
-        // Pause after first shake
-        phoneAnimationTimeout = setTimeout(() => {
+        phoneTimeouts.push(setTimeout(() => {
             phoneIncoming.classList.remove('vibrating');
-        }, 1500);
+        }, 1500));
 
-        // Resume vibration
-        phoneAnimationTimeout = setTimeout(() => {
+        phoneTimeouts.push(setTimeout(() => {
             phoneIncoming.classList.add('vibrating');
-        }, 2500);
+        }, 2500));
 
-        // Step 2: Button pressed
-        phoneAnimationTimeout = setTimeout(() => {
+        phoneTimeouts.push(setTimeout(() => {
             phoneIncoming.classList.remove('vibrating');
             acceptBtn.classList.remove('flashing');
             acceptBtn.classList.add('pressed');
-        }, 3500);
+        }, 3500));
 
-        // Step 3: Show arrow
-        phoneAnimationTimeout = setTimeout(() => {
+        phoneTimeouts.push(setTimeout(() => {
             arrow.classList.add('visible');
-        }, 4000);
+        }, 4000));
 
-        // Step 4: Right phone vibrates
-        phoneAnimationTimeout = setTimeout(() => {
+        phoneTimeouts.push(setTimeout(() => {
             phoneConnected.classList.add('vibrating');
-        }, 4500);
+        }, 4500));
 
-        // Step 5: Stop vibration, show "Transferring..."
-        phoneAnimationTimeout = setTimeout(() => {
+        phoneTimeouts.push(setTimeout(() => {
             phoneConnected.classList.remove('vibrating');
-        }, 5500);
+        }, 5500));
 
-        // Step 6: Change to "OutDials" (connected)
-        phoneAnimationTimeout = setTimeout(() => {
+        phoneTimeouts.push(setTimeout(() => {
             transferText.style.display = 'none';
             connectedText.style.display = 'block';
-        }, 6500);
+        }, 6500));
     };
 
     const phoneObserver = new IntersectionObserver((entries) => {
@@ -256,7 +245,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (entry.isIntersecting) {
                 runPhoneAnimation();
             } else {
-                // Reset when scrolled away so it plays again
                 resetPhoneAnimation();
             }
         });
@@ -290,9 +278,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let voicemailTotal = 0;
         let humanTotal = 0;
         let amdAnimationPlayed = false;
-        let animationTimeout = null;
+        let animationTimeouts = [];
 
-        // Adjusted counts for 11 balls: 7 busy, 3 voicemail, 1 human
         const maxBusy = 7;
         const maxVoicemail = 3;
         const maxHuman = 1;
@@ -300,17 +287,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const dropBall = (ball, index) => {
             const type = ball.getAttribute('data-type');
             
-            // Simple fixed positions for each jar type
-            let targetY;
-            if (type === 'busy') {
-                targetY = 300; // Adjust based on visual
-            } else if (type === 'voicemail') {
-                targetY = 300;
-            } else {
-                targetY = 300;
-            }
+            let targetY = 300;
             
-            // Create unique animation
             const keyframes = `
                 @keyframes ballDrop${index} {
                     0% {
@@ -337,16 +315,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             `;
             
-            // Inject keyframes
             const styleSheet = document.createElement('style');
             styleSheet.id = `ballDropStyle${index}`;
             styleSheet.textContent = keyframes;
             document.head.appendChild(styleSheet);
             
-            // Apply animation
             ball.style.animation = `ballDrop${index} 2s ease-in`;
             
-            // Update jar counts when ball reaches jar
             setTimeout(() => {
                 if (type === 'busy' && busyTotal < maxBusy) {
                     busyTotal++;
@@ -363,7 +338,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }, 1000);
             
-            // Reset ball and remove style after animation
             setTimeout(() => {
                 ball.style.animation = '';
                 const oldStyle = document.getElementById(`ballDropStyle${index}`);
@@ -372,12 +346,9 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         const resetAMD = () => {
-            // Clear any running animation
-            if (animationTimeout) {
-                clearTimeout(animationTimeout);
-            }
+            animationTimeouts.forEach(t => clearTimeout(t));
+            animationTimeouts = [];
             
-            // Reset all counters
             busyTotal = 0;
             voicemailTotal = 0;
             humanTotal = 0;
@@ -388,7 +359,6 @@ document.addEventListener('DOMContentLoaded', () => {
             voicemailLiquid.style.height = '0%';
             humanLiquid.style.height = '0%';
             
-            // Clear all ball animations
             balls.forEach((ball, index) => {
                 ball.style.animation = '';
                 const oldStyle = document.getElementById(`ballDropStyle${index}`);
@@ -402,14 +372,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (amdAnimationPlayed) return;
             amdAnimationPlayed = true;
 
-            // Reset first
-            resetAMD();
-
-            // Drop balls sequentially
             balls.forEach((ball, index) => {
-                animationTimeout = setTimeout(() => {
+                const timeout = setTimeout(() => {
                     dropBall(ball, index);
                 }, index * 300);
+                animationTimeouts.push(timeout);
             });
         };
 
@@ -418,7 +385,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (entry.isIntersecting) {
                     runAMDAnimation();
                 } else {
-                    // Reset when scrolled away so it plays again
                     resetAMD();
                 }
             });
@@ -463,17 +429,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!featuresSection) return;
 
         const now = Date.now();
-        if (now - lastScrollTime < 100) return; // Increased debounce
+        if (now - lastScrollTime < 100) return;
         lastScrollTime = now;
 
         const sectionRect = featuresSection.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
         const navHeight = document.querySelector('.nav')?.offsetHeight || 0;
 
-        // Check if we're in the section
         const isInSection = sectionRect.top <= navHeight && sectionRect.bottom >= viewportHeight;
         
-        // Check if we're at section boundaries
         const atTop = sectionRect.top >= navHeight && currentPanelIndex === 0;
         const atBottom = sectionRect.bottom <= viewportHeight && currentPanelIndex === featurePanels.length - 1;
 
@@ -489,7 +453,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 setTimeout(() => {
                     isScrollLocked = false;
-                }, 800); // Increased lock time for smoother transition
+                }, 800);
             } else if (delta < 0 && currentPanelIndex > 0) {
                 e.preventDefault();
                 isScrollLocked = true;
