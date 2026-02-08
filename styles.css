@@ -739,6 +739,12 @@ body {
     font-family: 'Courier New', monospace;
 }
 
+.caller-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
 .transfer-text {
     color: var(--text-secondary);
     font-size: 18px;
