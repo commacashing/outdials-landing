@@ -287,12 +287,25 @@ document.addEventListener('DOMContentLoaded', () => {
         const dropBall = (ball, index) => {
             const type = ball.getAttribute('data-type');
             
+            // Determine target position based on type
+            let targetX = '50%'; // default center
             let targetY = 300;
+            
+            // Calculate jar positions
+            if (type === 'busy') {
+                targetX = 'calc(50% - 170px)'; // Left jar
+            } else if (type === 'voicemail') {
+                targetX = '50%'; // Middle jar
+            } else if (type === 'human') {
+                targetX = 'calc(50% + 170px)'; // Right jar
+            }
             
             const keyframes = `
                 @keyframes ballDrop${index} {
                     0% {
                         top: 40px;
+                        left: 50%;
+                        transform: translateX(-50%);
                         opacity: 0;
                     }
                     10% {
@@ -300,16 +313,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                     50% {
                         top: 160px;
+                        left: 50%;
+                        transform: translateX(-50%);
                     }
                     75% {
                         top: ${targetY}px;
+                        left: ${targetX};
+                        transform: translateX(-50%);
                     }
                     85% {
                         top: ${targetY}px;
+                        left: ${targetX};
+                        transform: translateX(-50%);
                         opacity: 1;
                     }
                     100% {
                         top: ${targetY}px;
+                        left: ${targetX};
+                        transform: translateX(-50%);
                         opacity: 0;
                     }
                 }
