@@ -364,84 +364,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===============================================
-    // COMPARISON ANIMATION (for Features Section)
-    // ===============================================
-    
-    let comparisonInterval;
-    let isComparisonPlaying = false;
-
-    const startComparisonAnimation = () => {
-        if (isComparisonPlaying) return;
-        isComparisonPlaying = true;
-
-        const manualSteps = document.querySelectorAll('[data-feature="conversations"] .dialing-column:first-child .dial-step');
-        const outdialsSteps = document.querySelectorAll('[data-feature="conversations"] .dialing-column:last-child .dial-step');
-        
-        const playComparisonSequence = () => {
-            // Reset all
-            manualSteps.forEach(step => step.classList.remove('active'));
-            outdialsSteps.forEach(step => step.classList.remove('active'));
-
-            // Manual Dialing sequence (6 steps, 5 seconds each)
-            setTimeout(() => manualSteps[0]?.classList.add('active'), 500);
-            setTimeout(() => {
-                manualSteps[0]?.classList.remove('active');
-                manualSteps[1]?.classList.add('active');
-            }, 5500);
-            setTimeout(() => {
-                manualSteps[1]?.classList.remove('active');
-                manualSteps[2]?.classList.add('active');
-            }, 10500);
-            setTimeout(() => {
-                manualSteps[2]?.classList.remove('active');
-                manualSteps[3]?.classList.add('active');
-            }, 15500);
-            setTimeout(() => {
-                manualSteps[3]?.classList.remove('active');
-                manualSteps[4]?.classList.add('active');
-            }, 20500);
-            setTimeout(() => {
-                manualSteps[4]?.classList.remove('active');
-                manualSteps[5]?.classList.add('active');
-            }, 25500);
-            setTimeout(() => {
-                manualSteps[5]?.classList.remove('active');
-            }, 30500);
-
-            // OutDials sequence - all 3 calls at once, then connect
-            setTimeout(() => {
-                outdialsSteps[0]?.classList.add('active');
-                outdialsSteps[1]?.classList.add('active');
-                outdialsSteps[2]?.classList.add('active');
-            }, 500);
-            setTimeout(() => {
-                outdialsSteps[0]?.classList.remove('active');
-                outdialsSteps[1]?.classList.remove('active');
-                outdialsSteps[2]?.classList.remove('active');
-                outdialsSteps[3]?.classList.add('active'); // Connect
-            }, 5500);
-            setTimeout(() => {
-                outdialsSteps[3]?.classList.remove('active');
-            }, 30500);
-        };
-
-        playComparisonSequence();
-        comparisonInterval = setInterval(playComparisonSequence, 32000);
-    };
-
-    const stopComparisonAnimation = () => {
-        if (!isComparisonPlaying) return;
-        isComparisonPlaying = false;
-
-        if (comparisonInterval) {
-            clearInterval(comparisonInterval);
-        }
-
-        const allSteps = document.querySelectorAll('.dial-step');
-        allSteps.forEach(step => step.classList.remove('active'));
-    };
-
-    // ===============================================
     // SCROLLJACKING - FEATURES (FIXED)
     // ===============================================
     
@@ -479,16 +401,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const event = new CustomEvent('amdPanelActive');
                 amdPanel.dispatchEvent(event);
             }, 100);
-        }
-        
-        // Trigger Conversations animation when its panel becomes active
-        const conversationsPanel = document.querySelector('[data-feature="conversations"]');
-        if (conversationsPanel && featurePanels[index] === conversationsPanel && conversationsPanel.classList.contains('active')) {
-            setTimeout(() => {
-                startComparisonAnimation();
-            }, 100);
-        } else {
-            stopComparisonAnimation();
         }
     };
 
@@ -716,6 +628,34 @@ document.addEventListener('DOMContentLoaded', () => {
             window.addEventListener('load', initLottie);
         }
     }
+
+    // ===============================================
+    // FAQ ACCORDION
+    // ===============================================
+    
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        
+        question.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+            
+            // Close all other items (single accordion mode)
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('active');
+                }
+            });
+            
+            // Toggle current item
+            if (isActive) {
+                item.classList.remove('active');
+            } else {
+                item.classList.add('active');
+            }
+        });
+    });
 
     // ===============================================
     // CONSOLE LOG
