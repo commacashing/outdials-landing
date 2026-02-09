@@ -40,38 +40,46 @@
         <div class="hero-container">
             <div class="hero-content">
                 <h1 class="hero-title glow-text">
-                    Dial more<br>
-                    people, faster
+                    The 5-Second<br>
+                    Head Start
                 </h1>
                 <p class="hero-subtitle">
-                    OutDials turns 100 calls into 300 opportunities. Built for high-velocity sales teams who need more conversations, not more headcount.
+                    Your reps waste 70% of their day on dial tones and voicemails. OutDials turns 100 calls into 300 conversations by launching 3 at once and connecting you instantly.
                 </p>
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <div class="stat-display glow-text">
-                            <span class="stat-value" data-target="3">0</span>
-                            <span class="stat-suffix">x</span>
+                <div class="hero-comparison">
+                    <h3 class="comparison-title">3x More Conversations</h3>
+                    <p class="comparison-subtitle">Manual dialing: 1 call → wait → voicemail → repeat. OutDials: 3 calls → instant connect → next batch. Same reps. Same hours. 3x the talk time.</p>
+                    
+                    <div class="dialing-comparison">
+                        <div class="dialing-column">
+                            <div class="column-header">Manual Dialing</div>
+                            <div class="dial-step" data-step="1">Call 1: Ring...</div>
+                            <div class="dial-step" data-step="2">⏱️ 15s wait</div>
+                            <div class="dial-step" data-step="3">Call 2: Voicemail</div>
+                            <div class="dial-step" data-step="4">⏱️ 45s listen</div>
+                            <div class="dial-step" data-step="5">Call 3: Ring...</div>
+                            <div class="dial-step" data-step="6">❌ No answer</div>
+                            <div class="dial-total"><strong>⏱️ 2 min, 15 sec</strong></div>
+                            <div class="dial-result">15% Talk Time</div>
                         </div>
-                        <div class="stat-label">More Dials</div>
-                    </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat-item">
-                        <div class="stat-display glow-text">
-                            <span class="stat-value" data-target="60">0</span>
-                            <span class="stat-suffix">%</span>
+                        
+                        <div class="dialing-column">
+                            <div class="column-header">OutDials</div>
+                            <div class="dial-step" data-step="1">Call 1: Ring...</div>
+                            <div class="dial-step" data-step="1">Call 2: Ring...</div>
+                            <div class="dial-step" data-step="1">Call 3: Ring...</div>
+                            <div class="dial-step connect-step" data-step="2">⚡ CONNECT</div>
+                            <div class="dial-total"><strong>⏱️ 15 seconds total</strong></div>
+                            <div class="dial-result">60% Talk Time</div>
                         </div>
-                        <div class="stat-label">Talk Time</div>
-                    </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat-item">
-                        <div class="stat-display glow-text">
-                            <span class="stat-value" data-target="0">0</span>
-                            <span class="stat-suffix">ms</span>
-                        </div>
-                        <div class="stat-label">Latency</div>
                     </div>
                 </div>
                 <a href="#contact" class="btn-primary glow-button">Book a Demo</a>
+                <div class="trust-badges">
+                    <span>✓ 100% TCPA Compliant</span>
+                    <span>✓ SOC 2 Type II</span>
+                    <span>✓ Native Salesforce Integration</span>
+                </div>
                 <p class="hero-subtext">7-day deployment • Native CRM • $3,600/seat</p>
             </div>
         </div>
@@ -330,8 +338,8 @@
                                         </linearGradient>
                                     </defs>
                                     
-                                    <!-- Single unified funnel shape -->
-                                    <path d="M 50,40 L 250,40 L 180,160 L 180,300 L 120,300 L 120,160 Z" 
+                                    <!-- Single unified funnel shape with rounded corners -->
+                                    <path d="M 60,40 Q 50,40 50,50 L 50,55 L 115,160 Q 115,165 115,170 L 115,290 Q 115,300 125,300 L 175,300 Q 185,300 185,290 L 185,170 Q 185,165 185,160 L 250,55 L 250,50 Q 250,40 240,40 Z" 
                                           fill="url(#filterGrad)" 
                                           stroke="rgba(255,255,255,0.4)" 
                                           stroke-width="3"/>
@@ -402,64 +410,7 @@
                     </div>
                     <div class="feature-panel-right">
                         <div class="tcpa-map-container">
-                            <svg class="us-timezone-map" viewBox="0 0 960 600" preserveAspectRatio="xMidYMid meet">
-                                <!-- Alaska (top left) -->
-                                <path class="timezone-zone alaska" 
-                                      d="M 80,80 L 120,65 L 160,70 L 180,90 L 175,120 L 150,140 L 110,145 L 85,130 L 75,105 Z" 
-                                      fill="rgba(147, 112, 219, 0.3)" 
-                                      stroke="rgba(147, 112, 219, 0.6)" 
-                                      stroke-width="2"/>
-                                <text x="125" y="110" fill="white" font-size="11" font-weight="600" text-anchor="middle">Alaska</text>
-                                
-                                <!-- Pacific (west coast - taller, narrower) -->
-                                <path class="timezone-zone pacific" 
-                                      d="M 120,200 L 140,190 L 160,195 L 180,210 L 195,240 L 200,280 L 205,320 L 200,360 L 190,400 L 175,430 L 155,445 L 130,450 L 115,440 L 105,410 L 100,370 L 95,330 L 100,290 L 105,250 L 110,220 Z" 
-                                      fill="rgba(255, 140, 0, 0.3)" 
-                                      stroke="rgba(255, 140, 0, 0.6)" 
-                                      stroke-width="2"/>
-                                <text x="150" y="325" fill="white" font-size="13" font-weight="600" text-anchor="middle">Pacific</text>
-                                
-                                <!-- Mountain (mountains region) -->
-                                <path class="timezone-zone mountain" 
-                                      d="M 195,220 L 280,200 L 320,205 L 350,215 L 370,240 L 380,270 L 385,310 L 380,350 L 365,390 L 340,420 L 310,440 L 280,448 L 250,450 L 220,445 L 200,430 L 195,400 L 200,360 L 205,320 L 200,280 L 195,240 Z" 
-                                      fill="rgba(50, 205, 50, 0.3)" 
-                                      stroke="rgba(50, 205, 50, 0.6)" 
-                                      stroke-width="2"/>
-                                <text x="290" y="325" fill="white" font-size="13" font-weight="600" text-anchor="middle">Mountain</text>
-                                
-                                <!-- Central (large central region) -->
-                                <path class="timezone-zone central" 
-                                      d="M 370,215 L 480,200 L 560,195 L 620,200 L 650,210 L 670,230 L 685,260 L 695,295 L 700,330 L 695,365 L 680,400 L 660,425 L 630,445 L 590,455 L 540,458 L 490,455 L 450,448 L 410,438 L 380,420 L 365,390 L 370,350 L 375,310 L 375,270 L 370,240 Z" 
-                                      fill="rgba(30, 144, 255, 0.3)" 
-                                      stroke="rgba(30, 144, 255, 0.6)" 
-                                      stroke-width="2"/>
-                                <text x="530" y="330" fill="white" font-size="13" font-weight="600" text-anchor="middle">Central</text>
-                                
-                                <!-- Eastern (east coast with florida bump) -->
-                                <path class="timezone-zone eastern" 
-                                      d="M 650,210 L 740,200 L 810,205 L 860,220 L 890,245 L 905,280 L 910,320 L 905,360 L 890,395 L 860,425 L 820,445 L 780,455 L 740,460 L 700,458 L 660,450 L 630,445 L 660,425 L 680,400 L 695,365 L 700,330 L 695,295 L 685,260 L 670,230 Z" 
-                                      fill="rgba(255, 215, 0, 0.3)" 
-                                      stroke="rgba(255, 215, 0, 0.6)" 
-                                      stroke-width="2"/>
-                                <text x="780" y="330" fill="white" font-size="13" font-weight="600" text-anchor="middle">Eastern</text>
-                                
-                                <!-- Hawaii (bottom left islands) -->
-                                <g class="timezone-zone hawaii">
-                                    <ellipse cx="100" cy="510" rx="18" ry="10" 
-                                             fill="rgba(255, 105, 180, 0.3)" 
-                                             stroke="rgba(255, 105, 180, 0.6)" 
-                                             stroke-width="2"/>
-                                    <ellipse cx="130" cy="515" rx="22" ry="12" 
-                                             fill="rgba(255, 105, 180, 0.3)" 
-                                             stroke="rgba(255, 105, 180, 0.6)" 
-                                             stroke-width="2"/>
-                                    <ellipse cx="160" cy="512" rx="15" ry="8" 
-                                             fill="rgba(255, 105, 180, 0.3)" 
-                                             stroke="rgba(255, 105, 180, 0.6)" 
-                                             stroke-width="2"/>
-                                </g>
-                                <text x="130" y="525" fill="white" font-size="10" font-weight="600" text-anchor="middle">Hawaii</text>
-                            </svg>
+                            <img src="timezones_map.png" alt="US Timezone Map" class="timezone-map-image">
                             
                             <div class="compliance-badge">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
@@ -640,6 +591,7 @@
                     <div class="pricing-label">Success Royalty</div>
                     <div class="pricing-royalty glow">1%</div>
                     <div class="pricing-detail">of gross revenue on deals sourced via OutDials</div>
+                    <div class="pricing-partner">We only win when you close deals. Not a vendor—a partner.</div>
                 </div>
             </div>
         </div>
