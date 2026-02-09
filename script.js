@@ -4,99 +4,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     // ===============================================
-    // HERO COMPARISON ANIMATION
-    // ===============================================
-    
-    const comparisonSection = document.querySelector('.hero-comparison');
-    let comparisonInterval;
-    let isComparisonPlaying = false;
-
-    const startComparisonAnimation = () => {
-        if (isComparisonPlaying) return;
-        isComparisonPlaying = true;
-
-        const manualSteps = document.querySelectorAll('.dialing-column:first-child .dial-step');
-        const outdialsSteps = document.querySelectorAll('.dialing-column:last-child .dial-step');
-        
-        const playComparisonSequence = () => {
-            // Reset all
-            manualSteps.forEach(step => step.classList.remove('active'));
-            outdialsSteps.forEach(step => step.classList.remove('active'));
-
-            // Manual Dialing sequence (6 steps, 5 seconds each)
-            setTimeout(() => manualSteps[0]?.classList.add('active'), 500);
-            setTimeout(() => {
-                manualSteps[0]?.classList.remove('active');
-                manualSteps[1]?.classList.add('active');
-            }, 5500);
-            setTimeout(() => {
-                manualSteps[1]?.classList.remove('active');
-                manualSteps[2]?.classList.add('active');
-            }, 10500);
-            setTimeout(() => {
-                manualSteps[2]?.classList.remove('active');
-                manualSteps[3]?.classList.add('active');
-            }, 15500);
-            setTimeout(() => {
-                manualSteps[3]?.classList.remove('active');
-                manualSteps[4]?.classList.add('active');
-            }, 20500);
-            setTimeout(() => {
-                manualSteps[4]?.classList.remove('active');
-                manualSteps[5]?.classList.add('active');
-            }, 25500);
-            setTimeout(() => {
-                manualSteps[5]?.classList.remove('active');
-            }, 30500);
-
-            // OutDials sequence - all 3 calls at once, then connect
-            setTimeout(() => {
-                outdialsSteps[0]?.classList.add('active');
-                outdialsSteps[1]?.classList.add('active');
-                outdialsSteps[2]?.classList.add('active');
-            }, 500);
-            setTimeout(() => {
-                outdialsSteps[0]?.classList.remove('active');
-                outdialsSteps[1]?.classList.remove('active');
-                outdialsSteps[2]?.classList.remove('active');
-                outdialsSteps[3]?.classList.add('active'); // Connect
-            }, 5500);
-            setTimeout(() => {
-                outdialsSteps[3]?.classList.remove('active');
-            }, 30500);
-        };
-
-        playComparisonSequence();
-        comparisonInterval = setInterval(playComparisonSequence, 32000);
-    };
-
-    const stopComparisonAnimation = () => {
-        if (!isComparisonPlaying) return;
-        isComparisonPlaying = false;
-
-        if (comparisonInterval) {
-            clearInterval(comparisonInterval);
-        }
-
-        const allSteps = document.querySelectorAll('.dial-step');
-        allSteps.forEach(step => step.classList.remove('active'));
-    };
-
-    if (comparisonSection) {
-        const comparisonObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    startComparisonAnimation();
-                } else {
-                    stopComparisonAnimation();
-                }
-            });
-        }, { threshold: 0.5 });
-
-        comparisonObserver.observe(comparisonSection);
-    }
-
-    // ===============================================
     // WORKFLOW INTERACTIONS
     // ===============================================
     
@@ -457,6 +364,84 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===============================================
+    // COMPARISON ANIMATION (for Features Section)
+    // ===============================================
+    
+    let comparisonInterval;
+    let isComparisonPlaying = false;
+
+    const startComparisonAnimation = () => {
+        if (isComparisonPlaying) return;
+        isComparisonPlaying = true;
+
+        const manualSteps = document.querySelectorAll('[data-feature="conversations"] .dialing-column:first-child .dial-step');
+        const outdialsSteps = document.querySelectorAll('[data-feature="conversations"] .dialing-column:last-child .dial-step');
+        
+        const playComparisonSequence = () => {
+            // Reset all
+            manualSteps.forEach(step => step.classList.remove('active'));
+            outdialsSteps.forEach(step => step.classList.remove('active'));
+
+            // Manual Dialing sequence (6 steps, 5 seconds each)
+            setTimeout(() => manualSteps[0]?.classList.add('active'), 500);
+            setTimeout(() => {
+                manualSteps[0]?.classList.remove('active');
+                manualSteps[1]?.classList.add('active');
+            }, 5500);
+            setTimeout(() => {
+                manualSteps[1]?.classList.remove('active');
+                manualSteps[2]?.classList.add('active');
+            }, 10500);
+            setTimeout(() => {
+                manualSteps[2]?.classList.remove('active');
+                manualSteps[3]?.classList.add('active');
+            }, 15500);
+            setTimeout(() => {
+                manualSteps[3]?.classList.remove('active');
+                manualSteps[4]?.classList.add('active');
+            }, 20500);
+            setTimeout(() => {
+                manualSteps[4]?.classList.remove('active');
+                manualSteps[5]?.classList.add('active');
+            }, 25500);
+            setTimeout(() => {
+                manualSteps[5]?.classList.remove('active');
+            }, 30500);
+
+            // OutDials sequence - all 3 calls at once, then connect
+            setTimeout(() => {
+                outdialsSteps[0]?.classList.add('active');
+                outdialsSteps[1]?.classList.add('active');
+                outdialsSteps[2]?.classList.add('active');
+            }, 500);
+            setTimeout(() => {
+                outdialsSteps[0]?.classList.remove('active');
+                outdialsSteps[1]?.classList.remove('active');
+                outdialsSteps[2]?.classList.remove('active');
+                outdialsSteps[3]?.classList.add('active'); // Connect
+            }, 5500);
+            setTimeout(() => {
+                outdialsSteps[3]?.classList.remove('active');
+            }, 30500);
+        };
+
+        playComparisonSequence();
+        comparisonInterval = setInterval(playComparisonSequence, 32000);
+    };
+
+    const stopComparisonAnimation = () => {
+        if (!isComparisonPlaying) return;
+        isComparisonPlaying = false;
+
+        if (comparisonInterval) {
+            clearInterval(comparisonInterval);
+        }
+
+        const allSteps = document.querySelectorAll('.dial-step');
+        allSteps.forEach(step => step.classList.remove('active'));
+    };
+
+    // ===============================================
     // SCROLLJACKING - FEATURES (FIXED)
     // ===============================================
     
@@ -490,11 +475,20 @@ document.addEventListener('DOMContentLoaded', () => {
         // Trigger AMD animation when its panel becomes active
         const amdPanel = document.querySelector('[data-feature="premium-amd"]');
         if (amdPanel && featurePanels[index] === amdPanel && amdPanel.classList.contains('active')) {
-            // Small delay to ensure panel is visible
             setTimeout(() => {
                 const event = new CustomEvent('amdPanelActive');
                 amdPanel.dispatchEvent(event);
             }, 100);
+        }
+        
+        // Trigger Conversations animation when its panel becomes active
+        const conversationsPanel = document.querySelector('[data-feature="conversations"]');
+        if (conversationsPanel && featurePanels[index] === conversationsPanel && conversationsPanel.classList.contains('active')) {
+            setTimeout(() => {
+                startComparisonAnimation();
+            }, 100);
+        } else {
+            stopComparisonAnimation();
         }
     };
 
