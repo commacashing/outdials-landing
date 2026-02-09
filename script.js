@@ -4,64 +4,96 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     // ===============================================
-    // HERO STATS - BIDIRECTIONAL COUNTING
+    // HERO COMPARISON ANIMATION
     // ===============================================
     
-    let isCountingUp = false;
-    let isCountingDown = false;
+    const comparisonSection = document.querySelector('.hero-comparison');
+    let comparisonInterval;
+    let isComparisonPlaying = false;
 
-    const countStats = (direction) => {
-        const statValues = document.querySelectorAll('.stat-value');
+    const startComparisonAnimation = () => {
+        if (isComparisonPlaying) return;
+        isComparisonPlaying = true;
+
+        const manualSteps = document.querySelectorAll('.dialing-column:first-child .dial-step');
+        const outdialsSteps = document.querySelectorAll('.dialing-column:last-child .dial-step');
         
-        statValues.forEach((stat, index) => {
-            const target = parseInt(stat.getAttribute('data-target'));
-            const duration = 1500;
-            const startTime = Date.now();
-            
-            const animate = () => {
-                const elapsed = Date.now() - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                const easeOut = 1 - Math.pow(1 - progress, 3);
-                
-                let current;
-                if (direction === 'up') {
-                    current = Math.floor(easeOut * target);
-                } else {
-                    current = Math.floor((1 - easeOut) * target);
-                }
-                
-                stat.textContent = current;
-                
-                if (progress < 1) {
-                    requestAnimationFrame(animate);
-                } else {
-                    stat.textContent = direction === 'up' ? target : 0;
-                }
-            };
-            
-            setTimeout(() => animate(), index * 200);
-        });
+        const playComparisonSequence = () => {
+            // Reset all
+            manualSteps.forEach(step => step.classList.remove('active'));
+            outdialsSteps.forEach(step => step.classList.remove('active'));
+
+            // Manual Dialing sequence (6 steps, 5 seconds each)
+            setTimeout(() => manualSteps[0]?.classList.add('active'), 500);
+            setTimeout(() => {
+                manualSteps[0]?.classList.remove('active');
+                manualSteps[1]?.classList.add('active');
+            }, 5500);
+            setTimeout(() => {
+                manualSteps[1]?.classList.remove('active');
+                manualSteps[2]?.classList.add('active');
+            }, 10500);
+            setTimeout(() => {
+                manualSteps[2]?.classList.remove('active');
+                manualSteps[3]?.classList.add('active');
+            }, 15500);
+            setTimeout(() => {
+                manualSteps[3]?.classList.remove('active');
+                manualSteps[4]?.classList.add('active');
+            }, 20500);
+            setTimeout(() => {
+                manualSteps[4]?.classList.remove('active');
+                manualSteps[5]?.classList.add('active');
+            }, 25500);
+            setTimeout(() => {
+                manualSteps[5]?.classList.remove('active');
+            }, 30500);
+
+            // OutDials sequence - all 3 calls at once, then connect
+            setTimeout(() => {
+                outdialsSteps[0]?.classList.add('active');
+                outdialsSteps[1]?.classList.add('active');
+                outdialsSteps[2]?.classList.add('active');
+            }, 500);
+            setTimeout(() => {
+                outdialsSteps[0]?.classList.remove('active');
+                outdialsSteps[1]?.classList.remove('active');
+                outdialsSteps[2]?.classList.remove('active');
+                outdialsSteps[3]?.classList.add('active'); // Connect
+            }, 5500);
+            setTimeout(() => {
+                outdialsSteps[3]?.classList.remove('active');
+            }, 30500);
+        };
+
+        playComparisonSequence();
+        comparisonInterval = setInterval(playComparisonSequence, 32000);
     };
 
-    const statsObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !isCountingUp) {
-                isCountingUp = true;
-                isCountingDown = false;
-                entry.target.classList.add('visible');
-                countStats('up');
-            } else if (!entry.isIntersecting && !isCountingDown) {
-                isCountingDown = true;
-                isCountingUp = false;
-                entry.target.classList.remove('visible');
-                countStats('down');
-            }
-        });
-    }, { threshold: 0.3 });
-    
-    const heroStats = document.querySelector('.hero-stats');
-    if (heroStats) {
-        statsObserver.observe(heroStats);
+    const stopComparisonAnimation = () => {
+        if (!isComparisonPlaying) return;
+        isComparisonPlaying = false;
+
+        if (comparisonInterval) {
+            clearInterval(comparisonInterval);
+        }
+
+        const allSteps = document.querySelectorAll('.dial-step');
+        allSteps.forEach(step => step.classList.remove('active'));
+    };
+
+    if (comparisonSection) {
+        const comparisonObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    startComparisonAnimation();
+                } else {
+                    stopComparisonAnimation();
+                }
+            });
+        }, { threshold: 0.5 });
+
+        comparisonObserver.observe(comparisonSection);
     }
 
     // ===============================================
