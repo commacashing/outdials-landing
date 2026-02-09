@@ -148,7 +148,7 @@
                         <div class="workflow-number">2</div>
                         <div class="workflow-label">Start Dialing</div>
                         <div class="workflow-description">
-                            Click "Start Dialing" and OutDials races 3 contacts simultaneously. You see all 3 cards in real-time as they ring.
+                            Click "Start Dialing" and OutDials races 3 contacts with a stagger. You see all 3 cards in real-time as they ring.
                         </div>
                     </div>
 
@@ -379,13 +379,6 @@
                         <div class="tcpa-map-container">
                             <img src="timezones_map.png" alt="US Timezone Map" class="timezone-map-image">
                             
-                            <div class="compliance-badge">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                                    <path d="M20 6L9 17l-5-5"></path>
-                                </svg>
-                                <span>100% TCPA Compliant</span>
-                            </div>
-                            
                             <div class="compliance-badges-row">
                                 <div class="badge-item">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
@@ -403,7 +396,7 @@
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
                                         <path d="M20 6L9 17l-5-5"></path>
                                     </svg>
-                                    <span>Native Salesforce Integration</span>
+                                    <span>Auto DNC Filtering</span>
                                 </div>
                             </div>
                         </div>
@@ -548,57 +541,6 @@
                 </div>
             </div>
 
-            <!-- Feature 6: 3x More Conversations -->
-            <div class="feature-panel" data-feature="conversations">
-                <div class="feature-panel-content">
-                    <div class="feature-panel-left">
-                        <div class="feature-icon-large">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                            </svg>
-                        </div>
-                        <h2>3x More Conversations</h2>
-                        <p class="feature-description">Manual dialing: 1 call → wait → voicemail → repeat. OutDials: 3 calls → instant connect → next batch. Same reps. Same hours. 3x the talk time.</p>
-                    </div>
-                    <div class="feature-panel-right">
-                        <div class="dialing-comparison">
-                            <div class="dialing-column">
-                                <div class="column-header">Manual Dialing</div>
-                                <div class="dial-step" data-step="1">Call 1: Ring...</div>
-                                <div class="dial-step" data-step="2">15s wait</div>
-                                <div class="dial-step" data-step="3">Call 2: Voicemail</div>
-                                <div class="dial-step" data-step="4">45s listen</div>
-                                <div class="dial-step" data-step="5">Call 3: Ring...</div>
-                                <div class="dial-step" data-step="6">
-                                    <svg class="dial-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                                    </svg>
-                                    No answer
-                                </div>
-                                <div class="dial-total"><strong>2 min, 15 sec</strong></div>
-                                <div class="dial-result">15% Talk Time</div>
-                            </div>
-                            
-                            <div class="dialing-column">
-                                <div class="column-header">OutDials</div>
-                                <div class="dial-step" data-step="1">Call 1: Ring...</div>
-                                <div class="dial-step" data-step="1">Call 2: Ring...</div>
-                                <div class="dial-step" data-step="1">Call 3: Ring...</div>
-                                <div class="dial-step connect-step" data-step="2">
-                                    <svg class="dial-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                                    </svg>
-                                    CONNECT
-                                </div>
-                                <div class="dial-total"><strong>15 seconds total</strong></div>
-                                <div class="dial-result">60% Talk Time</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
         
         <!-- Scroll Progress Indicator -->
@@ -608,7 +550,6 @@
             <div class="progress-dot" data-index="2"></div>
             <div class="progress-dot" data-index="3"></div>
             <div class="progress-dot" data-index="4"></div>
-            <div class="progress-dot" data-index="5"></div>
         </div>
     </section>
 
@@ -632,6 +573,67 @@
                     <div class="pricing-royalty glow">1%</div>
                     <div class="pricing-detail">of gross revenue on deals sourced via OutDials</div>
                     <div class="pricing-partner">We only win when you close deals. Not a vendor—a partner.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section-faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How is this different from other dialers?</span>
+                        <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Three things: (1) Zero-lag instant bridge - no "dead air" pause when prospects answer. (2) Race Card gives reps a 5-second heads-up so they're prepared before the call connects. (3) We go live in 7 days, not 30. No heavy CRM packages, just clean OAuth2.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is this TCPA compliant?</span>
+                        <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>100%. Hard-coded consent checks, time-zone enforcement (8 AM - 9 PM local), automatic DNC filtering, and full audit trails. Every call requires human initiation, and reps are instantly bridged - zero abandoned calls. Built specifically for regulated industries like insurance and financial services.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How long does implementation take?</span>
+                        <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>7 days from contract to live dials. Day 1-2: CRM OAuth setup and field mapping. Day 3-4: Testing and AMD calibration. Day 5: Pilot with 2-3 reps. Day 6-7: Full team rollout. Most competitors take 14-30 days.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What if we already have a dialer?</span>
+                        <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>OutDials plugs into your existing CRM instance. Your data stays exactly where it is, your workflows don't change - you just get faster dialing. If you're on a contract with another provider, we can run a 7-day pilot alongside it to prove the lift before you switch.</p>
+                    </div>
                 </div>
             </div>
         </div>
