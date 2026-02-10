@@ -630,6 +630,44 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===============================================
+    // 3D LIQUID METAL CARD PARALLAX
+    // ===============================================
+    
+    const liquidCard = document.getElementById('liquidCard');
+    
+    if (liquidCard) {
+        const cardContainer = liquidCard.parentElement;
+        
+        cardContainer.addEventListener('mousemove', (e) => {
+            const rect = cardContainer.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            const mouseX = e.clientX - centerX;
+            const mouseY = e.clientY - centerY;
+            
+            const rotateX = (mouseY / rect.height) * -10; // ±10 degrees
+            const rotateY = (mouseX / rect.width) * 10;   // ±10 degrees
+            
+            liquidCard.style.transform = `
+                translateY(0px)
+                rotateX(${rotateX}deg)
+                rotateY(${rotateY}deg)
+                scale3d(1.02, 1.02, 1.02)
+            `;
+        });
+        
+        cardContainer.addEventListener('mouseleave', () => {
+            liquidCard.style.transform = `
+                translateY(0px)
+                rotateX(0deg)
+                rotateY(0deg)
+                scale3d(1, 1, 1)
+            `;
+        });
+    }
+
+    // ===============================================
     // FAQ ACCORDION
     // ===============================================
     
