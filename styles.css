@@ -2029,24 +2029,114 @@ body {
     }
 
     /* Mobile: Workflow spacing fix */
+    .workflow-container {
+        padding: 40px 0 60px;
+    }
+
     .workflow-steps {
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto auto;
+        gap: 60px 40px;
         padding: 0 20px;
     }
 
     .workflow-step {
-        flex: 0 0 45%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
-    .workflow-number {
-        margin-bottom: 60px;
+    .workflow-step[data-step="1"],
+    .workflow-step[data-step="2"] {
+        grid-row: 2;
+    }
+
+    .workflow-step[data-step="3"],
+    .workflow-step[data-step="4"] {
+        grid-row: 4;
+    }
+
+    .workflow-step[data-step="1"]::before,
+    .workflow-step[data-step="2"]::before {
+        content: attr(data-label);
+        position: absolute;
+        top: -50px;
+        font-size: 16px;
+        font-weight: 600;
+        white-space: nowrap;
+        color: var(--text-primary);
+    }
+
+    .workflow-step[data-step="1"]::before {
+        content: "Select Filter";
+    }
+
+    .workflow-step[data-step="2"]::before {
+        content: "Start Dialing";
+    }
+
+    .workflow-step[data-step="3"]::after,
+    .workflow-step[data-step="4"]::after {
+        content: attr(data-label);
+        position: absolute;
+        bottom: -50px;
+        font-size: 16px;
+        font-weight: 600;
+        white-space: nowrap;
+        color: var(--text-primary);
+    }
+
+    .workflow-step[data-step="3"]::after {
+        content: "Human Answers";
+    }
+
+    .workflow-step[data-step="4"]::after {
+        content: "Update Info";
+    }
+
+    .workflow-step {
+        position: relative;
     }
 
     .workflow-label {
-        margin-top: 60px;
+        display: none;
+    }
+
+    .workflow-number {
+        margin: 0;
+    }
+
+    .workflow-description {
+        display: none;
     }
 
     /* Mobile: Features - remove right side, keep left only */
+    .section-features-scrolljack {
+        height: auto;
+    }
+
+    .features-scrolljack-container {
+        position: relative;
+        height: auto;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        display: flex;
+    }
+
+    .feature-panel {
+        position: relative;
+        opacity: 1;
+        pointer-events: all;
+        min-width: 100%;
+        height: auto;
+        padding: 60px 24px;
+        scroll-snap-align: start;
+        flex-shrink: 0;
+    }
+
     .feature-panel-content {
         grid-template-columns: 1fr;
         gap: 0;
@@ -2064,6 +2154,10 @@ body {
     .feature-icon-large {
         margin-left: auto;
         margin-right: auto;
+    }
+
+    .scroll-progress {
+        display: none;
     }
 
     /* Mobile: Pricing card - smaller to fit screen */
@@ -2106,15 +2200,15 @@ body {
     }
 
     .royalty-rate {
-        font-size: 28px;
+        font-size: 24px;
     }
 
     .royalty-label {
-        font-size: 10px;
+        font-size: 9px;
     }
 
     .card-royalty {
-        bottom: 40px;
+        bottom: 36px;
         left: 24px;
     }
 
