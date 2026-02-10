@@ -29,7 +29,7 @@
                 <a href="#demo">Product</a>
                 <a href="#features">Features</a>
                 <a href="#pricing">Pricing</a>
-                <a href="#integrations">Integrations</a>
+                <a href="#faq">FAQ</a>
                 <a href="#contact" class="nav-cta">Book Demo</a>
             </div>
         </div>
@@ -559,29 +559,55 @@
             <h2 class="section-title">Transparent Pricing</h2>
             <p class="section-subtitle">We're a 1% stakeholder in your success</p>
             
-            <div class="pricing-simple">
-                <div class="pricing-block">
-                    <div class="pricing-label">Annual License</div>
-                    <div class="pricing-amount glow">$3,600</div>
-                    <div class="pricing-detail">per seat / year</div>
-                </div>
-
-                <div class="pricing-divider"></div>
-
-                <div class="pricing-block">
-                    <div class="pricing-label">Success Royalty</div>
-                    <div class="pricing-royalty glow">1%</div>
-                    <div class="pricing-detail">of gross revenue on deals sourced via OutDials</div>
-                    <div class="pricing-partner">We only win when you close deals. Not a vendor—a partner.</div>
+            <div class="pricing-card-container">
+                <div class="pricing-card" id="liquidCard">
+                    <!-- Card Inner Content -->
+                    <div class="card-shine"></div>
+                    <div class="card-content">
+                        <!-- Top Right Logo -->
+                        <div class="card-logo">
+                            <span class="broken-o">
+                                <svg viewBox="0 0 42 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <mask id="slitMaskCard">
+                                            <rect width="42" height="48" fill="white"/>
+                                            <line x1="25" y1="20" x2="33" y2="8" stroke="black" stroke-width="5" stroke-linecap="round"/>
+                                        </mask>
+                                    </defs>
+                                    <circle cx="21" cy="24" r="18" stroke="currentColor" stroke-width="6" fill="none" mask="url(#slitMaskCard)"/>
+                                </svg>
+                            </span>
+                            <span class="card-logo-text">OutDials</span>
+                        </div>
+                        
+                        <!-- EMV Chip (Middle Left) -->
+                        <div class="emv-chip">
+                            <div class="chip-grid"></div>
+                        </div>
+                        
+                        <!-- Center Price -->
+                        <div class="card-price">
+                            <span class="price-amount">$3,600</span>
+                            <span class="price-period">/ Year</span>
+                        </div>
+                        
+                        <!-- Bottom Left Royalty -->
+                        <div class="card-royalty">
+                            <span class="royalty-rate">1%</span>
+                            <span class="royalty-label">Success Royalty</span>
+                        </div>
+                    </div>
                 </div>
             </div>
+            
+            <p class="pricing-note">7-day deployment • Native CRM • We only win when you close deals</p>
         </div>
     </section>
 
     <!-- FAQ Section -->
     <section id="faq" class="section-faq">
         <div class="container">
-            <h2 class="section-title">Frequently Asked Questions</h2>
+            <h2 class="section-title">FAQ</h2>
             
             <div class="faq-container">
                 <div class="faq-item">
