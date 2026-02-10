@@ -4,6 +4,85 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     // ===============================================
+    // DEMO SECTION - RACE CARD ANIMATION
+    // ===============================================
+    
+    const demoSection = document.querySelector('.section-demo');
+    const raceCards = document.querySelectorAll('.demo-card');
+    
+    let raceCardTimeouts = [];
+    let isRaceCardPlaying = false;
+
+    const startRaceCardAnimation = () => {
+        if (isRaceCardPlaying) return;
+        isRaceCardPlaying = true;
+
+        // Clear any existing timeouts
+        raceCardTimeouts.forEach(timeout => clearTimeout(timeout));
+        raceCardTimeouts = [];
+
+        // Reset all cards to ringing
+        raceCards.forEach(card => {
+            card.classList.remove('connected', 'voicemail');
+            card.classList.add('ringing');
+        });
+
+        const playRaceSequence = () => {
+            // Card 1: Ringing → Connected (wins at 2s)
+            raceCardTimeouts.push(setTimeout(() => {
+                raceCards[0]?.classList.remove('ringing');
+                raceCards[0]?.classList.add('connected');
+            }, 2000));
+
+            // Card 2: Ringing → Voicemail (at 3s)
+            raceCardTimeouts.push(setTimeout(() => {
+                raceCards[1]?.classList.remove('ringing');
+                raceCards[1]?.classList.add('voicemail');
+            }, 3000));
+
+            // Card 3: Stays ringing (never connects)
+
+            // Reset after 6s and restart
+            raceCardTimeouts.push(setTimeout(() => {
+                raceCards.forEach(card => {
+                    card.classList.remove('connected', 'voicemail');
+                    card.classList.add('ringing');
+                });
+                playRaceSequence();
+            }, 6000));
+        };
+
+        playRaceSequence();
+    };
+
+    const stopRaceCardAnimation = () => {
+        if (!isRaceCardPlaying) return;
+        isRaceCardPlaying = false;
+
+        raceCardTimeouts.forEach(timeout => clearTimeout(timeout));
+        raceCardTimeouts = [];
+
+        raceCards.forEach(card => {
+            card.classList.remove('connected', 'voicemail');
+            card.classList.add('ringing');
+        });
+    };
+
+    if (demoSection) {
+        const demoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    startRaceCardAnimation();
+                } else {
+                    stopRaceCardAnimation();
+                }
+            });
+        }, { threshold: 0.3 });
+
+        demoObserver.observe(demoSection);
+    }
+
+    // ===============================================
     // WORKFLOW INTERACTIONS
     // ===============================================
     
