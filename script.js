@@ -650,7 +650,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const rotateY = (mouseX / rect.width) * 10;   // ±10 degrees
             
             liquidCard.style.transform = `
-                translateY(0px)
+                translateY(-8px)
                 rotateX(${rotateX}deg)
                 rotateY(${rotateY}deg)
                 scale3d(1.02, 1.02, 1.02)
