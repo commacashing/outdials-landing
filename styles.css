@@ -1988,17 +1988,19 @@ body {
         display: none;
     }
 
-    /* Mobile: Faster trust bar scroll */
+    /* Mobile: Faster trust bar scroll with seamless loop */
     .trust-ticker {
-        animation: scroll 20s linear infinite;
+        animation: scroll 12s linear infinite;
     }
     
     .trust-ticker-track {
-        gap: 60px;
+        gap: 80px;
     }
     
+    /* Duplicate logos on mobile for seamless loop */
     .trust-logo {
-        min-width: 100px;
+        min-width: 120px;
+        flex-shrink: 0;
     }
 
     /* Mobile: Race cards - condense and fit all 3 */
@@ -2042,7 +2044,7 @@ body {
         position: relative;
     }
 
-    /* Horizontal line between rows - positioned in middle */
+    /* Horizontal line between rows - positioned lower */
     .workflow-steps::after {
         content: '';
         position: absolute;
@@ -2056,7 +2058,7 @@ body {
             var(--border-subtle) 80%,
             transparent 100%
         );
-        transform: translateY(0);
+        transform: translateY(10px);
         z-index: 0;
     }
 
@@ -2096,10 +2098,9 @@ body {
         text-align: center;
         font-size: 13px;
         line-height: 1.5;
-        padding: 12px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid var(--border-subtle);
-        border-radius: 8px;
+        padding: 0;
+        background: transparent;
+        border: none;
         z-index: 10;
     }
 
