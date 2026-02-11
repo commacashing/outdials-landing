@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 stopDemo();
             }
         });
-    }, { threshold: 0.5 });
+    }, { threshold: window.innerWidth <= 768 ? 0.2 : 0.5 });
 
     const demoSection = document.querySelector('.section-demo');
     if (demoSection) {
