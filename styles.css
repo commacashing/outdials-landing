@@ -73,11 +73,13 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(10, 10, 10, 0.7);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border-subtle);
+    -webkit-backdrop-filter: blur(12px);
     z-index: 1000;
     padding: 16px 0;
+    transition: all 0.3s var(--spring);
+}
 }
 
 .nav-container {
@@ -1839,48 +1841,24 @@ body {
 
 .section-contact {
     padding: 120px 0;
-    opacity: 1;
-    transform: scale(1);
-    transition: opacity 0.8s var(--spring), transform 0.8s var(--spring);
-}
-
-.section-contact.visible {
-    opacity: 1;
-    transform: scale(1);
-}
-
-.contact-cta {
     text-align: center;
 }
 
-.contact-note {
-    margin-top: 24px;
-    font-size: 14px;
-    color: var(--text-secondary);
+.contact-simple {
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-.contact-note a {
-    color: var(--accent-white);
-    text-decoration: none;
-    border-bottom: 1px solid var(--accent-white);
+.contact-simple .section-title {
+    margin-bottom: 16px;
 }
 
-/* ===============================================
-   LOTTIE ANIMATION CONTAINER
-   =============================================== */
-
-.lottie-container {
-    width: 100%;
-    max-width: 500px;
-    height: 450px;
-    margin: 60px auto 80px;
+.contact-simple .section-subtitle {
+    margin-bottom: 40px;
 }
 
-@media (max-width: 768px) {
-    .lottie-container {
-        height: 350px;
-        max-width: 100%;
-    }
+.contact-simple .btn-primary {
+    display: inline-block;
 }
 
 /* ===============================================
@@ -2029,78 +2007,63 @@ body {
     }
 
     /* Mobile: Workflow spacing fix */
-    .workflow-container {
-        padding: 40px 0 60px;
-    }
-
     .workflow-steps {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto auto auto auto;
-        gap: 60px 40px;
+        gap: 80px 60px;
         padding: 0 20px;
+        position: relative;
     }
 
-    .workflow-step {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .workflow-step[data-step="1"],
-    .workflow-step[data-step="2"] {
-        grid-row: 2;
-    }
-
-    .workflow-step[data-step="3"],
-    .workflow-step[data-step="4"] {
-        grid-row: 4;
-    }
-
-    .workflow-step[data-step="1"]::before,
-    .workflow-step[data-step="2"]::before {
-        content: attr(data-label);
+    /* Horizontal line between 1&2 and 3&4 */
+    .workflow-steps::after {
+        content: '';
         position: absolute;
-        top: -50px;
-        font-size: 16px;
-        font-weight: 600;
-        white-space: nowrap;
-        color: var(--text-primary);
-    }
-
-    .workflow-step[data-step="1"]::before {
-        content: "Select Filter";
-    }
-
-    .workflow-step[data-step="2"]::before {
-        content: "Start Dialing";
-    }
-
-    .workflow-step[data-step="3"]::after,
-    .workflow-step[data-step="4"]::after {
-        content: attr(data-label);
-        position: absolute;
-        bottom: -50px;
-        font-size: 16px;
-        font-weight: 600;
-        white-space: nowrap;
-        color: var(--text-primary);
-    }
-
-    .workflow-step[data-step="3"]::after {
-        content: "Human Answers";
-    }
-
-    .workflow-step[data-step="4"]::after {
-        content: "Update Info";
+        left: 10%;
+        right: 10%;
+        top: 50%;
+        height: 2px;
+        background: linear-gradient(90deg, 
+            transparent 0%,
+            var(--border-subtle) 20%,
+            var(--border-subtle) 80%,
+            transparent 100%
+        );
+        transform: translateY(-40px);
     }
 
     .workflow-step {
         position: relative;
     }
 
-    .workflow-label {
-        display: none;
+    /* Top row (1 & 2) - labels above numbers */
+    .workflow-step:nth-child(1),
+    .workflow-step:nth-child(2) {
+        padding-top: 50px;
+    }
+
+    .workflow-step:nth-child(1) .workflow-label,
+    .workflow-step:nth-child(2) .workflow-label {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        white-space: nowrap;
+    }
+
+    /* Bottom row (3 & 4) - labels below numbers */
+    .workflow-step:nth-child(3),
+    .workflow-step:nth-child(4) {
+        padding-bottom: 50px;
+    }
+
+    .workflow-step:nth-child(3) .workflow-label,
+    .workflow-step:nth-child(4) .workflow-label {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        white-space: nowrap;
     }
 
     .workflow-number {
@@ -2111,29 +2074,35 @@ body {
         display: none;
     }
 
-    /* Mobile: Features - remove right side, keep left only */
+    /* Mobile: Features - horizontal scroll through all panels */
     .section-features-scrolljack {
         height: auto;
+        overflow: visible;
     }
 
     .features-scrolljack-container {
         position: relative;
         height: auto;
-        overflow-x: auto;
+        display: flex;
+        overflow-x: scroll;
         overflow-y: hidden;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
-        display: flex;
+        scrollbar-width: none;
+    }
+
+    .features-scrolljack-container::-webkit-scrollbar {
+        display: none;
     }
 
     .feature-panel {
         position: relative;
         opacity: 1;
         pointer-events: all;
-        min-width: 100%;
+        min-width: 100vw;
         height: auto;
         padding: 60px 24px;
-        scroll-snap-align: start;
+        scroll-snap-align: center;
         flex-shrink: 0;
     }
 
