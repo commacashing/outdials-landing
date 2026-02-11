@@ -463,6 +463,26 @@ document.addEventListener('DOMContentLoaded', () => {
         updateActivePanel(0);
     }
 
+    // Mobile: Update dots based on scroll position
+    if (window.innerWidth <= 768) {
+        const container = document.querySelector('.features-scrolljack-container');
+        if (container) {
+            container.addEventListener('scroll', () => {
+                const scrollLeft = container.scrollLeft;
+                const panelWidth = container.offsetWidth;
+                const currentIndex = Math.round(scrollLeft / panelWidth);
+                
+                progressDots.forEach((dot, i) => {
+                    if (i === currentIndex) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            });
+        }
+    }
+
     const progressObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
