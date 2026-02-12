@@ -1988,20 +1988,15 @@ body {
         display: none;
     }
 
-    /* Mobile: Faster trust bar scroll - translate -33.33% for 3 sets */
+    /* Mobile: CRM ticker - seamless infinite loop */
     .trust-ticker {
-        animation: scrollMobile 18s linear infinite;
+        animation: none;
     }
     
     .trust-logo {
         min-width: 120px;
         flex-shrink: 0;
     }
-
-@keyframes scrollMobile {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(calc(-33.333%)); }
-}
 
     /* Mobile: Race cards - condense and fit all 3 */
     .demo-race-grid {
@@ -2039,12 +2034,17 @@ body {
     .workflow-steps {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 140px 40px;
-        padding: 20px 24px 60px;
+        gap: 180px 40px;
+        padding: 20px 24px 80px;
         position: relative;
     }
 
-    /* Horizontal line - moved down away from top row numbers */
+    /* Hide the desktop SVG wave on mobile */
+    .workflow-wave {
+        display: none;
+    }
+
+    /* Wave line - sits exactly between the two rows */
     .workflow-steps::after {
         content: '';
         position: absolute;
@@ -2058,7 +2058,7 @@ body {
             var(--border-subtle) 80%,
             transparent 100%
         );
-        transform: translateY(30px);
+        transform: translateY(0);
         z-index: 0;
     }
 
@@ -2255,12 +2255,22 @@ body {
 
     .footer-links {
         flex-direction: row;
-        gap: 32px;
-        flex-wrap: wrap;
+        gap: 0;
+        justify-content: space-between;
+        width: 100%;
     }
 
     .footer-column {
         gap: 10px;
+        flex: 1;
+    }
+
+    .footer-column h4 {
+        font-size: 13px;
+    }
+
+    .footer-column a {
+        font-size: 12px;
     }
 
     .scroll-progress {
