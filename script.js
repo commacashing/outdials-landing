@@ -650,42 +650,68 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===============================================
-    // MOBILE: SEAMLESS CRM TICKER
+    // SEAMLESS CRM TICKER (ALL SCREENS)
     // ===============================================
 
-    if (window.innerWidth <= 768) {
-        const ticker = document.querySelector('.trust-ticker');
-        if (ticker) {
-            // Stop CSS animation
-            ticker.style.animation = 'none';
-            ticker.style.transform = 'translateX(0)';
+    const ticker = document.querySelector('.trust-ticker');
+    if (ticker) {
+        ticker.style.animation = 'none';
+        ticker.style.transform = 'translateX(0)';
 
-            // Get just the original logos (first 6)
-            const origLogos = Array.from(ticker.querySelectorAll('.trust-logo')).slice(0, 6);
-            
-            // Clear ticker and rebuild with only 2 sets
-            ticker.innerHTML = '';
-            const allLogos = [...origLogos, ...origLogos.map(l => l.cloneNode(true))];
-            allLogos.forEach(l => ticker.appendChild(l));
+        // Get original 6 logos only
+        const origLogos = Array.from(ticker.querySelectorAll('.trust-logo')).slice(0, 6);
+        ticker.innerHTML = '';
+        const allLogos = [...origLogos, ...origLogos.map(l => l.cloneNode(true))];
+        allLogos.forEach(l => ticker.appendChild(l));
 
-            // Wait for render then measure
-            requestAnimationFrame(() => {
-                const gap = 80;
-                let singleSetW = 0;
-                origLogos.forEach(l => { singleSetW += l.offsetWidth + gap; });
+        requestAnimationFrame(() => {
+            const gap = 80;
+            let singleSetW = 0;
+            origLogos.forEach(l => { singleSetW += l.offsetWidth + gap; });
 
-                let x = 0;
-                const speed = 0.6;
+            let x = 0;
+            let paused = false;
+            // Slightly faster on desktop
+            const speed = window.innerWidth > 768 ? 0.8 : 0.6;
 
-                const tick = () => {
+            ticker.addEventListener('mouseenter', () => { paused = true; });
+            ticker.addEventListener('mouseleave', () => { paused = false; });
+
+            const tick = () => {
+                if (!paused) {
                     x -= speed;
                     if (x <= -singleSetW) x = 0;
                     ticker.style.transform = `translateX(${x}px)`;
-                    requestAnimationFrame(tick);
-                };
+                }
                 requestAnimationFrame(tick);
-            });
-        }
+            };
+            requestAnimationFrame(tick);
+        });
+    }
+
+    // ===============================================
+    // MOBILE: POSITION WAVE LINE BETWEEN ROWS
+    // ===============================================
+
+    if (window.innerWidth <= 768) {
+        const positionWave = () => {
+            const waveLine = document.querySelector('.workflow-line');
+            const steps = document.querySelectorAll('.workflow-step');
+            if (!waveLine || steps.length < 3) return;
+
+            // Get the top of step 3 (first in bottom row) relative to workflow-container
+            const container = document.querySelector('.workflow-container');
+            const step3 = steps[2];
+            const containerTop = container.getBoundingClientRect().top;
+            const step3Top = step3.getBoundingClientRect().top;
+            const offsetTop = step3Top - containerTop;
+
+            // Place wave 20px above step 3's top
+            waveLine.style.top = (offsetTop - 55) + 'px';
+        };
+
+        // Run after layout
+        setTimeout(positionWave, 100);
     }
 
     // ===============================================
