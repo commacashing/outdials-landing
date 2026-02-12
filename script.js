@@ -650,6 +650,57 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===============================================
+    // MOBILE: SEAMLESS CRM TICKER
+    // ===============================================
+
+    if (window.innerWidth <= 768) {
+        const wrapper = document.querySelector('.trust-ticker-wrapper');
+        const ticker = document.querySelector('.trust-ticker');
+
+        if (wrapper && ticker) {
+            // Remove CSS animation on mobile
+            ticker.style.animation = 'none';
+
+            // Keep only one set of logos (remove duplicates added for CSS loop)
+            const allLogos = Array.from(ticker.querySelectorAll('.trust-logo'));
+            const setSize = allLogos.length / 3; // We have 3 sets in HTML
+            // Remove extra sets, keep just one
+            for (let i = setSize; i < allLogos.length; i++) {
+                allLogos[i].remove();
+            }
+
+            // Clone all logos and append — creates seamless bridge
+            const logos = Array.from(ticker.querySelectorAll('.trust-logo'));
+            logos.forEach(logo => {
+                const clone = logo.cloneNode(true);
+                ticker.appendChild(clone);
+            });
+
+            let x = 0;
+            const speed = 1; // pixels per frame
+            const singleSetWidth = () => {
+                const count = logos.length;
+                const gap = 80;
+                let w = 0;
+                logos.forEach(l => { w += l.offsetWidth; });
+                return w + (gap * count);
+            };
+
+            const animate = () => {
+                x -= speed;
+                const sw = singleSetWidth();
+                if (Math.abs(x) >= sw) {
+                    x = 0;
+                }
+                ticker.style.transform = `translateX(${x}px)`;
+                requestAnimationFrame(animate);
+            };
+
+            requestAnimationFrame(animate);
+        }
+    }
+
+    // ===============================================
     // 3D LIQUID METAL CARD PARALLAX
     // ===============================================
     
