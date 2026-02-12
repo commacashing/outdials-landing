@@ -1988,20 +1988,20 @@ body {
         display: none;
     }
 
-    /* Mobile: Faster trust bar scroll with seamless loop */
+    /* Mobile: Faster trust bar scroll - translate -33.33% for 3 sets */
     .trust-ticker {
-        animation: scroll 12s linear infinite;
+        animation: scrollMobile 18s linear infinite;
     }
     
-    .trust-ticker-track {
-        gap: 80px;
-    }
-    
-    /* Duplicate logos on mobile for seamless loop */
     .trust-logo {
         min-width: 120px;
         flex-shrink: 0;
     }
+
+@keyframes scrollMobile {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-33.333%)); }
+}
 
     /* Mobile: Race cards - condense and fit all 3 */
     .demo-race-grid {
@@ -2039,17 +2039,17 @@ body {
     .workflow-steps {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 100px 60px;
-        padding: 0 20px;
+        gap: 140px 40px;
+        padding: 20px 24px 60px;
         position: relative;
     }
 
-    /* Horizontal line between rows - positioned lower */
+    /* Horizontal line - moved down away from top row numbers */
     .workflow-steps::after {
         content: '';
         position: absolute;
-        left: 10%;
-        right: 10%;
+        left: 5%;
+        right: 5%;
         top: 50%;
         height: 2px;
         background: linear-gradient(90deg, 
@@ -2058,7 +2058,7 @@ body {
             var(--border-subtle) 80%,
             transparent 100%
         );
-        transform: translateY(10px);
+        transform: translateY(30px);
         z-index: 0;
     }
 
@@ -2078,7 +2078,7 @@ body {
     }
 
     .workflow-label {
-        font-size: 15px;
+        font-size: 14px;
         text-align: center;
         white-space: nowrap;
         margin: 0;
@@ -2088,20 +2088,23 @@ body {
         margin: 0;
     }
 
+    /* Description: no box, just plain text below */
     .workflow-description {
         position: absolute;
         top: 100%;
         left: 50%;
         transform: translateX(-50%);
-        margin-top: 16px;
-        width: 200px;
+        margin-top: 12px;
+        width: 140px;
         text-align: center;
-        font-size: 13px;
+        font-size: 12px;
         line-height: 1.5;
         padding: 0;
         background: transparent;
         border: none;
+        border-radius: 0;
         z-index: 10;
+        color: var(--text-secondary);
     }
 
     .workflow-step.active .workflow-description {
@@ -2247,12 +2250,17 @@ body {
 
     .footer-content {
         flex-direction: column;
-        gap: 48px;
+        gap: 32px;
     }
 
     .footer-links {
-        flex-direction: column;
+        flex-direction: row;
         gap: 32px;
+        flex-wrap: wrap;
+    }
+
+    .footer-column {
+        gap: 10px;
     }
 
     .scroll-progress {
