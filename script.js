@@ -654,49 +654,37 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===============================================
 
     if (window.innerWidth <= 768) {
-        const wrapper = document.querySelector('.trust-ticker-wrapper');
         const ticker = document.querySelector('.trust-ticker');
-
-        if (wrapper && ticker) {
-            // Remove CSS animation on mobile
+        if (ticker) {
+            // Stop CSS animation
             ticker.style.animation = 'none';
+            ticker.style.transform = 'translateX(0)';
 
-            // Keep only one set of logos (remove duplicates added for CSS loop)
-            const allLogos = Array.from(ticker.querySelectorAll('.trust-logo'));
-            const setSize = allLogos.length / 3; // We have 3 sets in HTML
-            // Remove extra sets, keep just one
-            for (let i = setSize; i < allLogos.length; i++) {
-                allLogos[i].remove();
-            }
+            // Get just the original logos (first 6)
+            const origLogos = Array.from(ticker.querySelectorAll('.trust-logo')).slice(0, 6);
+            
+            // Clear ticker and rebuild with only 2 sets
+            ticker.innerHTML = '';
+            const allLogos = [...origLogos, ...origLogos.map(l => l.cloneNode(true))];
+            allLogos.forEach(l => ticker.appendChild(l));
 
-            // Clone all logos and append — creates seamless bridge
-            const logos = Array.from(ticker.querySelectorAll('.trust-logo'));
-            logos.forEach(logo => {
-                const clone = logo.cloneNode(true);
-                ticker.appendChild(clone);
-            });
-
-            let x = 0;
-            const speed = 1; // pixels per frame
-            const singleSetWidth = () => {
-                const count = logos.length;
+            // Wait for render then measure
+            requestAnimationFrame(() => {
                 const gap = 80;
-                let w = 0;
-                logos.forEach(l => { w += l.offsetWidth; });
-                return w + (gap * count);
-            };
+                let singleSetW = 0;
+                origLogos.forEach(l => { singleSetW += l.offsetWidth + gap; });
 
-            const animate = () => {
-                x -= speed;
-                const sw = singleSetWidth();
-                if (Math.abs(x) >= sw) {
-                    x = 0;
-                }
-                ticker.style.transform = `translateX(${x}px)`;
-                requestAnimationFrame(animate);
-            };
+                let x = 0;
+                const speed = 0.6;
 
-            requestAnimationFrame(animate);
+                const tick = () => {
+                    x -= speed;
+                    if (x <= -singleSetW) x = 0;
+                    ticker.style.transform = `translateX(${x}px)`;
+                    requestAnimationFrame(tick);
+                };
+                requestAnimationFrame(tick);
+            });
         }
     }
 
