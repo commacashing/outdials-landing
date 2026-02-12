@@ -706,8 +706,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const step3Top = step3.getBoundingClientRect().top;
             const offsetTop = step3Top - containerTop;
 
-            // Place wave 20px above step 3's top
-            waveLine.style.top = (offsetTop - 55) + 'px';
+            // Place wave midway between row 1 and row 3
+            waveLine.style.top = (offsetTop - 120) + 'px';
         };
 
         // Run after layout
