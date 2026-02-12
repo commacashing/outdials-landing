@@ -714,8 +714,8 @@ body {
 .feature-icon-large {
     width: 80px;
     height: 80px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
+    background: transparent;
+    border-radius: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2039,27 +2039,22 @@ body {
         position: relative;
     }
 
-    /* Hide the desktop SVG wave on mobile */
-    .workflow-wave {
+    /* Hide the ::after straight line on mobile */
+    .workflow-steps::after {
         display: none;
     }
 
-    /* Wave line - sits exactly between the two rows */
-    .workflow-steps::after {
-        content: '';
+    /* Reposition the SVG wave to sit between the two rows */
+    .workflow-line {
+        top: auto;
+        bottom: auto;
         position: absolute;
-        left: 5%;
-        right: 5%;
-        top: 50%;
-        height: 2px;
-        background: linear-gradient(90deg, 
-            transparent 0%,
-            var(--border-subtle) 20%,
-            var(--border-subtle) 80%,
-            transparent 100%
-        );
-        transform: translateY(0);
-        z-index: 0;
+        left: 0;
+        width: 100%;
+        height: 120px;
+        /* 50% of the grid height puts it between rows */
+        top: calc(50% - 30px);
+        z-index: 1;
     }
 
     .workflow-step {
