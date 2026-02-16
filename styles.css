@@ -94,15 +94,15 @@ body {
     display: flex;
     align-items: center;
     gap: 0;
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 26px;
+    font-weight: 700;
     color: var(--text-primary);
     text-decoration: none;
 }
 
 .logo-text {
-    letter-spacing: -0.02em;
-    margin-left: -2px;
+    letter-spacing: -0.03em;
+    margin-left: -3px;
 }
 
 .broken-o {
@@ -112,8 +112,8 @@ body {
 }
 
 .broken-o svg {
-    width: 24px;
-    height: 28px;
+    width: 30px;
+    height: 34px;
     color: var(--text-primary);
 }
 
