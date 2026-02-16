@@ -2272,6 +2272,14 @@ body {
         bottom: 18px;
     }
 
+    .section-video {
+        padding: 60px 0 80px;
+    }
+
+    .video-wrapper {
+        border-radius: 12px;
+    }
+
     .nav-links {
         display: none;
     }
