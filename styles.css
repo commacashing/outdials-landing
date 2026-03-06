@@ -438,19 +438,8 @@ body {
     pointer-events: none;
 }
 
-/* Support as plain list item — no box */
-.feat-support {
-    display: flex !important;
-    align-items: center !important;
-    gap: 10px !important;
-    font-size: 14px !important;
-    color: var(--text-secondary) !important;
-}
 
-.feat-support-icon {
-    font-size: 13px;
-    flex-shrink: 0;
-}
+
 
 .feat-check {
     color: var(--accent-green);
