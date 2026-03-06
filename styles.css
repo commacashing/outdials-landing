@@ -307,7 +307,7 @@ body {
     gap: 16px;
     max-width: 1100px;
     margin: 0 auto;
-    align-items: start;
+    align-items: stretch;
 }
 
 /* Individual Card */
@@ -318,7 +318,6 @@ body {
     padding: 32px 28px 28px;
     display: flex;
     flex-direction: column;
-    gap: 0;
     position: relative;
     transition: border-color 0.2s, box-shadow 0.2s;
 }
@@ -328,32 +327,34 @@ body {
     box-shadow: 0 8px 40px rgba(0,0,0,0.4);
 }
 
-/* Highlighted (Pro) - Framer-style subtle glow, no heavy fill */
+/* Highlighted (Pro) — deep blue glow radiates from the card body */
 .tier-highlighted {
-    background: #0e0e0e;
-    border-color: rgba(37, 99, 235, 0.35);
+    background: radial-gradient(ellipse at 50% 120%, rgba(37,99,235,0.18) 0%, rgba(37,99,235,0.06) 50%, transparent 75%), #0e0e0e;
+    border-color: rgba(37,99,235,0.3);
     box-shadow:
-        0 0 0 1px rgba(37, 99, 235, 0.2),
-        0 0 30px rgba(37, 99, 235, 0.12),
-        0 0 60px rgba(37, 99, 235, 0.06);
+        0 0 0 1px rgba(37,99,235,0.15),
+        0 4px 24px rgba(37,99,235,0.15),
+        0 16px 64px rgba(37,99,235,0.12),
+        0 32px 80px rgba(37,99,235,0.06);
 }
 
 .tier-highlighted:hover {
-    border-color: rgba(37, 99, 235, 0.5);
+    border-color: rgba(37,99,235,0.45);
     box-shadow:
-        0 0 0 1px rgba(37, 99, 235, 0.3),
-        0 0 40px rgba(37, 99, 235, 0.18),
-        0 8px 40px rgba(0,0,0,0.4);
+        0 0 0 1px rgba(37,99,235,0.25),
+        0 4px 32px rgba(37,99,235,0.22),
+        0 16px 64px rgba(37,99,235,0.16),
+        0 32px 80px rgba(37,99,235,0.1);
 }
 
-/* Enterprise card subtle gradient */
+/* Enterprise card */
 .tier-pro {
-    background: linear-gradient(160deg, #0e0e0e 60%, #100d18 100%);
+    background: #0e0e0e;
 }
 
 /* Header */
 .tier-header {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .tier-name {
@@ -369,9 +370,9 @@ body {
     margin: 20px 0;
 }
 
-/* Price */
+/* Price block — no dividers above/below */
 .tier-price-block {
-    margin-bottom: 4px;
+    margin-bottom: 20px;
 }
 
 .tier-price {
@@ -411,14 +412,14 @@ body {
     min-height: 20px;
 }
 
-/* Features list */
+/* Features list — flex:1 makes all cards same height */
 .tier-features {
     list-style: none;
     padding: 0;
-    margin: 0 0 20px 0;
+    margin: 0 0 24px 0;
     display: flex;
     flex-direction: column;
-    gap: 11px;
+    gap: 13px;
     flex: 1;
 }
 
@@ -431,41 +432,37 @@ body {
     line-height: 1.4;
 }
 
+/* Invisible spacer items to push support row to bottom and equalize heights */
+.feat-spacer {
+    flex: 1;
+    pointer-events: none;
+}
+
+/* Support as last list item */
+.feat-support {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    font-size: 13px !important;
+    color: var(--text-secondary) !important;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.06);
+    margin-top: 4px;
+}
+
+.feat-support-icon {
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
 .feat-check {
     color: var(--accent-green);
     font-weight: 700;
     flex-shrink: 0;
     font-size: 13px;
     margin-top: 1px;
-}
-
-.feat-dash {
-    color: rgba(255,255,255,0.2);
-    flex-shrink: 0;
-    font-size: 13px;
-    margin-top: 1px;
-}
-
-.feat-muted {
-    color: rgba(255,255,255,0.3);
-}
-
-/* Support row */
-.tier-support {
-    font-size: 13px;
-    color: var(--text-secondary);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 20px;
-    padding: 10px 14px;
-    background: rgba(255,255,255,0.03);
-    border-radius: 8px;
-    border: 1px solid rgba(255,255,255,0.06);
-}
-
-.support-icon {
-    font-size: 15px;
 }
 
 /* CTAs */
