@@ -3,238 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OutDials - Stop Wasting Time on Manual Work</title>
+    <title>OutDials - Less Busywork. More Revenue.</title>
     <link rel="icon" href="icon.png">
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Homepage-specific overrides */
+        /* ── Hero ── */
         .hero-title {
             font-size: 3.5rem;
             line-height: 1.1;
             margin-bottom: 20px;
         }
 
-        .problems-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 24px;
-            margin: 48px 0;
+        /* ── How We Find Your Bottleneck ── */
+        .process-section {
+            padding: 100px 20px;
         }
 
-        .problem-card {
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 16px;
-            padding: 32px 24px;
-            text-align: center;
-            transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
-            animation: slideUp 0.6s ease-out backwards;
-        }
-
-        .problem-card:nth-child(1) { animation-delay: 0.1s; }
-        .problem-card:nth-child(2) { animation-delay: 0.2s; }
-        .problem-card:nth-child(3) { animation-delay: 0.3s; }
-        .problem-card:nth-child(4) { animation-delay: 0.4s; }
-
-        .problem-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(255, 255, 255, 0.6);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .problem-icon {
-            font-size: 48px;
-            margin-bottom: 16px;
-            display: inline-block;
-        }
-
-        .problem-card h3 {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: #1a1a1a;
-        }
-
-        .problem-card p {
-            font-size: 14px;
-            color: rgba(0, 0, 0, 0.6);
-            line-height: 1.6;
-        }
-
-        /* Solutions Section */
-        .solutions-container {
-            max-width: 1200px;
+        .process-container {
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 80px 20px;
         }
 
-        .solutions-header {
+        .process-header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 72px;
         }
 
-        .solutions-header h2 {
+        .process-header h2 {
             font-size: 2.5rem;
             font-weight: 600;
-            margin-bottom: 16px;
             color: #1a1a1a;
+            margin-bottom: 14px;
         }
 
-        .solutions-header p {
-            font-size: 18px;
-            color: rgba(0, 0, 0, 0.6);
-            max-width: 600px;
+        .process-header p {
+            font-size: 17px;
+            color: rgba(0,0,0,0.55);
+            max-width: 520px;
             margin: 0 auto;
+            line-height: 1.7;
         }
 
-        .comparison-grid {
+        .process-steps {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 32px;
-            margin: 0;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0;
+            position: relative;
+        }
+
+        /* connector line between steps */
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 36px;
+            left: calc(16.66% + 16px);
+            right: calc(16.66% + 16px);
+            height: 1px;
+            background: linear-gradient(90deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15));
+            z-index: 0;
         }
 
         @media (max-width: 768px) {
-            .comparison-grid {
+            .process-steps {
                 grid-template-columns: 1fr;
+                gap: 40px;
             }
+            .process-steps::before { display: none; }
         }
 
-        .solution-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.4) 100%);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 20px;
-            padding: 48px 32px;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
-            animation: fadeInUp 0.8s ease-out backwards;
-        }
-
-        .solution-card:nth-child(1) { animation-delay: 0.2s; }
-        .solution-card:nth-child(2) { animation-delay: 0.4s; }
-
-        .solution-card:hover {
-            transform: translateY(-12px);
-            border-color: rgba(255, 255, 255, 0.8);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
-        }
-
-        .solution-badge {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.6);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 16px;
-            color: rgba(0, 0, 0, 0.7);
-        }
-
-        .solution-card h3 {
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 16px;
-            color: #1a1a1a;
-        }
-
-        .solution-card p {
-            font-size: 16px;
-            color: rgba(0, 0, 0, 0.6);
-            line-height: 1.8;
-            margin-bottom: 28px;
-        }
-
-        .solution-features {
-            list-style: none;
-            margin: 32px 0;
-        }
-
-        .solution-features li {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 12px;
-            font-size: 14px;
-            color: rgba(0, 0, 0, 0.7);
-            line-height: 1.6;
-        }
-
-        .solution-features li::before {
-            content: "✓";
-            flex-shrink: 0;
-            font-weight: 700;
-            font-size: 16px;
-            color: rgba(0, 0, 0, 0.4);
-        }
-
-        .solution-cta {
-            display: inline-block;
-            background: rgba(0, 0, 0, 0.05);
-            color: #1a1a1a;
-            padding: 12px 28px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 14px;
-            transition: all 0.2s;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .solution-cta:hover {
-            background: rgba(0, 0, 0, 0.08);
-            border-color: rgba(0, 0, 0, 0.2);
-        }
-
-        /* Integrations Bar */
-        .integrations-section {
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
-            padding: 48px 20px;
-            margin: 80px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.3);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .integrations-header {
+        .process-step {
             text-align: center;
-            margin-bottom: 32px;
+            padding: 0 32px;
+            animation: fadeInUp 0.7s ease-out backwards;
+            position: relative;
+            z-index: 1;
         }
 
-        .integrations-header h3 {
-            font-size: 16px;
+        .process-step:nth-child(1) { animation-delay: 0.1s; }
+        .process-step:nth-child(2) { animation-delay: 0.25s; }
+        .process-step:nth-child(3) { animation-delay: 0.4s; }
+
+        .step-number {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.5);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 28px;
+            font-size: 22px;
+            font-weight: 700;
+            color: rgba(0,0,0,0.35);
+            letter-spacing: -0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .process-step:hover .step-number {
+            background: rgba(255,255,255,0.95);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+            color: rgba(0,0,0,0.7);
+            transform: translateY(-4px);
+        }
+
+        .process-step h3 {
+            font-size: 19px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .process-step p {
+            font-size: 14px;
+            color: rgba(0,0,0,0.55);
+            line-height: 1.75;
+        }
+
+        /* ── What We Build ── */
+        .builds-section {
+            padding: 100px 20px;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .builds-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .builds-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .builds-header h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 14px;
+        }
+
+        .builds-header p {
+            font-size: 17px;
+            color: rgba(0,0,0,0.55);
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        .builds-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 64px;
+        }
+
+        @media (max-width: 768px) {
+            .builds-grid { grid-template-columns: 1fr; }
+        }
+
+        .build-card {
+            background: rgba(255,255,255,0.55);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.4);
+            border-radius: 18px;
+            padding: 36px 32px;
+            transition: all 0.35s cubic-bezier(0.23,1,0.32,1);
+            animation: fadeInUp 0.7s ease-out backwards;
+        }
+
+        .build-card:nth-child(1) { animation-delay: 0.1s; }
+        .build-card:nth-child(2) { animation-delay: 0.2s; }
+        .build-card:nth-child(3) { animation-delay: 0.3s; }
+        .build-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .build-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255,255,255,0.7);
+            box-shadow: 0 24px 48px rgba(0,0,0,0.1);
+        }
+
+        .build-icon {
+            font-size: 36px;
+            margin-bottom: 18px;
+            display: block;
+        }
+
+        .build-card h3 {
+            font-size: 19px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .build-card p {
+            font-size: 14px;
+            color: rgba(0,0,0,0.55);
+            line-height: 1.75;
+        }
+
+        /* Proof bar */
+        .proof-bar {
+            border-top: 1px solid rgba(0,0,0,0.07);
+            padding-top: 48px;
+            text-align: center;
+        }
+
+        .proof-bar-label {
+            font-size: 13px;
             font-weight: 500;
-            color: rgba(0, 0, 0, 0.7);
-            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(0,0,0,0.4);
+            margin-bottom: 24px;
+        }
+
+        .proof-tools {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .proof-tool-pill {
+            background: rgba(255,255,255,0.65);
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 100px;
+            padding: 8px 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(0,0,0,0.65);
+            backdrop-filter: blur(8px);
+            transition: all 0.2s;
+        }
+
+        .proof-tool-pill:hover {
+            background: rgba(255,255,255,0.9);
+            border-color: rgba(0,0,0,0.15);
         }
 
         /* Animations */
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(32px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
         .glow-text {
-            background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(0,0,0,0.6));
+            background: linear-gradient(135deg, rgba(0,0,0,0.85), rgba(0,0,0,0.6));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -280,126 +297,91 @@
             <div class="hero-content">
                 <div class="hero-trial-pill glow-text">
                     <span class="trial-pill-dot"></span>
-                    Stop wasting time on repetitive work
+                    Custom AI automations for growing teams
                 </div>
                 <h1 class="hero-title glow-text">
-                    Focus on What<br>
-                    Matters
+                    Less Busywork.<br>More Revenue.
                 </h1>
                 <p class="hero-subtitle">
-                    Every minute your team spends on manual tasks is a minute they're not selling. We automate the bottlenecks holding you back—from bad data to endless dialing—so your reps can actually close deals.
+                    Custom AI automations that give your team back hours and your pipeline more deals.
                 </p>
                 <a href="#contact" class="btn-primary glow-button">Book a Demo</a>
-                <p class="hero-subtext">See how we've helped teams triple their productivity</p>
+                <p class="hero-subtext">We've helped teams reclaim 20+ hours a week</p>
             </div>
         </div>
     </section>
 
-    <!-- Problems Section -->
-    <section id="problems">
-        <div class="container">
-            <h2 class="section-title">The Bottlenecks We Fix</h2>
-            <p class="section-subtitle">You're likely facing more than one of these</p>
-            
-            <div class="problems-grid">
-                <div class="problem-card">
-                    <div class="problem-icon">📞</div>
-                    <h3>Wasted Dial Time</h3>
-                    <p>Reps spend 70% of their day on voicemails and dial tones instead of talking to prospects.</p>
+    <!-- How We Find Your Bottleneck -->
+    <section id="process" class="process-section">
+        <div class="process-container">
+            <div class="process-header">
+                <h2>How We Find Your Bottleneck</h2>
+                <p>Every business bleeds time somewhere different. Here's how we find yours and fix it — fast.</p>
+            </div>
+
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">01</div>
+                    <h3>Audit Your Workflow</h3>
+                    <p>We map where your team's time actually goes — not where you think it goes. A 30-minute call is all it takes to surface the real bottlenecks.</p>
                 </div>
 
-                <div class="problem-card">
-                    <div class="problem-icon">📊</div>
-                    <h3>Bad Data Quality</h3>
-                    <p>Missing emails, outdated phone numbers, and incomplete contact info kill your conversion rates.</p>
+                <div class="process-step">
+                    <div class="step-number">02</div>
+                    <h3>Identify the Leverage Point</h3>
+                    <p>We pinpoint the single highest-impact automation opportunity — the one that frees the most hours or unlocks the most revenue with the least friction.</p>
                 </div>
 
-                <div class="problem-card">
-                    <div class="problem-icon">⏱️</div>
-                    <h3>Manual Data Work</h3>
-                    <p>Your team manually updates CRM entries, cleans lists, and appends data instead of selling.</p>
-                </div>
-
-                <div class="problem-card">
-                    <div class="problem-icon">❌</div>
-                    <h3>Missed Opportunities</h3>
-                    <p>Incomplete prospect information means you're reaching out to the wrong people at the wrong time.</p>
+                <div class="process-step">
+                    <div class="step-number">03</div>
+                    <h3>Build & Deploy</h3>
+                    <p>We build a custom solution tailored to your stack and team. No off-the-shelf software. Live in days, not months.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Solutions Section -->
-    <section id="solutions" class="solutions-container">
-        <div class="solutions-header">
-            <h2>How We Fix Them</h2>
-            <p>OutDials gives you two powerful tools that work together to eliminate bottlenecks</p>
-        </div>
-
-        <div class="comparison-grid">
-            <!-- Dialer Card -->
-            <div class="solution-card">
-                <div class="solution-badge">Power Dialer</div>
-                <h3>The Dialer</h3>
-                <p>Turn 100 calls into 300 conversations. Launch 3 calls with intelligent stagger, connect instantly to the first person who answers, and watch your talk time skyrocket.</p>
-                
-                <ul class="solution-features">
-                    <li>Race 3 contacts simultaneously</li>
-                    <li>0ms instant bridge (no dead air)</li>
-                    <li>AMD voicemail filtering</li>
-                    <li>TCPA fully compliant</li>
-                    <li>7-day live deployment</li>
-                </ul>
-
-                <a href="product/dialer.html" class="solution-cta">Explore Dialer →</a>
+    <!-- What We Build -->
+    <section id="solutions" class="builds-section">
+        <div class="builds-container">
+            <div class="builds-header">
+                <h2>What We Build</h2>
+                <p>We're not a software vendor. We're builders — and we'll automate whatever is slowing you down most.</p>
             </div>
 
-            <!-- Enrichment Card -->
-            <div class="solution-card">
-                <div class="solution-badge">Data Enrichment</div>
-                <h3>Enrichment Tool</h3>
-                <p>Never call the wrong number again. Waterfall enrichment finds verified mobile numbers and emails with confidence scores, giving you clean, complete prospect lists.</p>
-                
-                <ul class="solution-features">
-                    <li>Append missing mobile & email</li>
-                    <li>Confidence scoring on every result</li>
-                    <li>Bulk upload & API access</li>
-                    <li>GDPR & TCPA compliant</li>
-                    <li>Works solo or with the dialer</li>
-                </ul>
+            <div class="builds-grid">
+                <div class="build-card">
+                    <span class="build-icon">🔁</span>
+                    <h3>Lead Follow-Up & Outreach</h3>
+                    <p>Automated sequences that reach out, follow up, and qualify leads — without a rep lifting a finger. Personalized at scale.</p>
+                </div>
 
-                <a href="product/enrichment.html" class="solution-cta">Explore Enrichment →</a>
-            </div>
-        </div>
+                <div class="build-card">
+                    <span class="build-icon">📄</span>
+                    <h3>Document Processing & Data Extraction</h3>
+                    <p>Turn PDFs, forms, and inbound emails into structured data automatically. No more manual entry, no more errors.</p>
+                </div>
 
-        <!-- Integration Note -->
-        <div class="integrations-section" style="margin-top: 80px; margin-left: -20px; margin-right: -20px;">
-            <div class="integrations-header">
-                <h3>Works with your existing CRM</h3>
-                <p style="font-size: 14px; color: rgba(0,0,0,0.6); margin: 0;">Salesforce, HubSpot, Pipedrive, Zoho, Monday.com, Close, and more</p>
+                <div class="build-card">
+                    <span class="build-icon">🗂️</span>
+                    <h3>CRM Auto-Population & Enrichment</h3>
+                    <p>Contacts enriched and records updated the moment they enter your pipeline. Your CRM stays clean without anyone touching it.</p>
+                </div>
+
+                <div class="build-card">
+                    <span class="build-icon">📅</span>
+                    <h3>Scheduling & Qualification Workflows</h3>
+                    <p>AI that screens, scores, and books meetings with your best prospects — so your team only talks to people worth their time.</p>
+                </div>
             </div>
-            <div class="trust-ticker-wrapper">
-                <div class="trust-ticker">
-                    <img src="logos/salesforce.png" alt="Salesforce" class="trust-logo">
-                    <img src="logos/hubspot.png" alt="HubSpot" class="trust-logo">
-                    <img src="logos/pipedrive.png" alt="Pipedrive" class="trust-logo">
-                    <img src="logos/zoho.png" alt="Zoho CRM" class="trust-logo">
-                    <img src="logos/monday.png" alt="Monday.com" class="trust-logo">
-                    <img src="logos/close.png" alt="Close CRM" class="trust-logo">
-                    <!-- Duplicate for seamless loop -->
-                    <img src="logos/salesforce.png" alt="Salesforce" class="trust-logo">
-                    <img src="logos/hubspot.png" alt="HubSpot" class="trust-logo">
-                    <img src="logos/pipedrive.png" alt="Pipedrive" class="trust-logo">
-                    <img src="logos/zoho.png" alt="Zoho CRM" class="trust-logo">
-                    <img src="logos/monday.png" alt="Monday.com" class="trust-logo">
-                    <img src="logos/close.png" alt="Close CRM" class="trust-logo">
-                    <!-- Third set for mobile seamless loop -->
-                    <img src="logos/salesforce.png" alt="Salesforce" class="trust-logo">
-                    <img src="logos/hubspot.png" alt="HubSpot" class="trust-logo">
-                    <img src="logos/pipedrive.png" alt="Pipedrive" class="trust-logo">
-                    <img src="logos/zoho.png" alt="Zoho CRM" class="trust-logo">
-                    <img src="logos/monday.png" alt="Monday.com" class="trust-logo">
-                    <img src="logos/close.png" alt="Close CRM" class="trust-logo">
+
+            <!-- Proof bar -->
+            <div class="proof-bar">
+                <p class="proof-bar-label">Tools we've already shipped</p>
+                <div class="proof-tools">
+                    <span class="proof-tool-pill">⚡ Power Dialer — 3x call volume</span>
+                    <span class="proof-tool-pill">🔍 Enrichment Tool — verified mobile & email</span>
+                    <span class="proof-tool-pill">+ whatever you need next</span>
                 </div>
             </div>
         </div>
@@ -410,11 +392,11 @@
         <div class="container">
             <div class="contact-simple">
                 <h2 class="section-title">See It In Action</h2>
-                <p class="section-subtitle">Book a 20-minute demo and see exactly how we eliminate your bottlenecks</p>
+                <p class="section-subtitle">Book a 20-minute call and we'll show you exactly where your team is losing time</p>
                 <a href="https://calendly.com/outdials/demo" target="_blank" rel="noopener noreferrer" class="btn-primary glow-button btn-large">
-                    Schedule Demo
+                    Schedule a Call
                 </a>
-                <p class="hero-subtext">7-day free trial • No credit card required</p>
+                <p class="hero-subtext">No pitch decks. No pressure. Just a real conversation.</p>
             </div>
         </div>
     </section>
@@ -438,7 +420,7 @@
                         </span>
                         <span class="logo-text">utDials</span>
                     </a>
-                    <p>Stop Wasting Time. Start Selling.</p>
+                    <p>Less Busywork. More Revenue.</p>
                 </div>
                 <div class="footer-links">
                     <div class="footer-column">
@@ -454,7 +436,7 @@
                     </div>
                     <div class="footer-column">
                         <h4>Contact</h4>
-                        <a href="mailto:hey@outdials.com">hello@outdials.com</a>
+                        <a href="mailto:hey@outdials.com">hey@outdials.com</a>
                         <a href="#contact">Book a Demo</a>
                     </div>
                 </div>
@@ -466,22 +448,19 @@
     </footer>
 
     <script>
-        // Dropdown toggle
         const productDropdown = document.querySelector('.product-dropdown');
         const dropdownToggle = document.querySelector('.dropdown-toggle');
 
-        dropdownToggle.addEventListener('click', (e) => {
+        dropdownToggle.addEventListener('click', () => {
             productDropdown.classList.toggle('active');
         });
 
-        // Close dropdown when clicking outside
         document.addEventListener('click', (e) => {
             if (!productDropdown.contains(e.target)) {
                 productDropdown.classList.remove('active');
             }
         });
 
-        // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const href = this.getAttribute('href');
@@ -489,10 +468,7 @@
                     e.preventDefault();
                     const target = document.querySelector(href);
                     if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                 }
             });
