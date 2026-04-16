@@ -32,13 +32,13 @@
         .process-header h2 {
             font-size: 2.5rem;
             font-weight: 600;
-            color: #1a1a1a;
+            color: #ffffff;
             margin-bottom: 14px;
         }
 
         .process-header p {
             font-size: 17px;
-            color: rgba(0,0,0,0.55);
+            color: rgba(255,255,255,0.6);
             max-width: 520px;
             margin: 0 auto;
             line-height: 1.7;
@@ -51,7 +51,6 @@
             position: relative;
         }
 
-        /* connector line between steps */
         .process-steps::before {
             content: '';
             position: absolute;
@@ -59,7 +58,7 @@
             left: calc(16.66% + 16px);
             right: calc(16.66% + 16px);
             height: 1px;
-            background: linear-gradient(90deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15));
+            background: rgba(255,255,255,0.12);
             z-index: 0;
         }
 
@@ -87,38 +86,38 @@
             width: 72px;
             height: 72px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.7);
+            background: rgba(255,255,255,0.07);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.5);
-            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.2);
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 28px;
             font-size: 22px;
             font-weight: 700;
-            color: rgba(0,0,0,0.35);
+            color: rgba(255,255,255,0.4);
             letter-spacing: -0.5px;
             transition: all 0.3s ease;
         }
 
         .process-step:hover .step-number {
-            background: rgba(255,255,255,0.95);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-            color: rgba(0,0,0,0.7);
+            background: rgba(255,255,255,0.15);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            color: rgba(255,255,255,0.9);
             transform: translateY(-4px);
         }
 
         .process-step h3 {
             font-size: 19px;
             font-weight: 600;
-            color: #1a1a1a;
+            color: #ffffff;
             margin-bottom: 12px;
         }
 
         .process-step p {
             font-size: 14px;
-            color: rgba(0,0,0,0.55);
+            color: rgba(255,255,255,0.5);
             line-height: 1.75;
         }
 
@@ -128,131 +127,144 @@
         }
 
         .builds-container {
-            max-width: 1100px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
         .builds-header {
             text-align: center;
-            margin-bottom: 64px;
+            margin-bottom: 56px;
         }
 
         .builds-header h2 {
             font-size: 2.5rem;
             font-weight: 600;
-            color: #1a1a1a;
+            color: #ffffff;
             margin-bottom: 14px;
         }
 
         .builds-header p {
             font-size: 17px;
-            color: rgba(0,0,0,0.55);
+            color: rgba(255,255,255,0.55);
             max-width: 520px;
             margin: 0 auto;
         }
 
-        .builds-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
-        }
-
-        @media (max-width: 768px) {
-            .builds-grid { grid-template-columns: 1fr; }
-        }
-
-        .build-card {
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 16px;
-            padding: 32px 24px;
-            transition: all 0.3s cubic-bezier(0.23,1,0.32,1);
-            animation: fadeInUp 0.7s ease-out backwards;
-        }
-
-        .build-card:nth-child(1) { animation-delay: 0.1s; }
-        .build-card:nth-child(2) { animation-delay: 0.2s; }
-        .build-card:nth-child(3) { animation-delay: 0.3s; }
-        .build-card:nth-child(4) { animation-delay: 0.4s; }
-
-        .build-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(255,255,255,0.7);
-            box-shadow: 0 24px 48px rgba(0,0,0,0.1);
-        }
-
-        .build-icon {
-            font-size: 36px;
-            margin-bottom: 18px;
-            display: block;
-        }
-
-        .build-card h3 {
-            font-size: 19px;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 10px;
-        }
-
-        .build-card p {
-            font-size: 14px;
-            color: rgba(0,0,0,0.55);
-            line-height: 1.75;
-        }
-
-        /* Proof bar */
-        .proof-bar {
-            border-top: 1px solid rgba(0,0,0,0.07);
-            padding-top: 48px;
-            text-align: center;
-        }
-
-        .proof-bar-label {
-            font-size: 13px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: rgba(0,0,0,0.4);
-            margin-bottom: 24px;
-        }
-
-        .proof-tools {
+        /* Tab pills */
+        .tab-pills {
             display: flex;
             justify-content: center;
-            align-items: center;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
+            margin-bottom: 40px;
         }
 
-        .proof-tool-pill {
-            background: rgba(255,255,255,0.65);
-            border: 1px solid rgba(0,0,0,0.08);
-            border-radius: 100px;
-            padding: 8px 20px;
+        .tab-pill {
             font-size: 13px;
             font-weight: 500;
-            color: rgba(0,0,0,0.65);
-            backdrop-filter: blur(8px);
-            transition: all 0.2s;
+            padding: 8px 20px;
+            border-radius: 100px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: transparent;
+            color: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
         }
 
-        .proof-tool-pill:hover {
-            background: rgba(255,255,255,0.9);
-            border-color: rgba(0,0,0,0.15);
+        .tab-pill:hover {
+            border-color: rgba(255,255,255,0.4);
+            color: rgba(255,255,255,0.85);
+        }
+
+        .tab-pill.active {
+            background: #ffffff;
+            border-color: #ffffff;
+            color: #000000;
+        }
+
+        /* Tab content panel */
+        .tab-panel {
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 48px;
+            background: rgba(255,255,255,0.04);
+            backdrop-filter: blur(12px);
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            animation: fadeInUp 0.35s ease-out;
+        }
+
+        @media (max-width: 640px) {
+            .tab-panel.active { flex-direction: column; gap: 24px; }
+            .tab-panel { padding: 28px 24px; }
+        }
+
+        .tab-panel-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+
+        .tab-panel-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: rgba(255,255,255,0.7);
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .tab-panel-body h3 {
+            font-size: 22px;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 0 0 14px;
+        }
+
+        .tab-panel-body p {
+            font-size: 15px;
+            color: rgba(255,255,255,0.58);
+            line-height: 1.8;
+            margin: 0 0 24px;
+        }
+
+        .tab-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tab-tag {
+            font-size: 12px;
+            font-weight: 500;
+            padding: 5px 14px;
+            border-radius: 100px;
+            border: 1px solid rgba(255,255,255,0.12);
+            color: rgba(255,255,255,0.4);
         }
 
         /* Animations */
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(32px); }
+            from { opacity: 0; transform: translateY(20px); }
             to   { opacity: 1; transform: translateY(0); }
         }
 
-        .glow-text {
-            color: inherit;
-        }
+        .glow-text { color: inherit; }
 
-        /* Force hero text to be fully visible regardless of bg */
         .hero .hero-title,
         .hero .hero-trial-pill {
             color: #ffffff !important;
@@ -352,29 +364,92 @@
                 <p>We're not a software vendor. We're builders — and we'll automate whatever is slowing you down most.</p>
             </div>
 
-            <div class="builds-grid">
-                <div class="build-card">
-                    <span class="build-icon">🔁</span>
+            <div class="tab-pills">
+                <button class="tab-pill active" data-tab="outreach">Outreach</button>
+                <button class="tab-pill" data-tab="documents">Documents</button>
+                <button class="tab-pill" data-tab="crm">CRM</button>
+                <button class="tab-pill" data-tab="scheduling">Scheduling</button>
+            </div>
+
+            <div class="tab-panel active" id="tab-outreach">
+                <div class="tab-panel-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M22 2L11 13"/>
+                        <path d="M22 2L15 22 11 13 2 9l20-7z"/>
+                    </svg>
+                </div>
+                <div class="tab-panel-body">
                     <h3>Lead Follow-Up & Outreach</h3>
-                    <p>Automated sequences that reach out, follow up, and qualify leads — without a rep lifting a finger. Personalized at scale.</p>
+                    <p>Automated sequences that reach out, follow up, and qualify leads — without a rep lifting a finger. Personalized at scale across email, phone, and SMS so no prospect falls through the cracks.</p>
+                    <div class="tab-tags">
+                        <span class="tab-tag">Email sequences</span>
+                        <span class="tab-tag">SMS follow-up</span>
+                        <span class="tab-tag">Lead scoring</span>
+                        <span class="tab-tag">Personalization at scale</span>
+                    </div>
                 </div>
+            </div>
 
-                <div class="build-card">
-                    <span class="build-icon">📄</span>
+            <div class="tab-panel" id="tab-documents">
+                <div class="tab-panel-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                    </svg>
+                </div>
+                <div class="tab-panel-body">
                     <h3>Document Processing & Data Extraction</h3>
-                    <p>Turn PDFs, forms, and inbound emails into structured data automatically. No more manual entry, no more errors.</p>
+                    <p>Turn PDFs, forms, and inbound emails into structured data automatically. No more manual entry, no more errors. Your team stops re-typing and starts acting on the information instead.</p>
+                    <div class="tab-tags">
+                        <span class="tab-tag">PDF parsing</span>
+                        <span class="tab-tag">Email triage</span>
+                        <span class="tab-tag">Auto-filing</span>
+                        <span class="tab-tag">Structured data export</span>
+                    </div>
                 </div>
+            </div>
 
-                <div class="build-card">
-                    <span class="build-icon">🗂️</span>
+            <div class="tab-panel" id="tab-crm">
+                <div class="tab-panel-icon">
+                    <svg viewBox="0 0 24 24">
+                        <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+                    </svg>
+                </div>
+                <div class="tab-panel-body">
                     <h3>CRM Auto-Population & Enrichment</h3>
-                    <p>Contacts enriched and records updated the moment they enter your pipeline. Your CRM stays clean without anyone touching it.</p>
+                    <p>Contacts enriched and records updated the moment they enter your pipeline. Your CRM stays clean without anyone touching it — so your team always has the context they need to close.</p>
+                    <div class="tab-tags">
+                        <span class="tab-tag">Contact enrichment</span>
+                        <span class="tab-tag">Auto-update</span>
+                        <span class="tab-tag">Data hygiene</span>
+                        <span class="tab-tag">Pipeline sync</span>
+                    </div>
                 </div>
+            </div>
 
-                <div class="build-card">
-                    <span class="build-icon">📅</span>
+            <div class="tab-panel" id="tab-scheduling">
+                <div class="tab-panel-icon">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="16" y1="2" x2="16" y2="6"/>
+                        <line x1="8" y1="2" x2="8" y2="6"/>
+                        <line x1="3" y1="10" x2="21" y2="10"/>
+                        <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/>
+                    </svg>
+                </div>
+                <div class="tab-panel-body">
                     <h3>Scheduling & Qualification Workflows</h3>
-                    <p>AI that screens, scores, and books meetings with your best prospects — so your team only talks to people worth their time.</p>
+                    <p>AI that screens, scores, and books meetings with your best prospects — so your team only talks to people worth their time. No back-and-forth, no unqualified calls eating up your calendar.</p>
+                    <div class="tab-tags">
+                        <span class="tab-tag">Lead screening</span>
+                        <span class="tab-tag">Auto-booking</span>
+                        <span class="tab-tag">Calendar sync</span>
+                        <span class="tab-tag">Qualification logic</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -464,6 +539,17 @@
                         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                 }
+            });
+        });
+
+        // Tab switcher
+        document.querySelectorAll('.tab-pill').forEach(pill => {
+            pill.addEventListener('click', () => {
+                const target = pill.dataset.tab;
+                document.querySelectorAll('.tab-pill').forEach(p => p.classList.remove('active'));
+                document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+                document.getElementById('tab-' + target).classList.add('active');
             });
         });
     </script>
