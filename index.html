@@ -125,7 +125,6 @@
         /* ── What We Build ── */
         .builds-section {
             padding: 100px 20px;
-            background: rgba(255,255,255,0.2);
         }
 
         .builds-container {
@@ -156,7 +155,6 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 24px;
-            margin-bottom: 64px;
         }
 
         @media (max-width: 768px) {
@@ -164,12 +162,12 @@
         }
 
         .build-card {
-            background: rgba(255,255,255,0.55);
+            background: rgba(255, 255, 255, 0.5);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.4);
-            border-radius: 18px;
-            padding: 36px 32px;
-            transition: all 0.35s cubic-bezier(0.23,1,0.32,1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 16px;
+            padding: 32px 24px;
+            transition: all 0.3s cubic-bezier(0.23,1,0.32,1);
             animation: fadeInUp 0.7s ease-out backwards;
         }
 
@@ -251,10 +249,15 @@
         }
 
         .glow-text {
-            background: linear-gradient(135deg, rgba(0,0,0,0.85), rgba(0,0,0,0.6));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: inherit;
+        }
+
+        /* Force hero text to be fully visible regardless of bg */
+        .hero .hero-title,
+        .hero .hero-trial-pill {
+            color: #ffffff !important;
+            background: none !important;
+            -webkit-text-fill-color: #ffffff !important;
         }
     </style>
 </head>
@@ -372,16 +375,6 @@
                     <span class="build-icon">📅</span>
                     <h3>Scheduling & Qualification Workflows</h3>
                     <p>AI that screens, scores, and books meetings with your best prospects — so your team only talks to people worth their time.</p>
-                </div>
-            </div>
-
-            <!-- Proof bar -->
-            <div class="proof-bar">
-                <p class="proof-bar-label">Tools we've already shipped</p>
-                <div class="proof-tools">
-                    <span class="proof-tool-pill">⚡ Power Dialer — 3x call volume</span>
-                    <span class="proof-tool-pill">🔍 Enrichment Tool — verified mobile & email</span>
-                    <span class="proof-tool-pill">+ whatever you need next</span>
                 </div>
             </div>
         </div>
