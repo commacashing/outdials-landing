@@ -7,6 +7,16 @@
     <link rel="icon" href="icon.png">
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* ── Consistent section spacing ── */
+        .process-section,
+        .builds-section {
+            padding: 100px 20px;
+        }
+
+        .trust-bar {
+            padding: 48px 20px;
+        }
+
         /* ── Hero ── */
         .hero-title {
             font-size: 3.5rem;
@@ -14,11 +24,77 @@
             margin-bottom: 20px;
         }
 
-        /* ── How We Find Your Bottleneck ── */
-        .process-section {
-            padding: 100px 20px;
+        /* ── Nav dropdown ── */
+        .product-dropdown {
+            position: relative;
         }
 
+        .dropdown-toggle {
+            cursor: pointer;
+            color: inherit;
+            font-size: inherit;
+            user-select: none;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 12px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15,15,15,0.95);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 8px;
+            min-width: 160px;
+            z-index: 100;
+        }
+
+        .product-dropdown.active .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 16px;
+            border-radius: 8px;
+            color: rgba(255,255,255,0.7);
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.15s ease;
+            white-space: nowrap;
+        }
+
+        .dropdown-menu a:hover {
+            background: rgba(255,255,255,0.08);
+            color: #ffffff;
+        }
+
+        /* ── CRM Ticker ── */
+        .trust-ticker-wrapper {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .trust-ticker {
+            display: flex;
+            gap: 48px;
+            align-items: center;
+            width: max-content;
+            animation: ticker-scroll 28s linear infinite;
+        }
+
+        @keyframes ticker-scroll {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-33.333%); }
+        }
+
+        .trust-ticker:hover {
+            animation-play-state: paused;
+        }
+
+        /* ── Process ── */
         .process-container {
             max-width: 1100px;
             margin: 0 auto;
@@ -122,10 +198,6 @@
         }
 
         /* ── What We Build ── */
-        .builds-section {
-            padding: 100px 20px;
-        }
-
         .builds-container {
             max-width: 900px;
             margin: 0 auto;
@@ -150,7 +222,6 @@
             margin: 0 auto;
         }
 
-        /* Tab pills */
         .tab-pills {
             display: flex;
             justify-content: center;
@@ -183,7 +254,6 @@
             color: #000000;
         }
 
-        /* Tab content panel */
         .tab-panel {
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 20px;
@@ -257,7 +327,6 @@
             color: rgba(255,255,255,0.4);
         }
 
-        /* Animations */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to   { opacity: 1; transform: translateY(0); }
@@ -292,15 +361,15 @@
                 <span class="logo-text">utDials</span>
             </a>
             <div class="nav-links">
+                <a href="about.html">About</a>
                 <div class="product-dropdown">
-                    <span class="dropdown-toggle">Product</span>
+                    <span class="dropdown-toggle">Solutions</span>
                     <div class="dropdown-menu">
-                        <a href="product/dialer.html">Dialer</a>
-                        <a href="product/enrichment.html">Enrichment</a>
+                        <a href="product/dialer.html">Power Dialer</a>
+                        <a href="product/enrichment.html">Lead Enrichment</a>
                     </div>
                 </div>
-                <a href="product/dialer.html#pricing">Pricing</a>
-                <a href="product/dialer.html#faq">FAQ</a>
+                <a href="case-studies.html">Case Studies</a>
                 <a href="#contact" class="nav-cta">Book Demo</a>
             </div>
         </div>
@@ -333,20 +402,17 @@
                 <h2>How We Find Your Bottleneck</h2>
                 <p>Every business bleeds time somewhere. Here's how we find yours.</p>
             </div>
-
             <div class="process-steps">
                 <div class="process-step">
                     <div class="step-number">01</div>
                     <h3>Audit Your Workflow</h3>
                     <p>We map where your team's time actually goes in a 30-minute call.</p>
                 </div>
-
                 <div class="process-step">
                     <div class="step-number">02</div>
                     <h3>Identify the Leverage Point</h3>
                     <p>We find the single automation that frees the most hours or unlocks the most revenue.</p>
                 </div>
-
                 <div class="process-step">
                     <div class="step-number">03</div>
                     <h3>Build & Deploy</h3>
@@ -368,14 +434,12 @@
                     <img src="logos/zoho.png" alt="Zoho CRM" class="trust-logo">
                     <img src="logos/monday.png" alt="Monday.com" class="trust-logo">
                     <img src="logos/close.png" alt="Close CRM" class="trust-logo">
-                    <!-- duplicate for seamless loop -->
                     <img src="logos/salesforce.png" alt="Salesforce" class="trust-logo">
                     <img src="logos/hubspot.png" alt="HubSpot" class="trust-logo">
                     <img src="logos/pipedrive.png" alt="Pipedrive" class="trust-logo">
                     <img src="logos/zoho.png" alt="Zoho CRM" class="trust-logo">
                     <img src="logos/monday.png" alt="Monday.com" class="trust-logo">
                     <img src="logos/close.png" alt="Close CRM" class="trust-logo">
-                    <!-- third set for mobile seamless loop -->
                     <img src="logos/salesforce.png" alt="Salesforce" class="trust-logo">
                     <img src="logos/hubspot.png" alt="HubSpot" class="trust-logo">
                     <img src="logos/pipedrive.png" alt="Pipedrive" class="trust-logo">
@@ -523,10 +587,14 @@
                 </div>
                 <div class="footer-links">
                     <div class="footer-column">
-                        <h4>Product</h4>
-                        <a href="product/dialer.html">Dialer</a>
-                        <a href="product/enrichment.html">Enrichment</a>
-                        <a href="product/dialer.html#pricing">Pricing</a>
+                        <h4>Solutions</h4>
+                        <a href="product/dialer.html">Power Dialer</a>
+                        <a href="product/enrichment.html">Lead Enrichment</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <a href="about.html">About</a>
+                        <a href="case-studies.html">Case Studies</a>
                     </div>
                     <div class="footer-column">
                         <h4>Legal</h4>
@@ -573,7 +641,6 @@
             });
         });
 
-        // Tab switcher
         document.querySelectorAll('.tab-pill').forEach(pill => {
             pill.addEventListener('click', () => {
                 const target = pill.dataset.tab;
