@@ -337,9 +337,48 @@
             background: none !important;
             -webkit-text-fill-color: #ffffff !important;
         }
+
+        /* ── Logo Rain ── */
+        #logo-rain {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            overflow: hidden;
+        }
+
+        .rain-logo {
+            position: absolute;
+            top: -120px;
+            mix-blend-mode: screen;
+            opacity: 0;
+            animation: logoFall linear forwards;
+            will-change: transform, opacity;
+        }
+
+        @keyframes logoFall {
+            0% {
+                opacity: 0;
+                transform: translateY(0px) rotate(var(--rot-start));
+            }
+            8% {
+                opacity: var(--peak-opacity);
+            }
+            75% {
+                opacity: var(--peak-opacity);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(var(--fall-dist)) rotate(var(--rot-end));
+            }
+        }
     </style>
 </head>
 <body>
+
+    <!-- Logo Rain Canvas -->
+    <div id="logo-rain"></div>
+
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-container">
@@ -612,6 +651,7 @@
     </footer>
 
     <script>
+        /* ── Nav dropdown ── */
         const productDropdown = document.querySelector('.product-dropdown');
         const dropdownToggle = document.querySelector('.dropdown-toggle');
 
@@ -638,6 +678,7 @@
             });
         });
 
+        /* ── Tab switcher ── */
         document.querySelectorAll('.tab-pill').forEach(pill => {
             pill.addEventListener('click', () => {
                 const target = pill.dataset.tab;
@@ -647,6 +688,62 @@
                 document.getElementById('tab-' + target).classList.add('active');
             });
         });
+
+        /* ── Logo Rain ── */
+        (function () {
+            const container = document.getElementById('logo-rain');
+            const COUNT = 28;          // total logos to spawn
+            const BURST_WINDOW = 1400; // ms over which all logos launch
+            const vw = window.innerWidth;
+            const vh = window.innerHeight;
+
+            for (let i = 0; i < COUNT; i++) {
+                const img = document.createElement('img');
+                img.src = 'Transparent_Logo.png';
+                img.className = 'rain-logo';
+
+                // Random size between 36px and 100px
+                const size = 36 + Math.random() * 64;
+                img.style.width  = size + 'px';
+                img.style.height = size + 'px';
+
+                // Random horizontal position
+                const xPos = Math.random() * (vw + 80) - 40;
+                img.style.left = xPos + 'px';
+
+                // How far it falls — enough to clear the viewport
+                const fallDist = vh + size + 80;
+                img.style.setProperty('--fall-dist', fallDist + 'px');
+
+                // Random rotation start/end for tumble effect
+                const rotStart = (Math.random() - 0.5) * 40;
+                const rotEnd   = rotStart + (Math.random() - 0.5) * 120;
+                img.style.setProperty('--rot-start', rotStart + 'deg');
+                img.style.setProperty('--rot-end',   rotEnd   + 'deg');
+
+                // Opacity — smaller logos slightly more transparent
+                const peakOpacity = 0.12 + (size / 100) * 0.28;
+                img.style.setProperty('--peak-opacity', peakOpacity.toFixed(2));
+
+                // Stagger launch within burst window
+                const delay = Math.random() * BURST_WINDOW;
+
+                // Duration: 1.0s–2.0s so fast but not instant
+                const duration = 1000 + Math.random() * 1000;
+
+                img.style.animationDelay    = delay + 'ms';
+                img.style.animationDuration = duration + 'ms';
+
+                container.appendChild(img);
+
+                // Remove from DOM once animation is done so it's clean
+                const totalTime = delay + duration + 50;
+                setTimeout(() => img.remove(), totalTime);
+            }
+
+            // Remove the container itself after everything is done
+            setTimeout(() => container.remove(), BURST_WINDOW + 2100);
+        })();
     </script>
 </body>
 </html>
