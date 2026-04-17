@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — OutDials</title>
+    <link rel="icon" href="icon.png">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ── Page wrapper ── */
+        .about-page {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 160px 24px 120px;
+        }
+
+        /* ── Hero ── */
+        .about-hero {
+            margin-bottom: 96px;
+        }
+
+        .about-hero-label {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: rgba(255,255,255,0.35);
+            margin-bottom: 24px;
+        }
+
+        .about-hero h1 {
+            font-size: 52px;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .about-hero-founder {
+            font-size: 15px;
+            color: rgba(255,255,255,0.35);
+            font-weight: 400;
+        }
+
+        /* ── Divider ── */
+        .about-divider {
+            height: 1px;
+            background: rgba(255,255,255,0.07);
+            margin: 64px 0;
+        }
+
+        /* ── Story ── */
+        .about-section {
+            margin-bottom: 80px;
+        }
+
+        .about-section-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: rgba(255,255,255,0.25);
+            margin-bottom: 32px;
+        }
+
+        /* Career progression */
+        .career-track {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin-bottom: 48px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+
+        .career-stop {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            flex-shrink: 0;
+        }
+
+        .career-stop-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.5);
+            white-space: nowrap;
+            padding: 6px 14px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 100px;
+            transition: all 0.2s;
+        }
+
+        .career-stop-label:hover {
+            color: rgba(255,255,255,0.85);
+            border-color: rgba(255,255,255,0.25);
+        }
+
+        .career-arrow {
+            font-size: 13px;
+            color: rgba(255,255,255,0.15);
+            padding: 0 10px;
+        }
+
+        .about-body p {
+            font-size: 17px;
+            line-height: 1.85;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 24px;
+        }
+
+        .about-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .about-body strong {
+            color: rgba(255,255,255,0.9);
+            font-weight: 500;
+        }
+
+        /* ── What we do ── */
+        .about-pillars {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 0;
+        }
+
+        .about-pillar {
+            flex: 1;
+            min-width: 180px;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px;
+            padding: 28px 24px;
+            background: rgba(255,255,255,0.03);
+            transition: all 0.25s ease;
+        }
+
+        .about-pillar:hover {
+            border-color: rgba(255,255,255,0.16);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .pillar-number {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.2);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .pillar-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .pillar-desc {
+            font-size: 13px;
+            color: rgba(255,255,255,0.4);
+            line-height: 1.65;
+        }
+
+        /* ── Quote ── */
+        .about-quote {
+            padding: 56px 0;
+            text-align: center;
+        }
+
+        .about-quote blockquote {
+            font-size: 26px;
+            font-weight: 500;
+            line-height: 1.5;
+            color: rgba(255,255,255,0.85);
+            letter-spacing: -0.01em;
+            max-width: 600px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+
+        /* ── CTA ── */
+        .about-cta {
+            text-align: center;
+            padding-top: 24px;
+        }
+
+        .about-cta p {
+            font-size: 16px;
+            color: rgba(255,255,255,0.45);
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+
+        /* Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 640px) {
+            .about-hero h1 { font-size: 36px; }
+            .about-quote blockquote { font-size: 20px; }
+            .about-pillars { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="./" class="nav-logo">
+                <span class="broken-o">
+                    <svg viewBox="0 0 42 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <mask id="slitMask">
+                                <rect width="42" height="48" fill="white"/>
+                                <line x1="25" y1="20" x2="33" y2="8" stroke="black" stroke-width="5" stroke-linecap="round"/>
+                            </mask>
+                        </defs>
+                        <circle cx="21" cy="24" r="18" stroke="currentColor" stroke-width="6" fill="none" mask="url(#slitMask)"/>
+                    </svg>
+                </span>
+                <span class="logo-text">utDials</span>
+            </a>
+            <div class="nav-links">
+                <a href="about.html" style="color: #ffffff;">About</a>
+                <div class="product-dropdown">
+                    <span class="dropdown-toggle">Solutions</span>
+                    <div class="dropdown-menu">
+                        <a href="product/dialer.html">Power Dialer</a>
+                        <a href="product/enrichment.html">Lead Enrichment</a>
+                    </div>
+                </div>
+                <a href="#contact" class="nav-cta">Book Demo</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="about-page">
+
+        <!-- Hero -->
+        <div class="about-hero fade-up">
+            <p class="about-hero-label">About</p>
+            <h1>I've worked every position in the room.</h1>
+            <p class="about-hero-founder">Anton Schlueter — Founder, OutDials</p>
+        </div>
+
+        <!-- Story -->
+        <div class="about-section fade-up">
+            <p class="about-section-label">The Story</p>
+
+            <div class="career-track">
+                <div class="career-stop">
+                    <span class="career-stop-label">Chef</span>
+                </div>
+                <span class="career-arrow">→</span>
+                <div class="career-stop">
+                    <span class="career-stop-label">Bartender</span>
+                </div>
+                <span class="career-arrow">→</span>
+                <div class="career-stop">
+                    <span class="career-stop-label">Sales Rep</span>
+                </div>
+                <span class="career-arrow">→</span>
+                <div class="career-stop">
+                    <span class="career-stop-label">Director of Operations</span>
+                </div>
+            </div>
+
+            <div class="about-body">
+                <p>Four completely different jobs. Same problem in every single one.</p>
+                <p>Time kept disappearing into the wrong things — inventory checks, onboarding paperwork, manual reporting. Hours that had nothing to do with actually making money. I watched it happen in kitchens, behind bars, on sales floors, and in boardrooms.</p>
+                <p>At some point it stopped being a coincidence. <strong>Most businesses don't have a people problem. They have a process problem.</strong></p>
+            </div>
+        </div>
+
+        <div class="about-divider"></div>
+
+        <!-- What OutDials Is -->
+        <div class="about-section fade-up">
+            <p class="about-section-label">What We Do</p>
+            <div class="about-pillars">
+                <div class="about-pillar">
+                    <p class="pillar-number">01</p>
+                    <p class="pillar-title">Audit</p>
+                    <p class="pillar-desc">We find where your team's time actually goes — not where you think it goes.</p>
+                </div>
+                <div class="about-pillar">
+                    <p class="pillar-number">02</p>
+                    <p class="pillar-title">Build</p>
+                    <p class="pillar-desc">Custom automations built for your stack. No off-the-shelf software.</p>
+                </div>
+                <div class="about-pillar">
+                    <p class="pillar-number">03</p>
+                    <p class="pillar-title">Integrate</p>
+                    <p class="pillar-desc">We make sure it works inside your existing setup and your team actually uses it.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-divider"></div>
+
+        <!-- Philosophy -->
+        <div class="about-quote fade-up">
+            <blockquote>"Effortless isn't lazy. It's what happens when the right systems are finally in place."</blockquote>
+        </div>
+
+        <div class="about-divider"></div>
+
+        <!-- CTA -->
+        <div class="about-cta fade-up">
+            <p>If any of this sounds familiar, let's talk.<br>Thirty minutes is enough to find the problem.</p>
+            <a href="https://calendly.com/outdials/demo" target="_blank" rel="noopener noreferrer" class="btn-primary glow-button">
+                Book a Call
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="./" class="nav-logo">
+                        <span class="broken-o">
+                            <svg viewBox="0 0 42 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <mask id="slitMaskFooter">
+                                        <rect width="42" height="48" fill="white"/>
+                                        <line x1="25" y1="20" x2="33" y2="8" stroke="black" stroke-width="5" stroke-linecap="round"/>
+                                    </mask>
+                                </defs>
+                                <circle cx="21" cy="24" r="18" stroke="currentColor" stroke-width="6" fill="none" mask="url(#slitMaskFooter)"/>
+                            </svg>
+                        </span>
+                        <span class="logo-text">utDials</span>
+                    </a>
+                    <p>Less Busywork. More Revenue.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Solutions</h4>
+                        <a href="product/dialer.html">Power Dialer</a>
+                        <a href="product/enrichment.html">Lead Enrichment</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <a href="about.html">About</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <a href="/privacy.html">Privacy Policy</a>
+                        <a href="/terms.html">Terms of Service</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Contact</h4>
+                        <a href="mailto:hey@outdials.com">hey@outdials.com</a>
+                        <a href="https://calendly.com/outdials/demo" target="_blank">Book a Demo</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 OutDials. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /* ── Nav dropdown ── */
+        const productDropdown = document.querySelector('.product-dropdown');
+        const dropdownToggle = document.querySelector('.dropdown-toggle');
+
+        dropdownToggle.addEventListener('click', () => {
+            productDropdown.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!productDropdown.contains(e.target)) {
+                productDropdown.classList.remove('active');
+            }
+        });
+
+        /* ── Scroll fade-up ── */
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
