@@ -13,7 +13,6 @@
       padding: 160px 24px 120px;
     }
 
-    /* Hero */
     .enrich-hero {
       margin-bottom: 16px;
     }
@@ -36,73 +35,73 @@
       margin-bottom: 0;
     }
 
-    /* Divider */
     .enrich-divider {
       height: 1px;
       background: rgba(255,255,255,0.07);
       margin: 64px 0;
     }
 
-    /* How It Works */
-    .enrich-steps {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 0;
-      position: relative;
-      margin-bottom: 0;
+    /* Laptop demo */
+    .laptop-wrapper {
+      max-width: 780px;
+      margin: 0 auto;
     }
 
-    .enrich-steps::before {
-      content: '';
-      position: absolute;
-      top: 36px;
-      left: calc(16.66% + 16px);
-      right: calc(16.66% + 16px);
-      height: 1px;
-      background: rgba(255,255,255,0.12);
-      z-index: 0;
+    .laptop-body {
+      background: #1a1a1a;
+      border-radius: 16px 16px 0 0;
+      padding: 14px 14px 0;
+      border: 2px solid #2a2a2a;
     }
 
-    .enrich-step {
-      text-align: center;
-      padding: 0 32px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .enrich-step-number {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.15);
+    .laptop-camera {
       display: flex;
-      align-items: center;
       justify-content: center;
-      margin: 0 auto 28px;
-      font-size: 22px;
-      font-weight: 700;
-      color: rgba(255,255,255,0.4);
-      transition: all 0.3s ease;
+      margin-bottom: 10px;
     }
 
-    .enrich-step:hover .enrich-step-number {
-      background: rgba(255,255,255,0.15);
-      color: rgba(255,255,255,0.9);
-      transform: translateY(-4px);
+    .laptop-camera-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #333;
     }
 
-    .enrich-step h3 {
-      font-size: 18px;
-      font-weight: 600;
-      color: #ffffff;
-      margin-bottom: 12px;
+    .laptop-screen {
+      background: #000;
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 16/10;
+      position: relative;
     }
 
-    .enrich-step p {
-      font-size: 14px;
-      color: rgba(255,255,255,0.5);
-      line-height: 1.75;
+    .laptop-hinge {
+      height: 6px;
+      background: #141414;
+      border-radius: 0 0 2px 2px;
+      border-left: 2px solid #222;
+      border-right: 2px solid #222;
+      border-bottom: 2px solid #222;
+    }
+
+    .laptop-base {
+      height: 16px;
+      background: #1c1c1c;
+      border-radius: 0 0 14px 14px;
+      border: 2px solid #2a2a2a;
+      border-top: none;
+      position: relative;
+    }
+
+    .laptop-trackpad {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 4px;
+      width: 70px;
+      height: 5px;
+      background: #111;
+      border-radius: 2px;
     }
 
     /* Stats */
@@ -151,7 +150,6 @@
     .enrich-table-header {
       display: grid;
       grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1.2fr 0.6fr;
-      gap: 0;
       padding: 16px 24px;
       border-bottom: 1px solid rgba(255,255,255,0.07);
     }
@@ -167,19 +165,13 @@
     .enrich-table-row {
       display: grid;
       grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1.2fr 0.6fr;
-      gap: 0;
       padding: 14px 24px;
       border-bottom: 1px solid rgba(255,255,255,0.04);
       transition: background 0.2s;
     }
 
-    .enrich-table-row:last-child {
-      border-bottom: none;
-    }
-
-    .enrich-table-row:hover {
-      background: rgba(255,255,255,0.03);
-    }
+    .enrich-table-row:last-child { border-bottom: none; }
+    .enrich-table-row:hover { background: rgba(255,255,255,0.03); }
 
     .enrich-table-row span {
       font-size: 13px;
@@ -188,24 +180,18 @@
       align-items: center;
     }
 
-    .enrich-table-row .col-phone {
+    .col-phone {
       color: #ffffff;
       font-weight: 600;
       font-family: 'Courier New', monospace;
     }
 
-    .enrich-table-row .col-score {
-      font-weight: 700;
-    }
-
+    .col-score { font-weight: 700; }
     .score-high { color: #10b981; }
     .score-existing { color: rgba(255,255,255,0.9); }
     .score-none { color: rgba(255,255,255,0.25); }
 
-    .col-new {
-      position: relative;
-    }
-
+    .col-new { position: relative; }
     .col-new::after {
       content: 'NEW';
       font-size: 9px;
@@ -217,54 +203,6 @@
       border-radius: 4px;
       padding: 2px 5px;
       margin-left: 8px;
-    }
-
-    /* FAQ */
-    .enrich-faq {
-      max-width: 760px;
-    }
-
-    /* Section headers */
-    .enrich-section-label {
-      font-size: 12px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: rgba(255,255,255,0.25);
-      margin-bottom: 40px;
-    }
-
-    /* Video */
-    .enrich-video-wrapper {
-      position: relative;
-      width: 100%;
-      border-radius: 16px;
-      overflow: hidden;
-      aspect-ratio: 16 / 9;
-      border: 1px solid rgba(255,255,255,0.1);
-      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
-    }
-
-    .enrich-video-wrapper iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    /* CTA */
-    .enrich-cta {
-      text-align: center;
-      padding-top: 24px;
-    }
-
-    .enrich-cta p {
-      font-size: 16px;
-      color: rgba(255,255,255,0.45);
-      margin-bottom: 28px;
-      line-height: 1.6;
     }
 
     /* Dropdown */
@@ -305,15 +243,15 @@
     }
     .dropdown-toggle:hover { color: #ffffff !important; }
 
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
     @media (max-width: 768px) {
       .enrich-hero h1 { font-size: 36px; }
-      .enrich-steps { grid-template-columns: 1fr; gap: 40px; }
-      .enrich-steps::before { display: none; }
       .enrich-stats { grid-template-columns: 1fr; }
-      .enrich-table-header,
-      .enrich-table-row { grid-template-columns: 1fr 1fr 1fr; }
+      .enrich-table-header, .enrich-table-row { grid-template-columns: 1fr 1fr 1fr; }
       .enrich-table-header span:nth-child(n+4),
       .enrich-table-row span:nth-child(n+4) { display: none; }
+      .laptop-wrapper { max-width: 100%; }
     }
   </style>
 </head>
@@ -362,33 +300,120 @@
 
     <div class="enrich-divider"></div>
 
-    <!-- How It Works -->
+    <!-- How It Works — Animated Demo -->
     <div style="margin-bottom: 80px;">
-      <p class="enrich-section-label">How It Works</p>
-      <div class="enrich-steps">
-        <div class="enrich-step">
-          <div class="enrich-step-number">01</div>
-          <h3>Upload Your List</h3>
-          <p>Drop in your Excel file with advisor names, location, and date of birth. CRD number optional but recommended.</p>
+      <h2 class="section-title" style="text-align:center; margin-bottom: 12px;">How It Works</h2>
+      <p class="section-subtitle" style="text-align:center; margin-bottom: 48px;">Upload. Enrich. Download. Done.</p>
+
+      <div class="laptop-wrapper">
+        <div class="laptop-body">
+          <div class="laptop-camera"><div class="laptop-camera-dot"></div></div>
+          <div class="laptop-screen">
+
+            <!-- Nav bar -->
+            <div style="background:#0a0a0a; border-bottom:1px solid rgba(255,255,255,0.08); padding:10px 20px; display:flex; align-items:center; justify-content:space-between; position:absolute; top:0; left:0; right:0; z-index:10;">
+              <div style="display:flex; align-items:center; gap:2px; font-size:13px; font-weight:700; color:#fff; line-height:1;">
+                <svg width="15" height="17" viewBox="0 0 42 48" fill="none" style="display:block;"><defs><mask id="nd"><rect width="42" height="48" fill="white"/><line x1="25" y1="20" x2="33" y2="8" stroke="black" stroke-width="5" stroke-linecap="round"/></mask></defs><circle cx="21" cy="24" r="18" stroke="white" stroke-width="6" fill="none" mask="url(#nd)"/></svg>
+                <span style="margin-left:1px;">utDials</span>
+              </div>
+              <div style="font-size:10px; color:rgba(255,255,255,0.3);">Lead Enrichment</div>
+              <div style="font-size:10px; color:rgba(255,255,255,0.3);">Logout</div>
+            </div>
+
+            <!-- Content area -->
+            <div style="position:absolute; top:38px; left:0; right:0; bottom:0; overflow:hidden;">
+
+              <!-- Phase 1: Idle -->
+              <div id="ep1" style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:16px; transition:opacity 0.5s;">
+                <div style="font-size:14px; font-weight:700; color:#fff; margin-bottom:4px;">Lead Enrichment Engine</div>
+                <div style="font-size:9px; color:rgba(255,255,255,0.45); margin-bottom:16px;">Upload your Excel file to enrich contacts with personal cell numbers</div>
+                <div id="edropzone" style="border:1.5px dashed rgba(255,255,255,0.15); border-radius:10px; padding:20px 32px; text-align:center; width:100%; max-width:320px; background:rgba(255,255,255,0.03); transition:border-color 0.4s, background 0.4s;">
+                  <div style="font-size:20px; margin-bottom:6px; color:rgba(255,255,255,0.5);">⬆</div>
+                  <div style="font-size:9px; font-weight:600; color:rgba(255,255,255,0.7); margin-bottom:3px;">Drag and drop your Excel file here</div>
+                  <div style="font-size:8px; color:rgba(255,255,255,0.35); margin-bottom:10px;">or click below to select</div>
+                  <div style="display:inline-block; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); border-radius:6px; padding:5px 14px; font-size:8px; font-weight:600; color:rgba(255,255,255,0.7);">Choose File</div>
+                </div>
+              </div>
+
+              <!-- Phase 2: File selected -->
+              <div id="ep2" style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:16px; opacity:0; pointer-events:none; transition:opacity 0.5s;">
+                <div style="font-size:14px; font-weight:700; color:#fff; margin-bottom:4px;">Lead Enrichment Engine</div>
+                <div style="font-size:9px; color:rgba(255,255,255,0.45); margin-bottom:16px;">Upload your Excel file to enrich contacts with personal cell numbers</div>
+                <div style="border:1.5px dashed rgba(255,255,255,0.15); border-radius:10px; padding:20px 32px; text-align:center; width:100%; max-width:320px; background:rgba(255,255,255,0.03);">
+                  <div style="font-size:20px; margin-bottom:6px; color:rgba(255,255,255,0.5);">⬆</div>
+                  <div style="font-size:9px; font-weight:600; color:rgba(255,255,255,0.7); margin-bottom:3px;">Drag and drop your Excel file here</div>
+                  <div style="font-size:8px; color:rgba(255,255,255,0.35); margin-bottom:10px;">or click below to select</div>
+                  <div style="display:inline-block; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); border-radius:6px; padding:5px 14px; font-size:8px; font-weight:600; color:rgba(255,255,255,0.7);">Choose File</div>
+                </div>
+                <div style="margin-top:10px; padding:10px 16px; background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.3); border-radius:8px; width:100%; max-width:320px; display:flex; align-items:center; justify-content:space-between;">
+                  <div>
+                    <div style="font-size:9px; font-weight:600; color:#fff;">📄 leads_Q3_2026.xlsx</div>
+                    <div style="font-size:8px; color:rgba(255,255,255,0.45);">2.4 MB · 847 contacts</div>
+                  </div>
+                  <div id="estartbtn" style="background:rgba(34,197,94,0.9); border-radius:6px; padding:5px 12px; font-size:8px; font-weight:700; color:#fff; transition:transform 0.15s;">Start Enrichment</div>
+                </div>
+              </div>
+
+              <!-- Phase 3: Processing -->
+              <div id="ep3" style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:16px; opacity:0; pointer-events:none; transition:opacity 0.5s;">
+                <div style="font-size:14px; font-weight:700; color:#fff; margin-bottom:16px;">Enriching Your Leads...</div>
+                <div style="width:40px; height:40px; animation:spin 1.5s linear infinite; margin-bottom:16px;">
+                  <svg width="40" height="40" viewBox="0 0 42 48" fill="none"><defs><mask id="sm3"><rect width="42" height="48" fill="white"/><line x1="25" y1="20" x2="33" y2="8" stroke="black" stroke-width="5" stroke-linecap="round"/></mask></defs><circle cx="21" cy="24" r="18" stroke="white" stroke-width="6" fill="none" mask="url(#sm3)"/></svg>
+                </div>
+                <div style="width:200px; height:4px; background:rgba(255,255,255,0.1); border-radius:4px; overflow:hidden; margin-bottom:8px;">
+                  <div id="eprogbar" style="height:100%; width:0%; background:rgba(34,197,94,0.8); border-radius:4px; transition:width 0.2s linear;"></div>
+                </div>
+                <div id="eprogtext" style="font-size:8px; color:rgba(255,255,255,0.4);">Processing 0 of 847 contacts...</div>
+              </div>
+
+              <!-- Phase 4: Results -->
+              <div id="ep4" style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:16px; opacity:0; pointer-events:none; transition:opacity 0.5s; overflow-y:auto;">
+                <div style="font-size:14px; font-weight:700; color:#fff; margin-bottom:12px;">Enrichment Complete ✓</div>
+                <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:14px 18px; width:100%; max-width:340px;">
+                  <div style="display:inline-flex; align-items:center; gap:5px; background:rgba(34,197,94,0.15); border:1px solid rgba(34,197,94,0.3); border-radius:20px; padding:4px 12px; font-size:8px; font-weight:600; color:rgba(34,197,94,0.9); margin-bottom:12px;">✓ leads_Q3_2026_enriched.xlsx downloaded</div>
+                  <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px;">
+                    <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:8px;">
+                      <div style="font-size:7px; font-weight:600; text-transform:uppercase; letter-spacing:0.06em; color:rgba(255,255,255,0.4); margin-bottom:3px;">Total Contacts</div>
+                      <div style="font-size:18px; font-weight:700; color:#fff;">847</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:8px;">
+                      <div style="font-size:7px; font-weight:600; text-transform:uppercase; letter-spacing:0.06em; color:rgba(255,255,255,0.4); margin-bottom:3px;">Match Rate</div>
+                      <div style="font-size:18px; font-weight:700; color:#fff;">64%</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:8px;">
+                      <div style="font-size:7px; font-weight:600; text-transform:uppercase; letter-spacing:0.06em; color:rgba(255,255,255,0.4); margin-bottom:3px;">Cell Phones Found</div>
+                      <div style="font-size:18px; font-weight:700; color:rgba(34,197,94,0.9);">542</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:8px;">
+                      <div style="font-size:7px; font-weight:600; text-transform:uppercase; letter-spacing:0.06em; color:rgba(255,255,255,0.4); margin-bottom:3px;">No Match</div>
+                      <div style="font-size:18px; font-weight:700; color:rgba(255,255,255,0.4);">305</div>
+                    </div>
+                  </div>
+                  <div style="border-top:1px solid rgba(255,255,255,0.07); padding-top:10px;">
+                    <div style="font-size:7px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:rgba(255,255,255,0.3); margin-bottom:8px;">Data Source</div>
+                    <div style="display:flex; align-items:center; justify-content:space-between; padding:5px 8px; background:rgba(255,255,255,0.04); border-radius:6px;">
+                      <span style="font-size:8px; font-weight:500; color:rgba(255,255,255,0.7);">Enformion Contact Enrichment</span>
+                      <span style="font-size:8px; font-weight:600; color:rgba(255,255,255,0.5);">542 records</span>
+                    </div>
+                  </div>
+                </div>
+                <div style="margin-top:10px; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); border-radius:6px; padding:6px 18px; font-size:8px; font-weight:600; color:rgba(255,255,255,0.7);">Upload Another File</div>
+              </div>
+
+            </div>
+          </div>
         </div>
-        <div class="enrich-step">
-          <div class="enrich-step-number">02</div>
-          <h3>We Match & Enrich</h3>
-          <p>Our engine cross-references your list against public records to find verified personal mobile numbers — no landlines.</p>
-        </div>
-        <div class="enrich-step">
-          <div class="enrich-step-number">03</div>
-          <h3>Download & Dial</h3>
-          <p>Your enriched file comes back with a phone column and a confidence score for every row. Ready to load into any dialer.</p>
-        </div>
+        <div class="laptop-hinge"></div>
+        <div class="laptop-base"><div class="laptop-trackpad"></div></div>
       </div>
     </div>
 
     <div class="enrich-divider"></div>
 
-    <!-- Stats -->
+    <!-- By The Numbers -->
     <div style="margin-bottom: 80px;">
-      <p class="enrich-section-label">By The Numbers</p>
+      <h2 class="section-title" style="text-align:center; margin-bottom: 12px;">By The Numbers</h2>
+      <p class="section-subtitle" style="text-align:center; margin-bottom: 48px;">Real results from real advisor lists.</p>
       <div class="enrich-stats">
         <div class="enrich-stat">
           <div class="enrich-stat-number">64%</div>
@@ -407,9 +432,10 @@
 
     <div class="enrich-divider"></div>
 
-    <!-- Output Preview -->
+    <!-- What You Get Back -->
     <div style="margin-bottom: 80px;">
-      <p class="enrich-section-label">What You Get Back</p>
+      <h2 class="section-title" style="text-align:center; margin-bottom: 12px;">What You Get Back</h2>
+      <p class="section-subtitle" style="text-align:center; margin-bottom: 48px;">Your exact same file — with a phone column and a confidence score added to every row.</p>
       <div class="enrich-table-wrapper">
         <div class="enrich-table-header">
           <span>CRD</span>
@@ -421,82 +447,46 @@
           <span>C-Score</span>
         </div>
         <div class="enrich-table-row">
-          <span>3131848</span>
-          <span>Christine</span>
-          <span>Wood</span>
-          <span>Montgomery</span>
-          <span>AL</span>
+          <span>3131848</span><span>Christine</span><span>Wood</span><span>Montgomery</span><span>AL</span>
           <span class="col-phone col-new">3345491113</span>
           <span class="col-score score-high">90</span>
         </div>
         <div class="enrich-table-row">
-          <span>4555189</span>
-          <span>Reid</span>
-          <span>Fields</span>
-          <span>Montgomery</span>
-          <span>AL</span>
+          <span>4555189</span><span>Reid</span><span>Fields</span><span>Montgomery</span><span>AL</span>
           <span class="col-phone col-new">3343247378</span>
           <span class="col-score score-high">90</span>
         </div>
         <div class="enrich-table-row">
-          <span>5328958</span>
-          <span>Hannah</span>
-          <span>Hensley</span>
-          <span>Pike Road</span>
-          <span>AL</span>
+          <span>5328958</span><span>Hannah</span><span>Hensley</span><span>Pike Road</span><span>AL</span>
           <span class="col-phone col-new">3345586112</span>
           <span class="col-score score-high">90</span>
         </div>
         <div class="enrich-table-row">
-          <span>2841076</span>
-          <span>James</span>
-          <span>Dorner</span>
-          <span>White Plains</span>
-          <span>NY</span>
+          <span>2841076</span><span>James</span><span>Dorner</span><span>White Plains</span><span>NY</span>
           <span class="col-phone score-existing">9149823401</span>
           <span class="col-score score-existing">100</span>
         </div>
         <div class="enrich-table-row">
-          <span>58737912</span>
-          <span>Justo</span>
-          <span>Beski</span>
-          <span>New York</span>
-          <span>NY</span>
+          <span>58737912</span><span>Justo</span><span>Beski</span><span>New York</span><span>NY</span>
           <span class="col-phone score-none">—</span>
           <span class="col-score score-none">0</span>
         </div>
       </div>
-      <p style="font-size: 13px; color: rgba(255,255,255,0.25); margin-top: 16px; text-align: center;">C-Score: 90 = Enformion match · 100 = pre-existing verified number · 0 = no match found</p>
-    </div>
-
-    <div class="enrich-divider"></div>
-
-    <!-- Video -->
-    <div style="margin-bottom: 80px;">
-      <p class="enrich-section-label">See It In Action</p>
-      <div class="enrich-video-wrapper">
-        <iframe
-          src="https://www.loom.com/embed/bb6ed7bf3d4c4e6c95b8957362217e09?hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true"
-          frameborder="0"
-          allowfullscreen
-        ></iframe>
-      </div>
+      <p style="font-size:13px; color:rgba(255,255,255,0.25); margin-top:16px; text-align:center;">C-Score: 90 = Enformion match &nbsp;·&nbsp; 100 = pre-existing verified number &nbsp;·&nbsp; 0 = no match found</p>
     </div>
 
     <div class="enrich-divider"></div>
 
     <!-- FAQ -->
     <div style="margin-bottom: 80px;">
-      <p class="enrich-section-label">FAQ</p>
-      <div class="enrich-faq">
+      <h2 class="section-title" style="text-align:center; margin-bottom: 12px;">FAQ</h2>
+      <p class="section-subtitle" style="text-align:center; margin-bottom: 48px;"></p>
+      <div class="faq-container" style="max-width:760px; margin: 0 auto;">
 
         <div class="faq-item">
           <div class="faq-question">
             <span>What file format do I upload?</span>
-            <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
+            <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
           </div>
           <div class="faq-answer">
             <p>Excel (.xlsx). Your file needs at minimum: First Name, Last Name, and either a Date of Birth or Home State. CRD number improves match accuracy significantly for financial advisors.</p>
@@ -506,10 +496,7 @@
         <div class="faq-item">
           <div class="faq-question">
             <span>How long does it take?</span>
-            <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
+            <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
           </div>
           <div class="faq-answer">
             <p>Under 5 minutes for 100 contacts. Larger lists of 5,000–14,000 contacts typically process in under 10 minutes. You get the file back automatically when it's done.</p>
@@ -519,10 +506,7 @@
         <div class="faq-item">
           <div class="faq-question">
             <span>What is the C-Score?</span>
-            <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
+            <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
           </div>
           <div class="faq-answer">
             <p>Confidence Score. 90 means we found a mobile number via our data partner. 100 means the number already existed in your list and was verified. 0 means no match was found for that contact.</p>
@@ -532,10 +516,7 @@
         <div class="faq-item">
           <div class="faq-question">
             <span>Does this work for financial advisors specifically?</span>
-            <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
+            <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
           </div>
           <div class="faq-answer">
             <p>Yes — and it's where we get our best results. Financial advisors are registered with FINRA and have CRD numbers, which gives us a unique anchor to match against personal data records. That's how we hit a 64% mobile match rate on advisor lists where direct dials rarely pick up.</p>
@@ -547,13 +528,17 @@
 
     <div class="enrich-divider"></div>
 
-    <!-- CTA -->
-    <div class="enrich-cta">
-      <p>Ready to see what your list looks like enriched?<br>We'll set you up and run a sample batch.</p>
-      <a href="https://calendly.com/outdials/demo" target="_blank" rel="noopener noreferrer" class="btn-primary glow-button">
-        Schedule Call
-      </a>
-    </div>
+    <!-- See It In Action -->
+    <section id="contact" class="section-contact">
+      <div class="contact-simple">
+        <h2 class="section-title">See It In Action</h2>
+        <p class="section-subtitle">Book a 20-minute call and we'll run a sample batch on your list.</p>
+        <a href="https://calendly.com/outdials/demo" target="_blank" rel="noopener noreferrer" class="btn-primary glow-button btn-large">
+          Schedule Call
+        </a>
+        <p class="hero-subtext">No pitch decks. No pressure. Just a real conversation.</p>
+      </div>
+    </section>
 
   </div>
 
@@ -607,29 +592,102 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+
       // Dropdown
       const productDropdown = document.querySelector('.product-dropdown');
       const dropdownToggle = document.querySelector('.dropdown-toggle');
       if (productDropdown && dropdownToggle) {
-        dropdownToggle.addEventListener('click', () => {
-          productDropdown.classList.toggle('active');
-        });
-        document.addEventListener('click', (e) => {
-          if (!productDropdown.contains(e.target)) {
-            productDropdown.classList.remove('active');
-          }
+        dropdownToggle.addEventListener('click', () => productDropdown.classList.toggle('active'));
+        document.addEventListener('click', (e) => { if (!productDropdown.contains(e.target)) productDropdown.classList.remove('active'); });
+      }
+
+      // FAQ
+      document.querySelectorAll('.faq-question').forEach(q => {
+        q.addEventListener('click', () => q.parentElement.classList.toggle('active'));
+      });
+
+      // Demo loop
+      const phases = ['ep1','ep2','ep3','ep4'];
+
+      function show(id) {
+        phases.forEach(p => {
+          const el = document.getElementById(p);
+          if (!el) return;
+          el.style.opacity = p === id ? '1' : '0';
+          el.style.pointerEvents = p === id ? 'all' : 'none';
         });
       }
 
-      // FAQ accordion
-      document.querySelectorAll('.faq-question').forEach(q => {
-        q.addEventListener('click', () => {
-          const item = q.parentElement;
-          item.classList.toggle('active');
-        });
-      });
+      function downloadXlsx() {
+        if (typeof XLSX === 'undefined') return;
+        try {
+          const rows = [
+            ['CRD','First Name','Last Name','Home City','Home State','Phone - Personal','C-Score'],
+            [3131848,'Christine','Wood','Montgomery','AL','3345491113',90],
+            [4555189,'Reid','Fields','Montgomery','AL','3343247378',90],
+            [5328958,'Hannah','Hensley','Pike Road','AL','3345586112',90],
+            [2841076,'James','Dorner','White Plains','NY','9149823401',100],
+            [58737912,'Justo','Beski','New York','NY','',0],
+          ];
+          const ws = XLSX.utils.aoa_to_sheet(rows);
+          ws['!cols'] = [{wch:12},{wch:14},{wch:14},{wch:16},{wch:12},{wch:16},{wch:10}];
+          const wb = XLSX.utils.book_new();
+          XLSX.utils.book_append_sheet(wb, ws, 'Enriched');
+          XLSX.writeFile(wb, 'leads_Q3_2026_enriched.xlsx');
+        } catch(e) {}
+      }
+
+      function runProgress(cb) {
+        let pct = 0;
+        const bar = document.getElementById('eprogbar');
+        const txt = document.getElementById('eprogtext');
+        if (!bar || !txt) return;
+        bar.style.width = '0%';
+        const iv = setInterval(() => {
+          pct += 1.2;
+          if (pct > 100) pct = 100;
+          bar.style.width = pct + '%';
+          txt.textContent = 'Processing ' + Math.round(pct / 100 * 847) + ' of 847 contacts...';
+          if (pct >= 100) { clearInterval(iv); setTimeout(cb, 300); }
+        }, 30);
+      }
+
+      function runLoop() {
+        show('ep1');
+        const dz = document.getElementById('edropzone');
+
+        setTimeout(() => {
+          if (dz) {
+            dz.style.borderColor = 'rgba(34,197,94,0.6)';
+            dz.style.background = 'rgba(34,197,94,0.08)';
+          }
+          setTimeout(() => {
+            if (dz) {
+              dz.style.borderColor = 'rgba(255,255,255,0.15)';
+              dz.style.background = 'rgba(255,255,255,0.03)';
+            }
+            show('ep2');
+            setTimeout(() => {
+              const sb = document.getElementById('estartbtn');
+              if (sb) sb.style.transform = 'scale(0.92)';
+              setTimeout(() => {
+                if (sb) sb.style.transform = 'scale(1)';
+                show('ep3');
+                runProgress(() => {
+                  downloadXlsx();
+                  show('ep4');
+                  setTimeout(() => runLoop(), 5000);
+                });
+              }, 200);
+            }, 2500);
+          }, 700);
+        }, 2000);
+      }
+
+      setTimeout(runLoop, 800);
     });
   </script>
 
