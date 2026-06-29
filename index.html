@@ -340,12 +340,15 @@
 
         /* ── Logo Rain ── */
         #logo-rain {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 9999;
-            overflow: hidden;
-        }
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
 
         .rain-logo {
             position: absolute;
@@ -397,7 +400,8 @@
                 <span class="logo-text">utDials</span>
             </a>
             <div class="nav-links">
-                <a href="about.html">About</a>
+                <a href="./">Home</a>
+<a href="about.html">About</a>
                 <div class="product-dropdown">
                     <span class="dropdown-toggle">Solutions</span>
                     <div class="dropdown-menu">
@@ -406,7 +410,7 @@
                     </div>
                 </div>
                 <a href="case-studies.html">Case Studies</a>
-                <a href="#contact" class="nav-cta">Book Demo</a>
+                <a href="#contact" class="nav-cta">Schedule Call</a>
             </div>
         </div>
     </nav>
@@ -425,7 +429,7 @@
                 <p class="hero-subtitle">
                     Custom AI automations that give your team back hours and your pipeline more deals.
                 </p>
-                <a href="#contact" class="btn-primary glow-button">Book a Demo</a>
+                <a href="#contact" class="btn-primary glow-button">Schedule Call</a>
                 <p class="hero-subtext">64% mobile match rate on financial advisor contact lists</p>
             </div>
         </div>
@@ -593,7 +597,7 @@
                 <h2 class="section-title">See It In Action</h2>
                 <p class="section-subtitle">Book a 20-minute call and we'll show you exactly where your team is losing time</p>
                 <a href="https://calendly.com/outdials/demo" target="_blank" rel="noopener noreferrer" class="btn-primary glow-button btn-large">
-                    Schedule a Call
+                    Schedule Call
                 </a>
                 <p class="hero-subtext">No pitch decks. No pressure. Just a real conversation.</p>
             </div>
@@ -639,7 +643,7 @@
                     </div>
                     <div class="footer-column">
                         <h4>Contact</h4>
-                        <a href="mailto:hey@outdials.com">hey@outdials.com</a>
+                        <a href="mailto:support@outdials.com">support@outdials.com</a>
                         <a href="#contact">Book a Demo</a>
                     </div>
                 </div>
@@ -689,61 +693,57 @@
             });
         });
 
-        /* ── Logo Rain ── */
-        (function () {
-            const container = document.getElementById('logo-rain');
-            const COUNT = 28;          // total logos to spawn
-            const BURST_WINDOW = 1400; // ms over which all logos launch
-            const vw = window.innerWidth;
-            const vh = window.innerHeight;
+        /* ── Logo Rain (looping, hero only) ── */
+(function () {
+  const hero = document.getElementById('hero');
+  hero.style.position = 'relative';
+  hero.style.overflow = 'hidden';
 
-            for (let i = 0; i < COUNT; i++) {
-                const img = document.createElement('img');
-                img.src = 'Transparent_Logo.png';
-                img.className = 'rain-logo';
+  const container = document.getElementById('logo-rain');
+  const ACTIVE_COUNT = 12;
 
-                // Random size between 36px and 100px
-                const size = 36 + Math.random() * 64;
-                img.style.width  = size + 'px';
-                img.style.height = size + 'px';
+  function spawnLogo() {
+    const img = document.createElement('img');
+    img.src = 'Transparent_Logo.png';
+    img.className = 'rain-logo';
 
-                // Random horizontal position
-                const xPos = Math.random() * (vw + 80) - 40;
-                img.style.left = xPos + 'px';
+    const heroW = hero.offsetWidth;
+    const heroH = hero.offsetHeight;
 
-                // How far it falls — enough to clear the viewport
-                const fallDist = vh + size + 80;
-                img.style.setProperty('--fall-dist', fallDist + 'px');
+    const size = 36 + Math.random() * 64;
+    img.style.width = size + 'px';
+    img.style.height = size + 'px';
 
-                // Random rotation start/end for tumble effect
-                const rotStart = (Math.random() - 0.5) * 40;
-                const rotEnd   = rotStart + (Math.random() - 0.5) * 120;
-                img.style.setProperty('--rot-start', rotStart + 'deg');
-                img.style.setProperty('--rot-end',   rotEnd   + 'deg');
+    const xPos = Math.random() * (heroW + 80) - 40;
+    img.style.left = xPos + 'px';
 
-                // Opacity — smaller logos slightly more transparent
-                const peakOpacity = 0.12 + (size / 100) * 0.28;
-                img.style.setProperty('--peak-opacity', peakOpacity.toFixed(2));
+    const fallDist = heroH + size + 80;
+    img.style.setProperty('--fall-dist', fallDist + 'px');
 
-                // Stagger launch within burst window
-                const delay = Math.random() * BURST_WINDOW;
+    const rotStart = (Math.random() - 0.5) * 40;
+    const rotEnd = rotStart + (Math.random() - 0.5) * 120;
+    img.style.setProperty('--rot-start', rotStart + 'deg');
+    img.style.setProperty('--rot-end', rotEnd + 'deg');
 
-                // Duration: 1.0s–2.0s so fast but not instant
-                const duration = 1000 + Math.random() * 1000;
+    const peakOpacity = 0.12 + (size / 100) * 0.28;
+    img.style.setProperty('--peak-opacity', peakOpacity.toFixed(2));
 
-                img.style.animationDelay    = delay + 'ms';
-                img.style.animationDuration = duration + 'ms';
+    const duration = 1500 + Math.random() * 1500;
+    img.style.animationDelay = '0ms';
+    img.style.animationDuration = duration + 'ms';
 
-                container.appendChild(img);
+    container.appendChild(img);
 
-                // Remove from DOM once animation is done so it's clean
-                const totalTime = delay + duration + 50;
-                setTimeout(() => img.remove(), totalTime);
-            }
+    setTimeout(() => {
+      img.remove();
+      spawnLogo();
+    }, duration + 50);
+  }
 
-            // Remove the container itself after everything is done
-            setTimeout(() => container.remove(), BURST_WINDOW + 2100);
-        })();
+  for (let i = 0; i < ACTIVE_COUNT; i++) {
+    setTimeout(() => spawnLogo(), Math.random() * 2000);
+  }
+})();
     </script>
 </body>
 </html>
