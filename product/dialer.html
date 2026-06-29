@@ -6,86 +6,83 @@
     <title>OutDials - Power Dialer That Triples Your Talk Time</title>
     <link rel="icon" href="icon.png">
     <link rel="stylesheet" href="../styles.css">
+<style>
+.product-dropdown { position: relative; }
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15,15,15,0.95);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 8px;
+  min-width: 160px;
+  z-index: 100;
+}
+.product-dropdown.active .dropdown-menu { display: block; }
+.dropdown-menu a {
+  display: block;
+  padding: 10px 16px;
+  border-radius: 8px;
+  color: rgba(255,255,255,0.7);
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.dropdown-menu a:hover { background: rgba(255,255,255,0.08); color: #ffffff; }
+.dropdown-toggle {
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: 15px;
+  font-weight: 400;
+  user-select: none;
+  transition: color 0.2s;
+}
+.dropdown-toggle:hover { color: #ffffff !important; }
+</style>
 </head>
 <body>
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-container">
-            <div class="nav-logo">
-                <span class="broken-o">
-                    <svg viewBox="0 0 42 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <mask id="slitMask">
-                                <rect width="42" height="48" fill="white"/>
-                                <line x1="25" y1="20" x2="33" y2="8" stroke="black" stroke-width="5" stroke-linecap="round"/>
-                            </mask>
-                        </defs>
-                        <circle cx="21" cy="24" r="18" stroke="currentColor" stroke-width="6" fill="none" mask="url(#slitMask)"/>
-                    </svg>
-                </span>
-                <span class="logo-text">utDials</span>
-            </div>
-            <div class="nav-links">
-                <a href="#demo">Product</a>
-                <a href="#features">Features</a>
-                <a href="#pricing">Pricing</a>
-                <a href="#faq">FAQ</a>
-                <a href="#contact" class="nav-cta">Book Demo</a>
-            </div>
+            <a href="../" class="nav-logo">
+  <span class="broken-o">
+    <svg viewBox="0 0 42 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <mask id="slitMask">
+          <rect width="42" height="48" fill="white"/>
+          <line x1="25" y1="20" x2="33" y2="8" stroke="black" stroke-width="5" stroke-linecap="round"/>
+        </mask>
+      </defs>
+      <circle cx="21" cy="24" r="18" stroke="currentColor" stroke-width="6" fill="none" mask="url(#slitMask)"/>
+    </svg>
+  </span>
+  <span class="logo-text">utDials</span>
+</a>
+<div class="nav-links">
+  <a href="../">Home</a>
+  <a href="../about.html">About</a>
+  <div class="product-dropdown">
+    <span class="dropdown-toggle" style="font-size: 15px !important; font-weight: 400 !important;">Solutions</span>
+    <div class="dropdown-menu">
+      <a href="dialer.html">Power Dialer</a>
+      <a href="enrichment.html">Lead Enrichment</a>
+    </div>
+  </div>
+  <a href="../case-studies.html">Case Studies</a>
+  <a href="https://calendly.com/outdials/demo" target="_blank" class="nav-cta">Schedule Call</a>
+</div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-trial-pill glow-text">
-                    <span class="trial-pill-dot"></span>
-                    Free 7-day trial on all plans
-                </div>
-                <h1 class="hero-title glow-text">
-                    The 5-Second<br>
-                    Head Start
-                </h1>
-                <p class="hero-subtitle">
-                    Your reps waste 70% of their day on dial tones and voicemails. OutDials turns 100 calls into 300 conversations by launching 3 calls with a stagger and connecting you instantly.
-                </p>
-                <a href="#contact" class="btn-primary glow-button">Book a Demo</a>
-                <p class="hero-subtext">7-day deployment • Native CRM • Plans from $150/mo</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Trust Bar / Integrations -->
-    <section id="integrations" class="trust-bar">
-        <div class="trust-container">
-            <p class="trust-label">Integrates with your CRM:</p>
-            <div class="trust-ticker-wrapper">
-                <div class="trust-ticker">
-                    <img src="../logos/salesforce.png" alt="Salesforce" class="trust-logo">
-                    <img src="../logos/hubspot.png" alt="HubSpot" class="trust-logo">
-                    <img src="../logos/pipedrive.png" alt="Pipedrive" class="trust-logo">
-                    <img src="../logos/zoho.png" alt="Zoho CRM" class="trust-logo">
-                    <img src="../logos/monday.png" alt="Monday.com" class="trust-logo">
-                    <img src="../logos/close.png" alt="Close CRM" class="trust-logo">
-                    <!-- Duplicate for seamless loop -->
-                    <img src="../logos/salesforce.png" alt="Salesforce" class="trust-logo">
-                    <img src="../logos/hubspot.png" alt="HubSpot" class="trust-logo">
-                    <img src="../logos/pipedrive.png" alt="Pipedrive" class="trust-logo">
-                    <img src="../logos/zoho.png" alt="Zoho CRM" class="trust-logo">
-                    <img src="../logos/monday.png" alt="Monday.com" class="trust-logo">
-                    <img src="../logos/close.png" alt="Close CRM" class="trust-logo">
-                    <!-- Third set for mobile seamless loop -->
-                    <img src="../logos/salesforce.png" alt="Salesforce" class="trust-logo">
-                    <img src="../logos/hubspot.png" alt="HubSpot" class="trust-logo">
-                    <img src="../logos/pipedrive.png" alt="Pipedrive" class="trust-logo">
-                    <img src="../logos/zoho.png" alt="Zoho CRM" class="trust-logo">
-                    <img src="../logos/monday.png" alt="Monday.com" class="trust-logo">
-                    <img src="../logos/close.png" alt="Close CRM" class="trust-logo">
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Page Label -->
+<div style="max-width: 760px; margin: 0 auto; padding: 140px 24px 0;">
+  <p style="font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.35); margin-bottom: 0;">Power Dialer</p>
+</div>
 
     <!-- Interactive Product Demo + Workflow -->
     <section id="demo" class="section-demo">
@@ -549,126 +546,6 @@
         </div>
     </section>
 
-    <!-- Pricing Section - Tiered -->
-    <section id="pricing" class="section-pricing">
-        <div class="container">
-            <h2 class="section-title">Transparent Pricing</h2>
-            <p class="section-subtitle">Pick the tier that fits your team. No hidden fees.</p>
-
-            <!-- Toggle -->
-            <div class="pricing-toggle-row">
-                <span class="toggle-label" id="toggle-label-monthly">Monthly</span>
-                <label class="pricing-toggle-switch">
-                    <input type="checkbox" id="billingToggle" checked>
-                    <span class="toggle-track">
-                        <span class="toggle-thumb"></span>
-                    </span>
-                </label>
-                <span class="toggle-label toggle-label-annual" id="toggle-label-annual">
-                    Annual <span class="toggle-save-badge">Save ~15%</span>
-                </span>
-            </div>
-
-            <!-- Cards -->
-            <div class="pricing-cards-grid">
-
-                <!-- STANDARD -->
-                <div class="pricing-tier-card">
-                    <div class="tier-header">
-                        <div class="tier-name">Standard</div>
-                    </div>
-                    <div class="tier-price-block">
-                        <div class="tier-price">
-                            <span class="price-currency">$</span>
-                            <span class="price-number" data-annual="150" data-monthly="175">150</span>
-                            <span class="price-period">/ mo</span>
-                        </div>
-                        <div class="price-annual-note annual-note">Billed as <strong>$1,800 / year</strong></div>
-                        <div class="price-annual-note monthly-note" style="display:none;">Billed monthly</div>
-                    </div>
-                    <div class="tier-divider"></div>
-                    <ul class="tier-features">
-                        <li><span class="feat-check">✓</span> Staggered parallel dialing (3 lines)</li>
-                        <li><span class="feat-check">✓</span> 5-number rotation</li>
-                        <li><span class="feat-check">✓</span> 3 CRM fields on Race Card</li>
-                        <li><span class="feat-check">✓</span> AMD voicemail detection</li>
-                        <li><span class="feat-check">✓</span> Inbound call handling</li>
-                        <li><span class="feat-check">✓</span> Disposition logging &amp; call notes</li>
-                        <li><span class="feat-check">✓</span> DNC / opt-out filtering</li>
-                        <li><span class="feat-check">✓</span> CRM auto-sync</li>
-                        <li><span class="feat-check">✓</span> Email support</li>
-                    </ul>
-                    <a href="https://calendly.com/outdials/demo" target="_blank" class="tier-cta tier-cta-ghost">Start with Standard</a>
-                    <p class="tier-editor-note">Additional seats billed at same rate</p>
-                    <p class="tier-trial-note">7-day free trial</p>
-                </div>
-
-                <!-- PRO (highlighted) -->
-                <div class="pricing-tier-card tier-highlighted">
-                    <div class="tier-header">
-                        <div class="tier-name">Pro</div>
-                    </div>
-                    <div class="tier-price-block">
-                        <div class="tier-price">
-                            <span class="price-currency">$</span>
-                            <span class="price-number" data-annual="250" data-monthly="299">250</span>
-                            <span class="price-period">/ mo</span>
-                        </div>
-                        <div class="price-annual-note annual-note">Billed as <strong>$3,000 / year</strong></div>
-                        <div class="price-annual-note monthly-note" style="display:none;">Billed monthly</div>
-                    </div>
-                    <div class="tier-divider"></div>
-                    <ul class="tier-features">
-                        <li><span class="feat-check">✓</span> Everything in Standard, plus:</li>
-                        <li><span class="feat-check">✓</span> 10-number rotation</li>
-                        <li><span class="feat-check">✓</span> 5 CRM fields on Race Card</li>
-                        <li><span class="feat-check">✓</span> Session analytics</li>
-                        <li><span class="feat-check">✓</span> Data export (CSV)</li>
-                        <li><span class="feat-check">✓</span> Slack support</li>
-                        <li class="feat-spacer"></li>
-                        <li class="feat-spacer"></li>
-                        <li class="feat-spacer"></li>
-                    </ul>
-                    <a href="https://calendly.com/outdials/demo" target="_blank" class="tier-cta tier-cta-primary">Start with Pro</a>
-                    <p class="tier-editor-note">Additional seats billed at same rate</p>
-                    <p class="tier-trial-note">7-day free trial</p>
-                </div>
-
-                <!-- ENTERPRISE -->
-                <div class="pricing-tier-card tier-pro">
-                    <div class="tier-header">
-                        <div class="tier-name">Enterprise</div>
-                    </div>
-                    <div class="tier-price-block">
-                        <div class="tier-price">
-                            <span class="price-currency">$</span>
-                            <span class="price-number" data-annual="400" data-monthly="449">400</span>
-                            <span class="price-period">/ mo</span>
-                        </div>
-                        <div class="price-annual-note annual-note">Billed as <strong>$4,800 / year</strong></div>
-                        <div class="price-annual-note monthly-note" style="display:none;">Billed monthly</div>
-                    </div>
-                    <div class="tier-divider"></div>
-                    <ul class="tier-features">
-                        <li><span class="feat-check">✓</span> Everything in Pro, plus:</li>
-                        <li><span class="feat-check">✓</span> 15-number rotation</li>
-                        <li><span class="feat-check">✓</span> Unlimited CRM fields on Race Card</li>
-                        <li><span class="feat-check">✓</span> Admin dashboard</li>
-                        <li><span class="feat-check">✓</span> Monthly performance report</li>
-                        <li><span class="feat-check">✓</span> Dedicated account manager</li>
-                        <li><span class="feat-check">✓</span> Dedicated support</li>
-                        <li class="feat-spacer"></li>
-                        <li class="feat-spacer"></li>
-                    </ul>
-                    <a href="https://calendly.com/outdials/demo" target="_blank" class="tier-cta tier-cta-ghost">Start with Enterprise</a>
-                    <p class="tier-editor-note">Additional seats billed at same rate</p>
-                    <p class="tier-trial-note">7-day free trial</p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
     <!-- FAQ Section -->
     <section id="faq" class="section-faq">
         <div class="container">
@@ -748,11 +625,11 @@
     <section id="contact" class="section-contact">
         <div class="container">
             <div class="contact-simple">
-                <h2 class="section-title">Book a Demo</h2>
-                <p class="section-subtitle">See OutDials in action. 7-day deployment guaranteed.</p>
-                <a href="https://calendly.com/outdials/demo" target="_blank" rel="noopener noreferrer" class="btn-primary glow-button btn-large">
-                    Schedule Demo
-                </a>
+                <h2 class="section-title">See It In Action</h2>
+<p class="section-subtitle">Book a 20-minute call and we'll show you exactly how it works.</p>
+<a href="https://calendly.com/outdials/demo" target="_blank" rel="noopener noreferrer" class="btn-primary glow-button btn-large">
+  Schedule Call
+</a>
             </div>
         </div>
     </section>
@@ -762,48 +639,68 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <div class="nav-logo">
-                        <span class="broken-o">
-                            <svg viewBox="0 0 42 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <mask id="slitMaskFooter">
-                                        <rect width="42" height="48" fill="white"/>
-                                        <line x1="25" y1="20" x2="33" y2="8" stroke="black" stroke-width="5" stroke-linecap="round"/>
-                                    </mask>
-                                </defs>
-                                <circle cx="21" cy="24" r="18" stroke="currentColor" stroke-width="6" fill="none" mask="url(#slitMaskFooter)"/>
-                            </svg>
-                        </span>
-                        <span class="logo-text">utDials</span>
-                    </div>
-                    <p>Stop Waiting. Start Dialing.</p>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h4>Product</h4>
-                        <a href="#demo">Race Card</a>
-                        <a href="#features">Features</a>
-                        <a href="#pricing">Pricing</a>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Legal</h4>
-                        <a href="/privacy.html">Privacy Policy</a>
-                        <a href="/terms.html">Terms of Service</a>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Contact</h4>
-                        <a href="/cdn-cgi/l/email-protection#b5c6c0c5c5dac7c1f5dac0c1d1dcd4d9c69bd6dad8"><span class="__cf_email__" data-cfemail="d6a5a3a6a6b9a4a296b9a3a2b2bfb7baa5f8b5b9bb">[email&#160;protected]</span></a>
-                        <a href="#contact">Book a Demo</a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 OutDials. All rights reserved.</p>
-            </div>
+                    <a href="../" class="nav-logo">
+  <span class="broken-o">
+    <svg viewBox="0 0 42 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <mask id="slitMaskFooter">
+          <rect width="42" height="48" fill="white"/>
+          <line x1="25" y1="20" x2="33" y2="8" stroke="black" stroke-width="5" stroke-linecap="round"/>
+        </mask>
+      </defs>
+      <circle cx="21" cy="24" r="18" stroke="currentColor" stroke-width="6" fill="none" mask="url(#slitMaskFooter)"/>
+    </svg>
+  </span>
+  <span class="logo-text">utDials</span>
+</a>
+<p>Less Busywork. More Revenue.</p>
+</div>
+<div class="footer-links">
+  <div class="footer-column">
+    <h4>Solutions</h4>
+    <a href="dialer.html">Power Dialer</a>
+    <a href="enrichment.html">Lead Enrichment</a>
+  </div>
+  <div class="footer-column">
+    <h4>Company</h4>
+    <a href="../about.html">About</a>
+    <a href="../case-studies.html">Case Studies</a>
+  </div>
+  <div class="footer-column">
+    <h4>Legal</h4>
+    <a href="../privacy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms of Service</a>
+  </div>
+  <div class="footer-column">
+    <h4>Contact</h4>
+    <a href="mailto:support@outdials.com">support@outdials.com</a>
+    <a href="https://calendly.com/outdials/demo" target="_blank">Schedule Call</a>
+  </div>
+</div>
+</div>
+<div class="footer-bottom">
+  <p>&copy; 2026 OutDials. All rights reserved.</p>
+</div>
         </div>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
-    <script src="../script.js?v=7"></script>
+<script src="../script.js?v=7"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const productDropdown = document.querySelector('.product-dropdown');
+  const dropdownToggle = document.querySelector('.dropdown-toggle');
+  if (productDropdown && dropdownToggle) {
+    dropdownToggle.addEventListener('click', () => {
+      productDropdown.classList.toggle('active');
+    });
+    document.addEventListener('click', (e) => {
+      if (!productDropdown.contains(e.target)) {
+        productDropdown.classList.remove('active');
+      }
+    });
+  }
+});
+</script>
 </body>
 </html>
