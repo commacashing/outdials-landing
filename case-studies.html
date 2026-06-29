@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case Studies — OutDials</title>
+  <link rel="icon" href="icon.png">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .case-page {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 160px 24px 120px;
+    }
+
+    .case-hero-label {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 24px;
+    }
+
+    .case-hero h1 {
+      font-size: 52px;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+
+    .case-hero p {
+      font-size: 17px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.7;
+      max-width: 480px;
+    }
+
+    .product-dropdown { position: relative; }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 12px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15,15,15,0.95);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 8px;
+      min-width: 160px;
+      z-index: 100;
+    }
+    .product-dropdown.active .dropdown-menu { display: block; }
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 16px;
+      border-radius: 8px;
+      color: rgba(255,255,255,0.7);
+      font-size: 14px;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .dropdown-menu a:hover { background: rgba(255,255,255,0.08); color: #ffffff; }
+    .dropdown-toggle {
+      cursor: pointer;
+      color: var(--text-secondary);
+      font-size: 15px;
+      font-weight: 400;
+      user-select: none;
+      transition: color 0.2s;
+    }
+    .dropdown-toggle:hover { color: #ffffff !important; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-container">
+      <a href="./" class="nav-logo">
+        <span class="broken-o">
+          <svg viewBox="0 0 42 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><mask id="slitMask"><rect width="42" height="48" fill="white"/><line x1="25" y1="20" x2="33" y2="8" stroke="black" stroke-width="5" stroke-linecap="round"/></mask></defs>
+            <circle cx="21" cy="24" r="18" stroke="currentColor" stroke-width="6" fill="none" mask="url(#slitMask)"/>
+          </svg>
+        </span>
+        <span class="logo-text">utDials</span>
+      </a>
+      <div class="nav-links">
+        <a href="./">Home</a>
+        <a href="about.html">About</a>
+        <div class="product-dropdown">
+          <span class="dropdown-toggle" style="font-size:15px !important; font-weight:400 !important;">Solutions</span>
+          <div class="dropdown-menu">
+            <a href="product/dialer.html">Power Dialer</a>
+            <a href="product/enrichment.html">Lead Enrichment</a>
+          </div>
+        </div>
+        <a href="case-studies.html">Case Studies</a>
+        <a href="https://calendly.com/outdials/demo" target="_blank" class="nav-cta">Schedule Call</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="case-page">
+    <div class="case-hero">
+      <p class="case-hero-label">Case Studies</p>
+      <h1>Results in progress.</h1>
+      <p>We're currently documenting our first client deployments. Check back soon — real numbers from real teams are on the way.</p>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <a href="./" class="nav-logo">
+            <span class="broken-o">
+              <svg viewBox="0 0 42 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs><mask id="slitMaskFooter"><rect width="42" height="48" fill="white"/><line x1="25" y1="20" x2="33" y2="8" stroke="black" stroke-width="5" stroke-linecap="round"/></mask></defs>
+                <circle cx="21" cy="24" r="18" stroke="currentColor" stroke-width="6" fill="none" mask="url(#slitMaskFooter)"/>
+              </svg>
+            </span>
+            <span class="logo-text">utDials</span>
+          </a>
+          <p>Less Busywork. More Revenue.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-column"><h4>Solutions</h4><a href="product/dialer.html">Power Dialer</a><a href="product/enrichment.html">Lead Enrichment</a></div>
+          <div class="footer-column"><h4>Company</h4><a href="about.html">About</a><a href="case-studies.html">Case Studies</a></div>
+          <div class="footer-column"><h4>Legal</h4><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a></div>
+          <div class="footer-column"><h4>Contact</h4><a href="mailto:support@outdials.com">support@outdials.com</a><a href="https://calendly.com/outdials/demo" target="_blank">Schedule Call</a></div>
+        </div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2026 OutDials. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const productDropdown = document.querySelector('.product-dropdown');
+      const dropdownToggle = document.querySelector('.dropdown-toggle');
+      if (productDropdown && dropdownToggle) {
+        dropdownToggle.addEventListener('click', () => productDropdown.classList.toggle('active'));
+        document.addEventListener('click', (e) => { if (!productDropdown.contains(e.target)) productDropdown.classList.remove('active'); });
+      }
+    });
+  </script>
+
+</body>
+</html>
