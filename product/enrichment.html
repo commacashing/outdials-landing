@@ -83,11 +83,12 @@
     @keyframes cursorClick { 0%,100% { transform: scale(1); } 50% { transform: scale(0.8); } }
 
     @media (max-width: 768px) {
-      .enrich-hero h1 { font-size: 36px; }
-      .enrich-stats { grid-template-columns: 1fr; }
-      .enrich-table-header, .enrich-table-row { grid-template-columns: 1fr 1fr 1fr; }
-      .enrich-table-header span:nth-child(n+4), .enrich-table-row span:nth-child(n+4) { display: none; }
-    }
+  .enrich-hero h1 { font-size: 36px; }
+  .enrich-stats { grid-template-columns: 1fr; }
+  .enrich-table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .enrich-table-header, .enrich-table-row { grid-template-columns: 50px 80px 80px 90px 50px 110px 60px; min-width: 520px; }
+  .laptop-wrapper { max-width: 100%; }
+}
   </style>
 </head>
 <body>
@@ -103,7 +104,12 @@
         </span>
         <span class="logo-text">utDials</span>
       </a>
-      <div class="nav-links">
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+<div class="nav-links">
         <a href="../">Home</a>
         <a href="../about.html">About</a>
         <div class="product-dropdown">
@@ -509,6 +515,20 @@
         dropdownToggle.addEventListener('click', () => productDropdown.classList.toggle('active'));
         document.addEventListener('click', (e) => { if (!productDropdown.contains(e.target)) productDropdown.classList.remove('active'); });
       }
+      const hamburger = document.getElementById('hamburger');
+const navLinks = document.querySelector('.nav-links');
+if (hamburger && navLinks) {
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    navLinks.classList.toggle('mobile-open');
+  });
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navLinks.classList.remove('mobile-open');
+    });
+  });
+}
 
       document.querySelectorAll('.faq-question').forEach(q => {
         q.addEventListener('click', () => q.parentElement.classList.toggle('active'));
