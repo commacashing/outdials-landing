@@ -260,7 +260,6 @@
             </a>
             <div class="nav-links">
                 <a href="./">Home</a>
-<a href="./">Home</a>
 <a href="about.html">About</a>
 <div class="product-dropdown">
   <span class="dropdown-toggle" style="font-size: 15px !important; font-weight: 400 !important;">Solutions</span>
@@ -363,18 +362,20 @@
 
     <script>
         /* ── Nav dropdown ── */
-        const productDropdown = document.querySelector('.product-dropdown');
-        const dropdownToggle = document.querySelector('.dropdown-toggle');
+        document.addEventListener('DOMContentLoaded', () => {
+  const productDropdown = document.querySelector('.product-dropdown');
+  const dropdownToggle = document.querySelector('.dropdown-toggle');
 
-        dropdownToggle.addEventListener('click', () => {
-            productDropdown.classList.toggle('active');
-        });
+  dropdownToggle.addEventListener('click', () => {
+    productDropdown.classList.toggle('active');
+  });
 
-        document.addEventListener('click', (e) => {
-            if (!productDropdown.contains(e.target)) {
-                productDropdown.classList.remove('active');
-            }
-        });
+  document.addEventListener('click', (e) => {
+    if (!productDropdown.contains(e.target)) {
+      productDropdown.classList.remove('active');
+    }
+  });
+});
 
         /* ── Scroll fade-up ── */
         const observer = new IntersectionObserver((entries) => {
