@@ -89,7 +89,12 @@
         </span>
         <span class="logo-text">utDials</span>
       </a>
-      <div class="nav-links">
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+<div class="nav-links">
         <a href="./">Home</a>
         <a href="about.html">About</a>
         <div class="product-dropdown">
@@ -147,6 +152,20 @@
         dropdownToggle.addEventListener('click', () => productDropdown.classList.toggle('active'));
         document.addEventListener('click', (e) => { if (!productDropdown.contains(e.target)) productDropdown.classList.remove('active'); });
       }
+      const hamburger = document.getElementById('hamburger');
+const navLinks = document.querySelector('.nav-links');
+if (hamburger && navLinks) {
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    navLinks.classList.toggle('mobile-open');
+  });
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navLinks.classList.remove('mobile-open');
+    });
+  });
+}
     });
   </script>
 
