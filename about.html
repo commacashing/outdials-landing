@@ -206,11 +206,37 @@
             transform: translateY(0);
         }
 
-        @media (max-width: 640px) {
-            .about-hero h1 { font-size: 36px; }
-            .about-quote blockquote { font-size: 20px; }
-            .about-pillars { flex-direction: column; }
-        }
+        .about-founder-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 0;
+}
+
+.about-founder-photo {
+  flex-shrink: 0;
+}
+
+.photo-placeholder {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 640px) {
+  .about-hero h1 { font-size: 36px; }
+  .about-quote blockquote { font-size: 20px; }
+  .about-pillars { flex-direction: column; }
+}
     </style>
 </head>
 <body>
@@ -234,100 +260,57 @@
             </a>
             <div class="nav-links">
                 <a href="./">Home</a>
-<a href="about.html" style="color: #ffffff;">About</a>
+<a href="./">Home</a>
+<a href="about.html">About</a>
 <div class="product-dropdown">
   <span class="dropdown-toggle" style="font-size: 15px !important; font-weight: 400 !important;">Solutions</span>
-                    <div class="dropdown-menu">
-                        <a href="product/dialer.html">Power Dialer</a>
-                        <a href="product/enrichment.html">Lead Enrichment</a>
-                    </div>
-                </div>
-                <a href="https://calendly.com/outdials/demo" target="_blank" class="nav-cta">Schedule Call</a>
+  <div class="dropdown-menu">
+    <a href="product/dialer.html">Power Dialer</a>
+    <a href="product/enrichment.html">Lead Enrichment</a>
+  </div>
+</div>
+<a href="case-studies.html">Case Studies</a>
+<a href="https://calendly.com/outdials/demo" target="_blank" class="nav-cta">Schedule Call</a>
             </div>
         </div>
     </nav>
 
     <main class="about-page">
 
-        <!-- Hero -->
-        <div class="about-hero fade-up">
-            <p class="about-hero-label">About</p>
-            <h1>I've worked every position in the room.</h1>
-            <p class="about-hero-founder">Anton Schlueter — Founder, OutDials</p>
-        </div>
+  <!-- Hero -->
+  <div class="about-hero fade-up">
+    <p class="about-hero-label">About</p>
 
-        <!-- Story -->
-        <div class="about-section fade-up">
-            <p class="about-section-label">The Story</p>
+    <div class="about-founder-row">
+      <div class="about-founder-photo">
+        <div class="photo-placeholder">AS</div>
+      </div>
+      <div>
+        <h1>I've worked every position in the room.</h1>
+        <p class="about-hero-founder">Anton Schlueter — Founder, OutDials</p>
+      </div>
+    </div>
+  </div>
 
-            <div class="career-track">
-                <div class="career-stop">
-                    <span class="career-stop-label">Chef</span>
-                </div>
-                <span class="career-arrow">→</span>
-                <div class="career-stop">
-                    <span class="career-stop-label">Bartender</span>
-                </div>
-                <span class="career-arrow">→</span>
-                <div class="career-stop">
-                    <span class="career-stop-label">Sales Rep</span>
-                </div>
-                <span class="career-arrow">→</span>
-                <div class="career-stop">
-                    <span class="career-stop-label">Director of Operations</span>
-                </div>
-            </div>
+  <!-- Story -->
+  <div class="about-section fade-up">
+    <div class="about-body">
+      <p>Chef, bartender, sales rep, director of operations.</p>
+      <p>Different industries, same problem: too much time spent on work that didn't need a person.</p>
+      <p>The moment it clicked was watching an outbound team use interns whose only job was dialing. As soon as someone answered, they'd hand the call to a rep and start dialing again. It worked, but I kept thinking: why are three people doing what one system should be able to do? Why not run multiple calls at once, connect the first person who answers, and remove the middle step?</p>
+      <p>That question became OutDials.</p>
+      <p>Every tool I build starts the same way. Find what's wasting the most time, automate it, and make sure it fits how the team actually works. The result is simple: people spend less time on repetitive work and more time on the work that actually matters.</p>
+    </div>
+  </div>
 
-            <div class="about-body">
-                <p>Four completely different jobs. Same problem in every single one.</p>
-                <p>Time kept disappearing into the wrong things — inventory checks, onboarding paperwork, manual reporting. Hours that had nothing to do with actually making money. I watched it happen in kitchens, behind bars, on sales floors, and in boardrooms.</p>
-                <p>At some point it stopped being a coincidence. <strong>Most businesses don't have a people problem. They have a process problem.</strong></p>
-            </div>
-        </div>
+  <div class="about-divider"></div>
 
-        <div class="about-divider"></div>
+  <!-- Philosophy -->
+  <div class="about-quote fade-up">
+    <blockquote>Effortless isn't lazy. It's what happens when the right systems are finally in place.</blockquote>
+  </div>
 
-        <!-- What OutDials Is -->
-        <div class="about-section fade-up">
-            <p class="about-section-label">What We Do</p>
-            <div class="about-pillars">
-                <div class="about-pillar">
-                    <p class="pillar-number">01</p>
-                    <p class="pillar-title">Audit</p>
-                    <p class="pillar-desc">We find where your team's time actually goes — not where you think it goes.</p>
-                </div>
-                <div class="about-pillar">
-                    <p class="pillar-number">02</p>
-                    <p class="pillar-title">Build</p>
-                    <p class="pillar-desc">Custom automations built for your stack. No off-the-shelf software.</p>
-                </div>
-                <div class="about-pillar">
-                    <p class="pillar-number">03</p>
-                    <p class="pillar-title">Integrate</p>
-                    <p class="pillar-desc">We make sure it works inside your existing setup and your team actually uses it.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="about-divider"></div>
-
-        <!-- Philosophy -->
-        <div class="about-quote fade-up">
-            <blockquote>"Effortless isn't lazy. It's what happens when the right systems are finally in place."</blockquote>
-        </div>
-
-        <div class="about-divider"></div>
-
-        <!-- CTA -->
-        <div class="about-cta fade-up">
-            <p>If any of this sounds familiar, let's talk.<br>Thirty minutes is enough to find the problem.</p>
-            <a href="https://calendly.com/outdials/demo" target="_blank" rel="noopener noreferrer" class="btn-primary glow-button">
-                Schedule Call
-            </a>
-        </div>
-
-    </main>
-
+</main>
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -356,9 +339,10 @@
                         <a href="product/enrichment.html">Lead Enrichment</a>
                     </div>
                     <div class="footer-column">
-                        <h4>Company</h4>
-                        <a href="about.html">About</a>
-                    </div>
+  <h4>Company</h4>
+  <a href="about.html">About</a>
+  <a href="case-studies.html">Case Studies</a>
+</div>
                     <div class="footer-column">
                         <h4>Legal</h4>
                         <a href="/privacy.html">Privacy Policy</a>
