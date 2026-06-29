@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lead Enrichment — OutDials</title>
+  <link rel="icon" href="../icon.png">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .enrich-page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 160px 24px 120px;
+    }
+
+    /* Hero */
+    .enrich-hero {
+      margin-bottom: 16px;
+    }
+
+    .enrich-hero-label {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 24px;
+    }
+
+    .enrich-hero h1 {
+      font-size: 52px;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      margin-bottom: 0;
+    }
+
+    /* Divider */
+    .enrich-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.07);
+      margin: 64px 0;
+    }
+
+    /* How It Works */
+    .enrich-steps {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      position: relative;
+      margin-bottom: 0;
+    }
+
+    .enrich-steps::before {
+      content: '';
+      position: absolute;
+      top: 36px;
+      left: calc(16.66% + 16px);
+      right: calc(16.66% + 16px);
+      height: 1px;
+      background: rgba(255,255,255,0.12);
+      z-index: 0;
+    }
+
+    .enrich-step {
+      text-align: center;
+      padding: 0 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .enrich-step-number {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+      font-size: 22px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.4);
+      transition: all 0.3s ease;
+    }
+
+    .enrich-step:hover .enrich-step-number {
+      background: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.9);
+      transform: translateY(-4px);
+    }
+
+    .enrich-step h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .enrich-step p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.75;
+    }
+
+    /* Stats */
+    .enrich-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+
+    .enrich-stat {
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 32px 24px;
+      background: rgba(255,255,255,0.03);
+      text-align: center;
+      transition: all 0.25s ease;
+    }
+
+    .enrich-stat:hover {
+      border-color: rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .enrich-stat-number {
+      font-size: 48px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .enrich-stat-label {
+      font-size: 14px;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.5;
+    }
+
+    /* Output Table */
+    .enrich-table-wrapper {
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .enrich-table-header {
+      display: grid;
+      grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1.2fr 0.6fr;
+      gap: 0;
+      padding: 16px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .enrich-table-header span {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.25);
+    }
+
+    .enrich-table-row {
+      display: grid;
+      grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1.2fr 0.6fr;
+      gap: 0;
+      padding: 14px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      transition: background 0.2s;
+    }
+
+    .enrich-table-row:last-child {
+      border-bottom: none;
+    }
+
+    .enrich-table-row:hover {
+      background: rgba(255,255,255,0.03);
+    }
+
+    .enrich-table-row span {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      display: flex;
+      align-items: center;
+    }
+
+    .enrich-table-row .col-phone {
+      color: #ffffff;
+      font-weight: 600;
+      font-family: 'Courier New', monospace;
+    }
+
+    .enrich-table-row .col-score {
+      font-weight: 700;
+    }
+
+    .score-high { color: #10b981; }
+    .score-existing { color: rgba(255,255,255,0.9); }
+    .score-none { color: rgba(255,255,255,0.25); }
+
+    .col-new {
+      position: relative;
+    }
+
+    .col-new::after {
+      content: 'NEW';
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #10b981;
+      background: rgba(16,185,129,0.1);
+      border: 1px solid rgba(16,185,129,0.3);
+      border-radius: 4px;
+      padding: 2px 5px;
+      margin-left: 8px;
+    }
+
+    /* FAQ */
+    .enrich-faq {
+      max-width: 760px;
+    }
+
+    /* Section headers */
+    .enrich-section-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.25);
+      margin-bottom: 40px;
+    }
+
+    /* Video */
+    .enrich-video-wrapper {
+      position: relative;
+      width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    }
+
+    .enrich-video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* CTA */
+    .enrich-cta {
+      text-align: center;
+      padding-top: 24px;
+    }
+
+    .enrich-cta p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    /* Dropdown */
+    .product-dropdown { position: relative; }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 12px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15,15,15,0.95);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 8px;
+      min-width: 160px;
+      z-index: 100;
+    }
+    .product-dropdown.active .dropdown-menu { display: block; }
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 16px;
+      border-radius: 8px;
+      color: rgba(255,255,255,0.7);
+      font-size: 14px;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .dropdown-menu a:hover { background: rgba(255,255,255,0.08); color: #ffffff; }
+    .dropdown-toggle {
+      cursor: pointer;
+      color: var(--text-secondary);
+      font-size: 15px;
+      font-weight: 400;
+      user-select: none;
+      transition: color 0.2s;
+    }
+    .dropdown-toggle:hover { color: #ffffff !important; }
+
+    @media (max-width: 768px) {
+      .enrich-hero h1 { font-size: 36px; }
+      .enrich-steps { grid-template-columns: 1fr; gap: 40px; }
+      .enrich-steps::before { display: none; }
+      .enrich-stats { grid-template-columns: 1fr; }
+      .enrich-table-header,
+      .enrich-table-row { grid-template-columns: 1fr 1fr 1fr; }
+      .enrich-table-header span:nth-child(n+4),
+      .enrich-table-row span:nth-child(n+4) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-container">
+      <a href="../" class="nav-logo">
+        <span class="broken-o">
+          <svg viewBox="0 0 42 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <mask id="slitMask">
+                <rect width="42" height="48" fill="white"/>
+                <line x1="25" y1="20" x2="33" y2="8" stroke="black" stroke-width="5" stroke-linecap="round"/>
+              </mask>
+            </defs>
+            <circle cx="21" cy="24" r="18" stroke="currentColor" stroke-width="6" fill="none" mask="url(#slitMask)"/>
+          </svg>
+        </span>
+        <span class="logo-text">utDials</span>
+      </a>
+      <div class="nav-links">
+        <a href="../">Home</a>
+        <a href="../about.html">About</a>
+        <div class="product-dropdown">
+          <span class="dropdown-toggle" style="font-size: 15px !important; font-weight: 400 !important;">Solutions</span>
+          <div class="dropdown-menu">
+            <a href="dialer.html">Power Dialer</a>
+            <a href="enrichment.html">Lead Enrichment</a>
+          </div>
+        </div>
+        <a href="../case-studies.html">Case Studies</a>
+        <a href="https://calendly.com/outdials/demo" target="_blank" class="nav-cta">Schedule Call</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="enrich-page">
+
+    <!-- Hero -->
+    <div class="enrich-hero">
+      <p class="enrich-hero-label">Lead Enrichment</p>
+      <h1>Your list goes in.<br>Mobile numbers come out.</h1>
+    </div>
+
+    <div class="enrich-divider"></div>
+
+    <!-- How It Works -->
+    <div style="margin-bottom: 80px;">
+      <p class="enrich-section-label">How It Works</p>
+      <div class="enrich-steps">
+        <div class="enrich-step">
+          <div class="enrich-step-number">01</div>
+          <h3>Upload Your List</h3>
+          <p>Drop in your Excel file with advisor names, location, and date of birth. CRD number optional but recommended.</p>
+        </div>
+        <div class="enrich-step">
+          <div class="enrich-step-number">02</div>
+          <h3>We Match & Enrich</h3>
+          <p>Our engine cross-references your list against public records to find verified personal mobile numbers — no landlines.</p>
+        </div>
+        <div class="enrich-step">
+          <div class="enrich-step-number">03</div>
+          <h3>Download & Dial</h3>
+          <p>Your enriched file comes back with a phone column and a confidence score for every row. Ready to load into any dialer.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="enrich-divider"></div>
+
+    <!-- Stats -->
+    <div style="margin-bottom: 80px;">
+      <p class="enrich-section-label">By The Numbers</p>
+      <div class="enrich-stats">
+        <div class="enrich-stat">
+          <div class="enrich-stat-number">64%</div>
+          <div class="enrich-stat-label">Mobile match rate on financial advisor lists</div>
+        </div>
+        <div class="enrich-stat">
+          <div class="enrich-stat-number">0</div>
+          <div class="enrich-stat-label">Landlines returned — mobile only, every time</div>
+        </div>
+        <div class="enrich-stat">
+          <div class="enrich-stat-number">&lt;5m</div>
+          <div class="enrich-stat-label">Average processing time per 100 contacts</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="enrich-divider"></div>
+
+    <!-- Output Preview -->
+    <div style="margin-bottom: 80px;">
+      <p class="enrich-section-label">What You Get Back</p>
+      <div class="enrich-table-wrapper">
+        <div class="enrich-table-header">
+          <span>CRD</span>
+          <span>First Name</span>
+          <span>Last Name</span>
+          <span>Home City</span>
+          <span>Home State</span>
+          <span>Phone - Personal</span>
+          <span>C-Score</span>
+        </div>
+        <div class="enrich-table-row">
+          <span>3131848</span>
+          <span>Christine</span>
+          <span>Wood</span>
+          <span>Montgomery</span>
+          <span>AL</span>
+          <span class="col-phone col-new">3345491113</span>
+          <span class="col-score score-high">90</span>
+        </div>
+        <div class="enrich-table-row">
+          <span>4555189</span>
+          <span>Reid</span>
+          <span>Fields</span>
+          <span>Montgomery</span>
+          <span>AL</span>
+          <span class="col-phone col-new">3343247378</span>
+          <span class="col-score score-high">90</span>
+        </div>
+        <div class="enrich-table-row">
+          <span>5328958</span>
+          <span>Hannah</span>
+          <span>Hensley</span>
+          <span>Pike Road</span>
+          <span>AL</span>
+          <span class="col-phone col-new">3345586112</span>
+          <span class="col-score score-high">90</span>
+        </div>
+        <div class="enrich-table-row">
+          <span>2841076</span>
+          <span>James</span>
+          <span>Dorner</span>
+          <span>White Plains</span>
+          <span>NY</span>
+          <span class="col-phone score-existing">9149823401</span>
+          <span class="col-score score-existing">100</span>
+        </div>
+        <div class="enrich-table-row">
+          <span>58737912</span>
+          <span>Justo</span>
+          <span>Beski</span>
+          <span>New York</span>
+          <span>NY</span>
+          <span class="col-phone score-none">—</span>
+          <span class="col-score score-none">0</span>
+        </div>
+      </div>
+      <p style="font-size: 13px; color: rgba(255,255,255,0.25); margin-top: 16px; text-align: center;">C-Score: 90 = Enformion match · 100 = pre-existing verified number · 0 = no match found</p>
+    </div>
+
+    <div class="enrich-divider"></div>
+
+    <!-- Video -->
+    <div style="margin-bottom: 80px;">
+      <p class="enrich-section-label">See It In Action</p>
+      <div class="enrich-video-wrapper">
+        <iframe
+          src="https://www.loom.com/embed/bb6ed7bf3d4c4e6c95b8957362217e09?hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true"
+          frameborder="0"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+
+    <div class="enrich-divider"></div>
+
+    <!-- FAQ -->
+    <div style="margin-bottom: 80px;">
+      <p class="enrich-section-label">FAQ</p>
+      <div class="enrich-faq">
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>What file format do I upload?</span>
+            <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
+          <div class="faq-answer">
+            <p>Excel (.xlsx). Your file needs at minimum: First Name, Last Name, and either a Date of Birth or Home State. CRD number improves match accuracy significantly for financial advisors.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>How long does it take?</span>
+            <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
+          <div class="faq-answer">
+            <p>Under 5 minutes for 100 contacts. Larger lists of 5,000–14,000 contacts typically process in under 10 minutes. You get the file back automatically when it's done.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>What is the C-Score?</span>
+            <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
+          <div class="faq-answer">
+            <p>Confidence Score. 90 means we found a mobile number via our data partner. 100 means the number already existed in your list and was verified. 0 means no match was found for that contact.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Does this work for financial advisors specifically?</span>
+            <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
+          <div class="faq-answer">
+            <p>Yes — and it's where we get our best results. Financial advisors are registered with FINRA and have CRD numbers, which gives us a unique anchor to match against personal data records. That's how we hit a 64% mobile match rate on advisor lists where direct dials rarely pick up.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="enrich-divider"></div>
+
+    <!-- CTA -->
+    <div class="enrich-cta">
+      <p>Ready to see what your list looks like enriched?<br>We'll set you up and run a sample batch.</p>
+      <a href="https://calendly.com/outdials/demo" target="_blank" rel="noopener noreferrer" class="btn-primary glow-button">
+        Schedule Call
+      </a>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <a href="../" class="nav-logo">
+            <span class="broken-o">
+              <svg viewBox="0 0 42 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <mask id="slitMaskFooter">
+                    <rect width="42" height="48" fill="white"/>
+                    <line x1="25" y1="20" x2="33" y2="8" stroke="black" stroke-width="5" stroke-linecap="round"/>
+                  </mask>
+                </defs>
+                <circle cx="21" cy="24" r="18" stroke="currentColor" stroke-width="6" fill="none" mask="url(#slitMaskFooter)"/>
+              </svg>
+            </span>
+            <span class="logo-text">utDials</span>
+          </a>
+          <p>Less Busywork. More Revenue.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4>Solutions</h4>
+            <a href="dialer.html">Power Dialer</a>
+            <a href="enrichment.html">Lead Enrichment</a>
+          </div>
+          <div class="footer-column">
+            <h4>Company</h4>
+            <a href="../about.html">About</a>
+            <a href="../case-studies.html">Case Studies</a>
+          </div>
+          <div class="footer-column">
+            <h4>Legal</h4>
+            <a href="../privacy.html">Privacy Policy</a>
+            <a href="../terms.html">Terms of Service</a>
+          </div>
+          <div class="footer-column">
+            <h4>Contact</h4>
+            <a href="mailto:support@outdials.com">support@outdials.com</a>
+            <a href="https://calendly.com/outdials/demo" target="_blank">Schedule Call</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 OutDials. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Dropdown
+      const productDropdown = document.querySelector('.product-dropdown');
+      const dropdownToggle = document.querySelector('.dropdown-toggle');
+      if (productDropdown && dropdownToggle) {
+        dropdownToggle.addEventListener('click', () => {
+          productDropdown.classList.toggle('active');
+        });
+        document.addEventListener('click', (e) => {
+          if (!productDropdown.contains(e.target)) {
+            productDropdown.classList.remove('active');
+          }
+        });
+      }
+
+      // FAQ accordion
+      document.querySelectorAll('.faq-question').forEach(q => {
+        q.addEventListener('click', () => {
+          const item = q.parentElement;
+          item.classList.toggle('active');
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
