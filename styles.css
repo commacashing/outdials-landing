@@ -648,8 +648,13 @@ body {
   gap: 5px;
   cursor: pointer;
   padding: 4px;
-  background: none;
-  border: none;
+  background: none !important;
+  border: none !important;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+  box-shadow: none;
+  border-radius: 0;
 }
 
 .hamburger span {
