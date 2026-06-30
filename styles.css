@@ -631,11 +631,12 @@ body {
     .nav-links { display: none; }
     .nav-links.mobile-open { display: flex !important; }
     .section-title { font-size: 36px; }
-    .footer-content { flex-direction: column; gap: 32px; }
-    .footer-links { flex-direction: row; gap: 0; justify-content: space-between; width: 100%; }
-    .footer-column { gap: 10px; flex: 1; }
-    .footer-column h4 { font-size: 13px; }
-    .footer-column a { font-size: 12px; }
+    .footer-content { flex-direction: column; align-items: center; text-align: center; gap: 40px; }
+    .footer-brand { max-width: 100%; align-items: center; display: flex; flex-direction: column; }
+    .footer-links { display: grid; grid-template-columns: 1fr 1fr; gap: 32px 24px; width: 100%; }
+    .footer-column { gap: 14px; align-items: center; }
+    .footer-column h4 { font-size: 14px; margin-bottom: 4px; }
+    .footer-column a { font-size: 14px; padding: 4px 0; }}
     .scroll-progress { right: 20px; }
     .number-header-row, .number-data-row { grid-template-columns: 1.5fr 0.8fr 1fr 1fr; gap: 8px; padding: 14px 16px; font-size: 13px; }
 }
