@@ -7,35 +7,6 @@
 <link rel="icon" href="icon.png">
 <link rel="stylesheet" href="styles.css">
 <style>
-@media (max-width: 768px) {
-  .nav-links.mobile-open {
-    display: flex !important;
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: #000000;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 28px;
-    z-index: 999;
-  }
-  .nav-links .product-dropdown { display: contents; }
-  .nav-links .dropdown-toggle { display: none !important; }
-  .nav-links .dropdown-menu {
-    position: static !important;
-    transform: none !important;
-    background: transparent !important;
-    border: none !important;
-    display: flex !important;
-    flex-direction: column;
-    align-items: center;
-    gap: 28px;
-    padding: 0;
-  }
-  .nav-links .dropdown-menu a { font-size: 22px; color: rgba(255,255,255,0.85); }
-  .nav-links a { font-size: 22px; color: rgba(255,255,255,0.85); }
-  .nav-cta { font-size: 22px !important; padding: 12px 28px !important; background: #ffffff !important; color: #000000 !important; border-radius: 6px !important; }
-}
 /* ── Consistent section spacing ── */
         .process-section,
         .builds-section,
@@ -504,7 +475,7 @@
                 <a href="./">Home</a>
 <a href="about.html">About</a>
                 <div class="product-dropdown">
-                    <span class="dropdown-toggle" style="font-size: 15px !important; font-weight: 400 !important;">Solutions</span>
+                    <span class="dropdown-toggle">Solutions</span>
                     <div class="dropdown-menu">
                         <a href="product/dialer.html">Power Dialer</a>
                         <a href="product/enrichment.html">Lead Enrichment</a>
