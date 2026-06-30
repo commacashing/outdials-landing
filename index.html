@@ -26,14 +26,7 @@
             position: relative;
         }
 
-        .dropdown-checkbox {
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
-    width: 0;
-    height: 0;
-}
-.dropdown-toggle {
+        .dropdown-toggle {
     cursor: pointer;
     font-size: 15px;
     font-weight: 400;
@@ -41,6 +34,8 @@
     color: var(--text-secondary);
     transition: color 0.2s;
     display: inline-block;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 .dropdown-toggle:hover {
     color: var(--text-primary) !important;
@@ -403,6 +398,7 @@
         gap: 24px;
         padding: 24px;
         overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
         z-index: 999;
         margin: 0;
     }
@@ -435,8 +431,7 @@
         gap: 16px;
         padding: 0;
     }
-    .nav-links .product-dropdown.active .dropdown-menu,
-    .dropdown-checkbox:checked ~ .dropdown-menu {
+    .nav-links .product-dropdown.active .dropdown-menu {
         display: flex !important;
     }
     .nav-links .dropdown-menu a {
@@ -484,8 +479,7 @@
                 <a href="./">Home</a>
 <a href="about.html">About</a>
                 <div class="product-dropdown">
-                    <input type="checkbox" id="solutionsToggle" class="dropdown-checkbox">
-                    <label for="solutionsToggle" class="dropdown-toggle">Solutions</label>
+                    <button type="button" class="dropdown-toggle" style="background:none; border:none; font-family:inherit; touch-action: manipulation; -webkit-tap-highlight-color: transparent;">Solutions</button>
                     <div class="dropdown-menu">
                         <a href="product/dialer.html">Power Dialer</a>
                         <a href="product/enrichment.html">Lead Enrichment</a>
@@ -742,6 +736,7 @@
         const dropdownToggle = document.querySelector('.dropdown-toggle');
 
         dropdownToggle.addEventListener('click', (e) => {
+    e.preventDefault();
     e.stopPropagation();
     productDropdown.classList.toggle('active');
 });
