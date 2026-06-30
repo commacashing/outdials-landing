@@ -43,6 +43,64 @@
   transition: color 0.2s;
 }
 .dropdown-toggle:hover { color: #ffffff !important; }
+
+.mobile-solutions { display: none; }
+
+@media (max-width: 768px) {
+    .nav-links.mobile-open {
+        display: flex !important;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #000000;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        padding: 24px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        z-index: 999;
+        margin: 0;
+    }
+    .nav-links a {
+        font-size: 22px;
+        color: rgba(255,255,255,0.85);
+    }
+    .nav-cta {
+        font-size: 22px !important;
+        padding: 12px 28px !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+        border-radius: 6px !important;
+    }
+    .desktop-only-dropdown { display: none !important; }
+    .mobile-solutions {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+    .mobile-solutions summary {
+        font-size: 22px;
+        color: rgba(255,255,255,0.85);
+        cursor: pointer;
+        list-style: none;
+    }
+    .mobile-solutions summary::-webkit-details-marker { display: none; }
+    .mobile-solutions summary::marker { content: ""; }
+    .mobile-solutions-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        margin-top: 16px;
+    }
+    .mobile-solutions-links a {
+        font-size: 18px;
+        color: rgba(255,255,255,0.5);
+    }
+}
 </style>
 </head>
 <body>
@@ -71,13 +129,20 @@
 <div class="nav-links">
   <a href="../">Home</a>
   <a href="../about.html">About</a>
-  <div class="product-dropdown">
-    <span class="dropdown-toggle" style="font-size: 15px !important; font-weight: 400 !important;">Solutions</span>
+  <div class="product-dropdown desktop-only-dropdown">
+    <button type="button" class="dropdown-toggle" style="background:none; border:none; font-family:inherit; touch-action: manipulation; -webkit-tap-highlight-color: transparent;">Solutions</button>
     <div class="dropdown-menu">
       <a href="dialer.html">Power Dialer</a>
       <a href="enrichment.html">Lead Enrichment</a>
     </div>
   </div>
+  <details class="mobile-solutions">
+    <summary>Solutions</summary>
+    <div class="mobile-solutions-links">
+      <a href="dialer.html">Power Dialer</a>
+      <a href="enrichment.html">Lead Enrichment</a>
+    </div>
+  </details>
   <a href="../case-studies.html">Case Studies</a>
   <a href="https://calendly.com/outdials/demo" target="_blank" class="nav-cta">Schedule Call</a>
 </div>
@@ -697,7 +762,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const productDropdown = document.querySelector('.product-dropdown');
   const dropdownToggle = document.querySelector('.dropdown-toggle');
   if (productDropdown && dropdownToggle) {
-    dropdownToggle.addEventListener('click', () => {
+    dropdownToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
       productDropdown.classList.toggle('active');
     });
     document.addEventListener('click', (e) => {
