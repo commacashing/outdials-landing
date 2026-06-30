@@ -475,7 +475,7 @@
                 <a href="./">Home</a>
 <a href="about.html">About</a>
                 <div class="product-dropdown">
-                    <span class="dropdown-toggle">Solutions</span>
+                    <span class="dropdown-toggle" style="pointer-events: auto; cursor: pointer; touch-action: manipulation;">Solutions</span>
                     <div class="dropdown-menu">
                         <a href="product/dialer.html">Power Dialer</a>
                         <a href="product/enrichment.html">Lead Enrichment</a>
@@ -731,9 +731,10 @@
         const productDropdown = document.querySelector('.product-dropdown');
         const dropdownToggle = document.querySelector('.dropdown-toggle');
 
-        dropdownToggle.addEventListener('click', () => {
-            productDropdown.classList.toggle('active');
-        });
+        dropdownToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    productDropdown.classList.toggle('active');
+});
 
         document.addEventListener('click', (e) => {
             if (!productDropdown.contains(e.target)) {
