@@ -87,8 +87,12 @@
     @media (max-width: 768px) {
   .enrich-hero h1 { font-size: 36px; }
   .laptop-wrapper { max-width: 100%; }
-  #ep5 { zoom: 0.65; }
-  .col-new::after { display: none; }
+  .laptop-screen { aspect-ratio: 4/3 !important; }
+  #ep5 { zoom: 0.6; }
+  .col-new::after { display: none !important; }
+  .enrich-table-wrapper { overflow-x: scroll !important; -webkit-overflow-scrolling: touch; }
+  .enrich-table-header, .enrich-table-row { grid-template-columns: 60px 90px 90px 100px 60px 130px 70px !important; min-width: 620px !important; gap: 0; }
+  .enrich-table-header span, .enrich-table-row span { font-size: 12px; padding: 10px 8px; }
   .enrich-stats { grid-template-columns: 1fr; }
   .enrich-table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .enrich-table-header, .enrich-table-row { grid-template-columns: 50px 80px 80px 90px 50px 110px 60px; min-width: 520px; }
